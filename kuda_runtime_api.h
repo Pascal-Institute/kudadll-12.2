@@ -12,7 +12,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_getDiviceCount(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_setDevice(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_setDevice(JNIEnv* env, jobject obj, jint device);
 
 #ifdef __cplusplus
 }
