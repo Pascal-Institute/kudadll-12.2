@@ -11,6 +11,13 @@ JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_syncDevice(JNIEnv* env, jobject insta
     return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_resetDevice(JNIEnv* env, jobject instance) {
+
+    cudaError_t cudaStatus = cudaDeviceReset();
+
+    return cudaStatus;
+}
+
 JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_getRuntimeVersion(JNIEnv * env, jobject instance) {
     
     int runtimeVersion;
