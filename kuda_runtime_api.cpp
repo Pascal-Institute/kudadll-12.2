@@ -4,6 +4,13 @@
 
 //https://docs.nvidia.com/cuda/cuda-runtime-api/index.html
 
+JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
+    
+    cudaError_t cudaStatus = cudaDeviceSynchronize();
+
+    return cudaStatus;
+}
+
 JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_getRuntimeVersion(JNIEnv * env, jobject instance) {
     int runtimeVersion;
 
@@ -26,4 +33,23 @@ JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_getDivice(JNIEnv* env, jobject instan
     }
 
     return diviceCode;
+}
+
+JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_getDiviceCount(JNIEnv* env, jobject instance) {
+    int diviceCount;
+
+    cudaError_t cudaStatus = cudaGetDeviceCount(&diviceCount);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return diviceCount;
+}
+
+JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_setDevice(JNIEnv* env, jobject instance, jint device) {
+    
+    cudaError_t cudaStatus = cudaSetDevice((int) device);
+
+    return cudaStatus;
 }
