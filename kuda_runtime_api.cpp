@@ -57,7 +57,15 @@ JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_getDiviceCount(JNIEnv* env, jobject i
 }
 
 JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags) {
+    
     cudaError_t cudaStatus = cudaInitDevice((int)device, (unsigned int)deviceFlags, (unsigned int) flags);
+
+    return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jobject instance, jlong devicePtr) {
+
+    cudaError_t cudaStatus = cudaIpcCloseMemHandle((void*) devicePtr);
 
     return cudaStatus;
 }
