@@ -14,6 +14,8 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_getDiviceCount(JNIEnv* env, jobject obj);
 
+	JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags);
+
 	JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_setDevice(JNIEnv* env, jobject obj, jint device);
 
 	JNIEXPORT jint JNICALL Java_KudaRuntimeAPI_setDeviceFlags(JNIEnv* env, jobject obj, jint flags);
