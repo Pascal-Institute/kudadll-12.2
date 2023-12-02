@@ -6,6 +6,9 @@
 extern "C" {
 #endif
 
+	//6.1 Device Management
+	JNIEXPORT jint JNICALL Java_kuda_getDeviceAttribute(JNIEnv* env, jobject obj, jint attr, jint device);
+
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject obj);
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_resetDevice(JNIEnv* env, jobject obj);
