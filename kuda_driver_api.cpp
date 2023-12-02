@@ -22,3 +22,16 @@ JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDriverVersion(JNIEnv* env, jobject
 	return driverVersion;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDevice(JNIEnv* env, jobject obj, jint ordinal) {
+
+	CUdevice device;
+
+	CUresult cudaStatus = cuDeviceGet(&device, ordinal);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return cudaStatus;
+}
+
