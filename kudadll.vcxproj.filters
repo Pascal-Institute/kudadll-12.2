@@ -18,15 +18,9 @@
     <ClCompile Include="kuda_runtime_api.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="kuda_driver_api.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kuda_runtime_api.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="kuda_driver_api.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
