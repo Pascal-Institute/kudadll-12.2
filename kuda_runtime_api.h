@@ -1,5 +1,7 @@
 #include <jni.h>
 
+//https://docs.nvidia.com/cuda/cuda-runtime-api/index.html
+
 #ifdef __cplusplus
 extern "C" {
 #endif

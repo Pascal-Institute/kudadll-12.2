@@ -2,8 +2,6 @@
 #include <jni.h>
 #include <cuda_runtime_api.h>
 
-//https://docs.nvidia.com/cuda/cuda-runtime-api/index.html
-
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
     
     cudaError_t cudaStatus = cudaDeviceSynchronize();
