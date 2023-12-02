@@ -35,3 +35,15 @@ JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDevice(JNIEnv* env, jobject obj, j
 	return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDeviceCount(JNIEnv* env, jobject obj) {
+	
+	int count;
+
+	CUresult cudaStatus = cuDeviceGetCount(&count);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return count;
+}

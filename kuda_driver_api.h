@@ -14,6 +14,8 @@ extern "C" {
 	//6.5 Device Management
 	JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDevice(JNIEnv* env, jobject obj, jint ordinal);
 
+	JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDeviceCount(JNIEnv* env, jobject obj);
+
 #ifdef __cplusplus
 }
 #endif
