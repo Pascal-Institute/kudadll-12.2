@@ -148,3 +148,9 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLastError(JNIEnv* env, jobject ob
 
     return cudaStatus;
 }
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj) {
+    cudaError_t cudaStatus = cudaPeekAtLastError();
+
+    return cudaStatus;
+}

@@ -39,6 +39,8 @@ extern "C" {
 	//6.3 Error Handling
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLastError(JNIEnv* env, jobject obj);
 
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj);
+
 #ifdef __cplusplus
 }
 #endif
