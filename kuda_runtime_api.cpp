@@ -14,6 +14,19 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLimit(JNIEnv* env, jobject obj, j
     return pValue;
 }
 
+JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getPCIBusId(JNIEnv* env, jobject obj, jint device) {
+    const int maxBufferLen = 13;
+    char pciBusId[maxBufferLen];
+    
+    cudaError_t cudaStatus = cudaDeviceGetPCIBusId(pciBusId, maxBufferLen, device);
+
+    if (cudaStatus != cudaSuccess) {
+        return env->NewStringUTF("Error retrieving PCI Bus ID");
+    }
+
+    return env->NewStringUTF(pciBusId);
+}
+
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
     
     cudaError_t cudaStatus = cudaDeviceSynchronize();
