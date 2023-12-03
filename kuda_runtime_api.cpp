@@ -3,6 +3,7 @@
 #include <cuda_runtime_api.h>
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLimit(JNIEnv* env, jobject obj, jbyte limit) {
+    
     size_t pValue;
     
     cudaError_t cudaStatus = cudaDeviceGetLimit(&pValue, static_cast<cudaLimit>(limit));
@@ -15,6 +16,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLimit(JNIEnv* env, jobject obj, j
 }
 
 JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getPCIBusId(JNIEnv* env, jobject obj, jint device) {
+    
     const int maxBufferLen = 13;
     char pciBusId[maxBufferLen];
     
@@ -25,6 +27,20 @@ JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getPCIBusId(JNIEnv* env, jobject 
     }
 
     return env->NewStringUTF(pciBusId);
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getStreamPriorityRange(JNIEnv* env, jobject obj) {
+    
+    int leastPriority;
+    int greatestPriority;
+
+    cudaError_t cudaStatus = cudaDeviceGetStreamPriorityRange(&leastPriority, &greatestPriority);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (leastPriority - greatestPriority);
 }
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
