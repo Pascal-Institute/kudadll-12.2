@@ -2,6 +2,18 @@
 #include <jni.h>
 #include <cuda_runtime_api.h>
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLimit(JNIEnv* env, jobject obj, jbyte limit) {
+    size_t pValue;
+    
+    cudaError_t cudaStatus = cudaDeviceGetLimit(&pValue, static_cast<cudaLimit>(limit));
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return pValue;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
     
     cudaError_t cudaStatus = cudaDeviceSynchronize();
