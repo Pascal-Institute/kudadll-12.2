@@ -43,6 +43,13 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getStreamPriorityRange(JNIEnv* env, 
     return (leastPriority - greatestPriority);
 }
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setCacheConfig(JNIEnv* env, jobject obj, jint cacheConfig) {
+
+    cudaError_t cudaStatus = cudaDeviceSetCacheConfig(static_cast<cudaFuncCache>(cacheConfig));
+
+    return cudaStatus;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
     
     cudaError_t cudaStatus = cudaDeviceSynchronize();
