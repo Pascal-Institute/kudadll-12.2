@@ -138,9 +138,15 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setDevice(JNIEnv* env, jobject insta
 }
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setDeviceFlags(JNIEnv* env, jobject instance, jint flags) {
+
     cudaError_t cudaStatus = cudaSetDeviceFlags((unsigned int) flags);
 
     return cudaStatus;
+}
+
+JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getErrorName(JNIEnv* env, jobject obj, jint error) {
+    
+    return env->NewStringUTF(cudaGetErrorName(static_cast<cudaError_t>(error)));
 }
 
 JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getErrorString(JNIEnv* env, jobject obj, jint error) {
@@ -149,12 +155,14 @@ JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getErrorString(JNIEnv* env, jobje
 }
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLastError(JNIEnv* env, jobject obj) {
+
     cudaError_t cudaStatus = cudaGetLastError();
 
     return cudaStatus;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj) {
+
     cudaError_t cudaStatus = cudaPeekAtLastError();
 
     return cudaStatus;
