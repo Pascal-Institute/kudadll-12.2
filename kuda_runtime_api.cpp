@@ -2,19 +2,6 @@
 #include <jni.h>
 #include <cuda_runtime_api.h>
 
-JNIEXPORT jint JNICALL Java_kuda_getDeviceAttribute(JNIEnv* env, jobject obj, jint attr, jint device) {
-   
-    int value;
-
-    cudaError_t cudaStatus = cudaDeviceGetAttribute(&value, cudaDeviceAttr(attr), device);
-
-    if (cudaStatus != cudaSuccess) {
-        return cudaStatus;
-    }
-
-    return value;
-}
-
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
     
     cudaError_t cudaStatus = cudaDeviceSynchronize();
