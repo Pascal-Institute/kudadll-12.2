@@ -48,6 +48,9 @@ extern "C" {
 	//6.4 Stream Management
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 
+	//6.5 Event ManageMent
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_cudaEventCreate(JNIEnv* env, jobject obj, jlong event);
+
 #ifdef __cplusplus
 }
 #endif
