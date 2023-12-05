@@ -49,7 +49,7 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 
 	//6.5 Event ManageMent
-	JNIEXPORT jint JNICALL Java_kuda_runtime_EventHandler_create(JNIEnv* env, jobject obj, jlong event);
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_EventHandler_create(JNIEnv* env, jobject obj, jlong event);
 
 #ifdef __cplusplus
 }
