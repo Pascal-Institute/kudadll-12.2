@@ -168,9 +168,19 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject
     return cudaStatus;
 }
 
+//6.4 Stream Management
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj) {
     
     cudaError_t cudaStatus = cudaCtxResetPersistingL2Cache();
+
+    return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj) {
+
+    cudaStream_t pStream;
+
+    cudaError_t cudaStatus = cudaStreamCreate(&pStream);
 
     return cudaStatus;
 }
