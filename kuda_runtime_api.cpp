@@ -176,13 +176,18 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* en
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj) {
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj) {
 
     cudaStream_t pStream;
 
     cudaError_t cudaStatus = cudaStreamCreate(&pStream);
 
-    return cudaStatus;
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (jlong)pStream;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj, jobject event) {
