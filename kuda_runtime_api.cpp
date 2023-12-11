@@ -205,9 +205,15 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, 
 }
 
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj, jobject event) {
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj) {
 
-    cudaError_t cudaStatus = cudaEventCreate(reinterpret_cast<cudaEvent_t*>(event));
+    cudaEvent_t event;
 
-    return cudaStatus;
+    cudaError_t cudaStatus = cudaEventCreate(&event);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (jlong)event;
 }
