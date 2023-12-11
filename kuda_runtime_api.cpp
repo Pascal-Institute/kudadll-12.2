@@ -2,7 +2,8 @@
 #include <jni.h>
 #include <cuda_runtime_api.h>
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLimit(JNIEnv* env, jobject obj, jbyte limit) {
+//6.1 Device Management
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit) {
     
     size_t pValue;
     
@@ -15,7 +16,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLimit(JNIEnv* env, jobject obj, j
     return pValue;
 }
 
-JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getPCIBusId(JNIEnv* env, jobject obj, jint device) {
+JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceHandler_getPCIBusId(JNIEnv* env, jclass cls, jint device) {
     
     const int maxBufferLen = 13;
     char pciBusId[maxBufferLen];
@@ -29,7 +30,7 @@ JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_getPCIBusId(JNIEnv* env, jobject 
     return env->NewStringUTF(pciBusId);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getStreamPriorityRange(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getStreamPriorityRange(JNIEnv* env, jclass cls) {
     
     int leastPriority;
     int greatestPriority;
@@ -43,42 +44,42 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getStreamPriorityRange(JNIEnv* env, 
     return (leastPriority - greatestPriority);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setCacheConfig(JNIEnv* env, jobject obj, jint cacheConfig) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig) {
 
     cudaError_t cudaStatus = cudaDeviceSetCacheConfig(static_cast<cudaFuncCache>(cacheConfig));
 
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value) {
     
     cudaError_t cudaStatus = cudaDeviceSetLimit(static_cast<cudaLimit>(limit), (size_t) value);
 
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_setSharedMemConfig(JNIEnv* env, jobject obj, jint config) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setSharedMemConfig(JNIEnv* env, jclass cls, jint config) {
     
     cudaError_t cudaStatus = cudaDeviceSetSharedMemConfig(static_cast<cudaSharedMemConfig>(config));
 
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_syncDevice(JNIEnv* env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_synchronize(JNIEnv* env, jclass cls) {
     
     cudaError_t cudaStatus = cudaDeviceSynchronize();
 
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_resetDevice(JNIEnv* env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jclass cls) {
     
     cudaError_t cudaStatus = cudaDeviceReset();
 
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getRuntimeVersion(JNIEnv * env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv * env, jobject instance) {
     
     int runtimeVersion;
 
@@ -164,6 +165,49 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getLastError(JNIEnv* env, jobject ob
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj) {
 
     cudaError_t cudaStatus = cudaPeekAtLastError();
+
+    return cudaStatus;
+}
+
+//6.4 Stream Management
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj) {
+    
+    cudaError_t cudaStatus = cudaCtxResetPersistingL2Cache();
+
+    return cudaStatus;
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj) {
+
+    cudaStream_t pStream;
+
+    cudaError_t cudaStatus = cudaStreamCreate(&pStream);
+
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (jlong)pStream;
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, jobject obj, jint flags) {
+
+    cudaStream_t pStream;
+
+    cudaError_t cudaStatus = cudaStreamCreateWithFlags(&pStream, (unsigned int) flags);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (jlong)pStream;
+}
+
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj, jobject event) {
+
+    cudaError_t cudaStatus = cudaEventCreate(reinterpret_cast<cudaEvent_t*>(event));
 
     return cudaStatus;
 }
