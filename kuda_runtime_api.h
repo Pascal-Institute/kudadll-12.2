@@ -6,21 +6,21 @@
 extern "C" {
 #endif
 	//6.1 Device Management
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceGetLimit(JNIEnv* env, jobject obj, jbyte limit);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit);
 
-	JNIEXPORT jstring JNICALL Java_kuda_RuntimeAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint device);
+	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceHandler_getPCIBusId(JNIEnv* env, jclass cls, jint device);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceGetStreamPriorityRange(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getStreamPriorityRange(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceSetCacheConfig(JNIEnv* env, jobject obj, jint cacheConfig);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceSetSharedMemConfig(JNIEnv* env, jobject obj, jint config);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setSharedMemConfig(JNIEnv* env, jclass cls, jint config);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceSynchronize(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_synchronize(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceReset(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jclass cls);
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv* env, jobject obj);
 
