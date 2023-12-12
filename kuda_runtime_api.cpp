@@ -204,10 +204,73 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, 
     return (jlong)pStream;
 }
 
+//6.5 Event ManageMent
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls) {
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj, jobject event) {
+    cudaEvent_t event;
 
-    cudaError_t cudaStatus = cudaEventCreate(reinterpret_cast<cudaEvent_t*>(event));
+    cudaError_t cudaStatus = cudaEventCreate(&event);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (jlong)event;
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
+    
+    cudaEvent_t event;
+
+    cudaError_t cudaStatus = cudaEventCreateWithFlags(&event, (unsigned int)flags);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (jlong)event;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_destroy(JNIEnv* env, jclass cls, jlong event) {
+    
+    CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
+
+    cudaError_t cudaStatus = cudaEventDestroy(cudaEventPointer);
+
+    return cudaStatus;
+}
+
+JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_EventHandler_elapsedTime(JNIEnv* env, jclass cls, jlong start, jlong end) {
+
+    float ms;
+
+    CUevent_st* cudaStartEventPointer = reinterpret_cast<CUevent_st*>(start);
+
+    CUevent_st* cudaEndEventPointer = reinterpret_cast<CUevent_st*>(end);
+
+    cudaError_t cudaStatus = cudaEventElapsedTime(&ms, cudaStartEventPointer, cudaEndEventPointer);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return ms;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_query(JNIEnv* env, jclass cls, jlong event) {
+
+    CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
+
+    cudaError_t cudaStatus = cudaEventQuery(cudaEventPointer);
+
+    return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env, jclass cls, jlong event) {
+
+    CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
+
+    cudaError_t cudaStatus = cudaEventSynchronize(cudaEventPointer);
 
     return cudaStatus;
 }
