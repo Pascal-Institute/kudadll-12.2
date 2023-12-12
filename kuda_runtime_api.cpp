@@ -222,7 +222,7 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreateWithFlags(JNIEnv* env, j
     
     cudaEvent_t event;
 
-    cudaError_t cudaStatus = cudaEventCreateWithFlags(&event);
+    cudaError_t cudaStatus = cudaEventCreateWithFlags(&event, (unsigned int)flags);
 
     if (cudaStatus != cudaSuccess) {
         return cudaStatus;
