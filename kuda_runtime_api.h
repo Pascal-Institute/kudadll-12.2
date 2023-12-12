@@ -55,6 +55,22 @@ extern "C" {
 	//6.5 Event ManageMent
 	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj);
 
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreateWithFlags(JNIEnv* env, jobject obj, jint flags);
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventDestroy(JNIEnv* env, jobject obj, jlong event);
+
+JNIEXPORT jfloat JNICALL Java_kuda_RuntimeAPI_eventElapsedTime(JNIEnv* env, jobject obj, jlong start, jlong end);
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventQuery(JNIEnv* env, jobject obj, jlong event);
+
+//cudaEventRecord
+
+//cudaEventRecordWithFlags
+
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong event);
+
+
 #ifdef __cplusplus
 }
 #endif
