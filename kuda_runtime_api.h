@@ -55,6 +55,10 @@ extern "C" {
 	//6.5 Event ManageMent
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj, jobject event);
 
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreateWithFlags(JNIEnv* env, jobject obj, jint flags);
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventDestroy(JNIEnv* env, jobject obj, jlong event);
+
 #ifdef __cplusplus
 }
 #endif
