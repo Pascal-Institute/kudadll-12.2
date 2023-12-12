@@ -204,8 +204,8 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, 
     return (jlong)pStream;
 }
 
-
-JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj) {
+//6.5 Event ManageMent
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls) {
 
     cudaEvent_t event;
 
@@ -218,7 +218,7 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreate(JNIEnv* env, jobject ob
     return (jlong)event;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreateWithFlags(JNIEnv* env, jobject obj, jint flags) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
     
     cudaEvent_t event;
 
@@ -231,7 +231,7 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_eventCreateWithFlags(JNIEnv* env, j
     return (jlong)event;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventDestroy(JNIEnv* env, jobject obj, jlong event) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_destroy(JNIEnv* env, jclass cls, jlong event) {
     
     CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
 
@@ -240,7 +240,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventDestroy(JNIEnv* env, jobject ob
     return cudaStatus;
 }
 
-JNIEXPORT jfloat JNICALL Java_kuda_RuntimeAPI_eventElapsedTime(JNIEnv* env, jobject obj, jlong start, jlong end) {
+JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_EventHandler_elapsedTime(JNIEnv* env, jclass cls, jlong start, jlong end) {
 
     float ms;
 
@@ -257,7 +257,7 @@ JNIEXPORT jfloat JNICALL Java_kuda_RuntimeAPI_eventElapsedTime(JNIEnv* env, jobj
     return ms;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventQuery(JNIEnv* env, jobject obj, jlong event) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_query(JNIEnv* env, jclass cls, jlong event) {
 
     CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
 
@@ -266,7 +266,7 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventQuery(JNIEnv* env, jobject obj,
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong event) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env, jclass cls, jlong event) {
 
     CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
 
