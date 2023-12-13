@@ -52,6 +52,9 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, jobject obj, jint flags);
 
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_cudaStreamBeginCapture(JNIEnv* env, jobject obj, jlong stream ,jint mode);
+
 	//6.5 Event ManageMent
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls);
 
