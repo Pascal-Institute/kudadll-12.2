@@ -204,6 +204,15 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, 
     return (jlong)pStream;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode) {
+    
+    CUstream_st* streamPointer = reinterpret_cast<CUstream_st*>(stream);
+    
+    cudaError_t cudaStatus = cudaStreamBeginCapture(streamPointer, static_cast<cudaStreamCaptureMode>(mode));
+
+    return cudaStatus;
+}
+
 //6.5 Event ManageMent
 JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls) {
 
