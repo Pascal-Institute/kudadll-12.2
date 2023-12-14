@@ -183,9 +183,9 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* en
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode) {
 
-    CUstream_st* streamPointer = reinterpret_cast<CUstream_st*>(stream);
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
-    cudaError_t cudaStatus = cudaStreamBeginCapture(streamPointer, static_cast<cudaStreamCaptureMode>(mode));
+    cudaError_t cudaStatus = cudaStreamBeginCapture(cudaStreamPointer, static_cast<cudaStreamCaptureMode>(mode));
 
     return cudaStatus;
 }
@@ -228,6 +228,15 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithPriority(JNIEnv* en
     }
 
     return (jlong)pStream;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream) {
+
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+
+    cudaError_t cudaStatus = cudaStreamDestroy(cudaStreamPointer);
+
+    return cudaStatus;
 }
 
 //6.5 Event ManageMent
