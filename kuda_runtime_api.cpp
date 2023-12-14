@@ -190,6 +190,17 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobj
     return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src) {
+
+    CUstream_st* cudaDstStreamPointer = reinterpret_cast<CUstream_st*>(dst);
+
+    CUstream_st* cudaSrcStreamPointer = reinterpret_cast<CUstream_st*>(src);
+
+    cudaError_t cudaStatus = cudaStreamCopyAttributes(cudaDstStreamPointer, cudaSrcStreamPointer);
+
+    return cudaStatus;
+}
+
 JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj) {
 
     cudaStream_t pStream;
