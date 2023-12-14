@@ -54,8 +54,6 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
-
 	//cudaStreamBeginCaptureToGraph
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
