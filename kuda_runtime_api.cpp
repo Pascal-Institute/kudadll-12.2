@@ -79,19 +79,6 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jcl
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv * env, jobject instance) {
-    
-    int runtimeVersion;
-
-    cudaError_t cudaStatus = cudaRuntimeGetVersion(&runtimeVersion);
-
-    if (cudaStatus != cudaSuccess) {
-        return cudaStatus;
-    }
-
-    return runtimeVersion;
-}
-
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDevice(JNIEnv* env, jobject instance) {
    
     int diviceCode;
@@ -319,4 +306,31 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env
     cudaError_t cudaStatus = cudaEventSynchronize(cudaEventPointer);
 
     return cudaStatus;
+}
+
+//6.27 Version Management
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
+    
+    int driverVersion;
+
+    cudaError_t cudaStatus = cudaDriverGetVersion(&driverVersion);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return driverVersion;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv* env, jobject instance) {
+
+    int runtimeVersion;
+
+    cudaError_t cudaStatus = cudaRuntimeGetVersion(&runtimeVersion);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return runtimeVersion;
 }
