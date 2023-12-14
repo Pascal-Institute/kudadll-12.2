@@ -177,6 +177,30 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* en
     return cudaStatus;
 }
 
+//cudaStreamAddCallback
+
+//cudaStreamAttachMemAsync
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode) {
+
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+
+    cudaError_t cudaStatus = cudaStreamBeginCapture(cudaStreamPointer, static_cast<cudaStreamCaptureMode>(mode));
+
+    return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src) {
+
+    CUstream_st* cudaDstStreamPointer = reinterpret_cast<CUstream_st*>(dst);
+
+    CUstream_st* cudaSrcStreamPointer = reinterpret_cast<CUstream_st*>(src);
+
+    cudaError_t cudaStatus = cudaStreamCopyAttributes(cudaDstStreamPointer, cudaSrcStreamPointer);
+
+    return cudaStatus;
+}
+
 JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj) {
 
     cudaStream_t pStream;
@@ -202,6 +226,28 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, 
     }
 
     return (jlong)pStream;
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_streamCreateWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority) {
+
+    cudaStream_t pStream;
+
+    cudaError_t cudaStatus = cudaStreamCreateWithPriority(&pStream, (unsigned int) flags, (int) priority);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return (jlong)pStream;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream) {
+
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+
+    cudaError_t cudaStatus = cudaStreamDestroy(cudaStreamPointer);
+
+    return cudaStatus;
 }
 
 //6.5 Event ManageMent
