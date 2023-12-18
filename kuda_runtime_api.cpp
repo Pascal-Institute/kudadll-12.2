@@ -257,6 +257,21 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobje
     return cudaStatus;
 }
 
+//cudaStreamUpdateCaptureDependencies
+
+//cudaStreamUpdateCaptureDependencies_v2
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags) {
+    
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+    
+    CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
+
+    cudaError_t cudaStatus = cudaStreamWaitEvent(cudaStreamPointer, cudaEventPointer, (unsigned int) flags);
+
+    return cudaStatus;
+    
+}
 
 //6.5 Event ManageMent
 JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls) {
