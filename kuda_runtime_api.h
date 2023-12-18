@@ -22,8 +22,6 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv* env, jobject obj);
-
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDevice(JNIEnv* env, jobject obj);
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDiviceCount(JNIEnv* env, jobject obj);
@@ -66,6 +64,19 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream);
 
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream);
+
+	//cudaStreamSetAttribute
+
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream);
+
+	//cudaStreamUpdateCaptureDependencies
+
+	//cudaStreamUpdateCaptureDependencies_v2
+
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags);
+
+	//cudaThreadExchangeStreamCaptureMode
 
 	//6.5 Event ManageMent
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls);
@@ -83,6 +94,11 @@ extern "C" {
 	//cudaEventRecordWithFlags
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env, jclass cls, jlong event);
+
+	//6.27 Version Management
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj);
+	
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv* env, jobject obj);
 
 #ifdef __cplusplus
 }

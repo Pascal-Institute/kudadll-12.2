@@ -79,19 +79,6 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jcl
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv * env, jobject instance) {
-    
-    int runtimeVersion;
-
-    cudaError_t cudaStatus = cudaRuntimeGetVersion(&runtimeVersion);
-
-    if (cudaStatus != cudaSuccess) {
-        return cudaStatus;
-    }
-
-    return runtimeVersion;
-}
-
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_getDevice(JNIEnv* env, jobject instance) {
    
     int diviceCode;
@@ -250,6 +237,42 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamDestory(JNIEnv* env, jobject o
     return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream) {
+    
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+
+    cudaError_t cudaStatus = cudaStreamQuery(cudaStreamPointer);
+
+    return cudaStatus;
+}
+
+//cudaStreamSetAttribute
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream) {
+
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+
+    cudaError_t cudaStatus = cudaStreamSynchronize(cudaStreamPointer);
+
+    return cudaStatus;
+}
+
+//cudaStreamUpdateCaptureDependencies
+
+//cudaStreamUpdateCaptureDependencies_v2
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags) {
+    
+    CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+    
+    CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
+
+    cudaError_t cudaStatus = cudaStreamWaitEvent(cudaStreamPointer, cudaEventPointer, (unsigned int) flags);
+
+    return cudaStatus;
+    
+}
+
 //6.5 Event ManageMent
 JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls) {
 
@@ -319,4 +342,31 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env
     cudaError_t cudaStatus = cudaEventSynchronize(cudaEventPointer);
 
     return cudaStatus;
+}
+
+//6.27 Version Management
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
+    
+    int driverVersion;
+
+    cudaError_t cudaStatus = cudaDriverGetVersion(&driverVersion);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return driverVersion;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_runtimeGetVersion(JNIEnv* env, jobject instance) {
+
+    int runtimeVersion;
+
+    cudaError_t cudaStatus = cudaRuntimeGetVersion(&runtimeVersion);
+
+    if (cudaStatus != cudaSuccess) {
+        return cudaStatus;
+    }
+
+    return runtimeVersion;
 }
