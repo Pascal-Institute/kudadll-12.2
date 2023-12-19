@@ -1,4 +1,4 @@
-#include <jni.h>
+﻿#include <jni.h>
 
 //https://docs.nvidia.com/cuda/cuda-runtime-api/index.html
 
@@ -44,37 +44,37 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj);
 
 	//6.4 Stream Management
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_ctxResetPersistingL2Cache(JNIEnv* env, jclass cls);
 
 	//cudaStreamAddCallback
 
 	//cudaStreamAttachMemAsync
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_beginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_beginCapture(JNIEnv* env, jclass cls, jlong stream, jint mode);
 
 	//cudaStreamBeginCaptureToGraph
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_copyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_copyAttributes(JNIEnv* env, jclass cls, jlong dst, jlong src);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_create(JNIEnv* env, jobject obj);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_create(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithFlags(JNIEnv* env, jobject obj, jint flags);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithPriority(JNIEnv* env, jclass cls, jint flags, jint priority);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_destory(JNIEnv* env, jobject obj, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_destory(JNIEnv* env, jclass cls, jlong stream);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_query(JNIEnv* env, jobject obj, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_query(JNIEnv* env, jclass cls, jlong stream);
 
 	//cudaStreamSetAttribute
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_synchrnoize(JNIEnv* env, jobject obj, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_synchrnoize(JNIEnv* env, jclass cls, jlong stream);
 
 	//cudaStreamUpdateCaptureDependencies
 
 	//cudaStreamUpdateCaptureDependencies_v2
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_waitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_waitEvent(JNIEnv* env, jclass cls, jlong stream, jlong event, jint flags);
 
 	//cudaThreadExchangeStreamCaptureMode
 
@@ -94,6 +94,23 @@ extern "C" {
 	//cudaEventRecordWithFlags
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env, jclass cls, jlong event);
+
+	//6.6 External Reource Interoperability
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalMemory(JNIEnv* env, jobject obj, jlong extMem);
+
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalSemaphore(JNIEnv* env, jobject obj, jlong extSem);
+
+	//JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_externalMemoryGetMappedBuffer(JNIEnv* env, jobject obj);
+	
+	//JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_externalMemoryGetMappedMipmappedArray(JNIEnv* env, jobject obj);
+	
+	//JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_importExternalMemory(JNIEnv* env, jobject obj);
+		
+	//JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_importExternalSemaphore(JNIEnv* env, jobject obj);
+		
+	//JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_signalExternalSemaphoresAsync(JNIEnv* env, jobject obj);
+		
+	//JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_waitExternalSemaphoresAsync(JNIEnv* env, jobject obj);
 
 	//6.27 Version Management
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj);
