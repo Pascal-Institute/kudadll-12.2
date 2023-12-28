@@ -372,6 +372,15 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, long 
     return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, long ptr) {
+    
+    void* cudaPtr = reinterpret_cast<void*>(ptr);
+
+    cudaError_t cudaStatus = cudaFreeHost(cudaPtr);
+
+    return cudaStatus;
+}
+
 //6.27 Version Management
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
     

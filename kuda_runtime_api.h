@@ -117,7 +117,12 @@ extern "C" {
 	//__host__​cudaError_t cudaArrayGetMemoryRequirements(cudaArrayMemoryRequirements* memoryRequirements, cudaArray_t array, int  device)
 	//__host__​cudaError_t cudaArrayGetPlane(cudaArray_t* pPlaneArray, cudaArray_t hArray, unsigned int  planeIdx)
 	//__host__​cudaError_t cudaArrayGetSparseProperties(cudaArraySparseProperties* sparseProperties, cudaArray_t array)
+	
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, long devPtr);
+
+	//__host__​cudaError_t cudaFreeArray(cudaArray_t array)
+
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, long ptr);
 
 	//6.27 Version Management
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj);
