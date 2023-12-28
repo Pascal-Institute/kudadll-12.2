@@ -363,6 +363,15 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalSemaphore(JNIEnv* env
     return cudaStatus;
 }
 
+//6.9 Memory Manangement
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, long devPtr) {
+    void* cudaDevPtr = reinterpret_cast<void*>(devPtr);
+
+    cudaError_t cudaStatus = cudaFree(cudaDevPtr);
+
+    return cudaStatus;
+}
+
 //6.27 Version Management
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
     
