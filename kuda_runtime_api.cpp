@@ -401,6 +401,15 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobj
 
 }
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr) {
+    
+    void* cudaPtr = reinterpret_cast<void*>(ptr);
+
+    cudaError_t cudaStatus = cudaHostUnregister(cudaPtr);
+
+    return cudaStatus;
+}
+
 //6.27 Version Management
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
     

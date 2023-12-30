@@ -126,6 +126,8 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobject obj, jlong mipMappedArray);
 
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr);
+
 	//6.27 Version Management
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj);
 	
