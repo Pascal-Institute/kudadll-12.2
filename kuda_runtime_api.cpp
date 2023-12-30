@@ -364,17 +364,17 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalSemaphore(JNIEnv* env
 }
 
 //6.9 Memory Manangement
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, long devPtr) {
-    void* cudaDevPtr = reinterpret_cast<void*>(devPtr);
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong devPtr) {
+    void* cudaDevPtr = reinterpret_cast<void*>((long) devPtr);
 
     cudaError_t cudaStatus = cudaFree(cudaDevPtr);
 
     return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, long ptr) {
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, jlong ptr) {
     
-    void* cudaPtr = reinterpret_cast<void*>(ptr);
+    void* cudaPtr = reinterpret_cast<void*>((long) ptr);
 
     cudaError_t cudaStatus = cudaFreeHost(cudaPtr);
 
