@@ -128,6 +128,8 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr);
 
+	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, jsize size);
+
 	//6.27 Version Management
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj);
 	
