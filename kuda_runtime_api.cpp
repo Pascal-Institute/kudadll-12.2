@@ -365,7 +365,8 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_destroyExternalSemaphore(JNIEnv* env
 
 //6.9 Memory Manangement
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong devPtr) {
-    void* cudaDevPtr = reinterpret_cast<void*>((long) devPtr);
+
+    void* cudaDevPtr = reinterpret_cast<void*>(devPtr);
 
     cudaError_t cudaStatus = cudaFree(cudaDevPtr);
 
@@ -373,20 +374,31 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong
 }
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeArray(JNIEnv* env, jobject obj, jlong array) {
+
     cudaArray_t cudaArray = reinterpret_cast<cudaArray_t>(array);
     
     cudaError_t cudaStatus = cudaFreeArray(cudaArray);
 
-    return cudaStatus
+    return cudaStatus;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, jlong ptr) {
     
-    void* cudaPtr = reinterpret_cast<void*>((long) ptr);
+    void* cudaPtr = reinterpret_cast<void*>(ptr);
 
     cudaError_t cudaStatus = cudaFreeHost(cudaPtr);
 
     return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipMappedArray(JNIEnv* env, jobject obj, jlong mipMappedArray) {
+
+    cudaMipmappedArray_t cudaMipMappedArray = reinterpret_cast<cudaMipmappedArray_t>(mipMappedArray);
+    
+    cudaError_t cudaStatus = cudaFreeMipmappedArray(cudaMipMappedArray);
+
+    return cudaStatus;
+
 }
 
 //6.27 Version Management
