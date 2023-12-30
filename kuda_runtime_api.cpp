@@ -372,6 +372,14 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong
     return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeArray(JNIEnv* env, jobject obj, jlong array) {
+    cudaArray_t cudaArray = reinterpret_cast<cudaArray_t>(array);
+    
+    cudaError_t cudaStatus = cudaFreeArray(cudaArray);
+
+    return cudaStatus
+}
+
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeHost(JNIEnv* env, jobject obj, jlong ptr) {
     
     void* cudaPtr = reinterpret_cast<void*>((long) ptr);
