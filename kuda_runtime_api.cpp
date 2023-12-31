@@ -25,6 +25,19 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, 
 	return pValue;
 }
 
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getMemPool(JNIEnv* env, jclass cls, jint  device) {
+
+	cudaMemPool_t memPool;
+
+	cudaError_t cudaStatus = cudaDeviceGetMemPool(&memPool, (int)device);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)memPool;
+}
+
 JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceHandler_getPCIBusId(JNIEnv* env, jclass cls, jint device) {
 
 	const int maxBufferLen = 13;
