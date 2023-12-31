@@ -38,3 +38,18 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_getVersion(JNIEnv* env, jobject obj, jlo
 
 	return version;
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_getProperty(JNIEnv* env, jobject obj, jint type) {
+	
+	int version;
+
+	libraryPropertyType_t libraryPropertyType = static_cast<libraryPropertyType_t>(type);
+
+	cublasStatus_t cublasStatus = cublasGetProperty(libraryPropertyType, &version);
+
+	if (cublasStatus != CUBLAS_STATUS_SUCCESS) {
+		return cublasStatus;
+	}
+
+	return version;
+}
