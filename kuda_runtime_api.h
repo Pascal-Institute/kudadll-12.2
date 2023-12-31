@@ -132,6 +132,8 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj, jsize size, jint flags);
 
+	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostRegister(JNIEnv* env, jobject obj, jsize size, jint flags);
+
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr);
 
 	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, jsize size);

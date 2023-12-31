@@ -418,6 +418,19 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj,
 //__host__​cudaError_t cudaGetSymbolAddress(void** devPtr, const void* symbol)
 //__host__​cudaError_t cudaGetSymbolSize(size_t* size, const void* symbol)
 
+
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostRegister(JNIEnv* env, jobject obj, jsize size, jint flags) {
+	void* cudaPtr;
+
+	cudaError_t cudaStatus = cudaHostRegister(&cudaPtr, (size_t)size, (unsigned int) flags);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)cudaPtr;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr) {
 
 	void* cudaPtr = reinterpret_cast<void*>(ptr);
@@ -438,8 +451,6 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, js
 	}
 
 	return (jlong) cudaDevPtr;
-
-	return cudaStatus;
 }
 
 //6.27 Version Management
