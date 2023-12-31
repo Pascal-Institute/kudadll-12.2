@@ -138,6 +138,12 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, jsize size);
 
+	//__host__​cudaError_t cudaMalloc3D(cudaPitchedPtr* pitchedDevPtr, cudaExtent extent)
+	//__host__​cudaError_t cudaMalloc3DArray(cudaArray_t * array, const cudaChannelFormatDesc * desc, cudaExtent extent, unsigned int  flags = 0)
+	//__host__​cudaError_t cudaMallocArray(cudaArray_t * array, const cudaChannelFormatDesc * desc, size_t width, size_t height = 0, unsigned int  flags = 0)
+
+	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_mallocHost(JNIEnv* env, jobject obj, jsize size);
+
 	//6.27 Version Management
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj);
 	

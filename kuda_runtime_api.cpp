@@ -401,10 +401,10 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobj
 
 }
 JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj, jsize size, jint flags) {
-	
+
 	void* cudaPHost;
 
-	cudaError_t cudaStatus = cudaHostAlloc(&cudaPHost, (size_t)size, (unsigned int) flags);
+	cudaError_t cudaStatus = cudaHostAlloc(&cudaPHost, (size_t)size, (unsigned int)flags);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
@@ -420,9 +420,10 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj,
 
 
 JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostRegister(JNIEnv* env, jobject obj, jsize size, jint flags) {
+	
 	void* cudaPtr;
 
-	cudaError_t cudaStatus = cudaHostRegister(&cudaPtr, (size_t)size, (unsigned int) flags);
+	cudaError_t cudaStatus = cudaHostRegister(&cudaPtr, (size_t)size, (unsigned int)flags);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
@@ -441,16 +442,32 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject 
 }
 
 JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, jsize size) {
-	
+
 	void* cudaDevPtr;
 
-	cudaError_t cudaStatus = cudaMalloc(&cudaDevPtr, (size_t) size);
+	cudaError_t cudaStatus = cudaMalloc(&cudaDevPtr, (size_t)size);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
 	}
 
-	return (jlong) cudaDevPtr;
+	return (jlong)cudaDevPtr;
+}
+
+//__host__​cudaError_t cudaMalloc3D(cudaPitchedPtr* pitchedDevPtr, cudaExtent extent)
+	//__host__​cudaError_t cudaMalloc3DArray(cudaArray_t * array, const cudaChannelFormatDesc * desc, cudaExtent extent, unsigned int  flags = 0)
+	//__host__​cudaError_t cudaMallocArray(cudaArray_t * array, const cudaChannelFormatDesc * desc, size_t width, size_t height = 0, unsigned int  flags = 0)
+
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_mallocHost(JNIEnv* env, jobject obj, jsize size) {
+	void* cudaPtr;
+
+	cudaError_t cudaStatus = cudaMallocHost(&cudaPtr, (size_t)size);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)cudaPtr;
 }
 
 //6.27 Version Management
