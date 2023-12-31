@@ -144,6 +144,13 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_mallocHost(JNIEnv* env, jobject obj, jsize size);
 
+	//6.13  Peer Device Memory Access
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceCanAccessPeer(JNIEnv* env, jobject obj);
+
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceDisablePeerAccess(JNIEnv* env, jobject obj, jint peerDevice);
+	
+	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceEnablePeerAccess(JNIEnv* env, jobject obj, jint  peerDevice, jint flags);
+
 	//6.27 Version Management
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj);
 	

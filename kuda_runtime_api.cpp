@@ -470,6 +470,34 @@ JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_mallocHost(JNIEnv* env, jobject obj
 	return (jlong)cudaPtr;
 }
 
+//6.13  Peer Device Memory Access
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceCanAccessPeer(JNIEnv* env, jobject obj) {
+	int canAccessPeer;
+
+	cudaError_t cudaStatus = cudaDeviceCanAccessPeer(&canAccessPeer);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return canAccessPeer;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceDisablePeerAccess(JNIEnv* env, jobject obj, jint peerDevice) {
+	
+	cudaError_t cudaStatus = cudaDeviceDisablePeerAccess((int)peerDevice);
+
+	return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_deviceEnablePeerAccess(JNIEnv* env, jobject obj, jint  peerDevice, jint flags) {
+	
+	cudaError_t cudaStatus = cudaDeviceEnablePeerAccess((int)peerDevice, (unsigned int)flags);
+
+	return cudaStatus;
+}
+
+
 //6.27 Version Management
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_driverGetVersion(JNIEnv* env, jobject obj) {
 
