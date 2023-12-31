@@ -22,3 +22,19 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_destroy(JNIEnv* env, jobject obj, jlong 
 
 	return cublasStatus;
 }
+
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_getVersion(JNIEnv* env, jobject obj, jlong handle) {
+
+	int version;
+
+	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
+
+	cublasStatus_t cublasStatus = cublasGetVersion(cublasHandle, &version);
+
+	if (cublasStatus != CUBLAS_STATUS_SUCCESS) {
+		return cublasStatus;
+	}
+
+	return version;
+}
