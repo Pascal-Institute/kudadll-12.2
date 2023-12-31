@@ -95,7 +95,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_query(JNIEnv* env, jclass cls, jlong event);
 
-	//cudaEventRecord
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_record(JNIEnv* env, jclass cls, jlong event, jlong stream);
 
 	//cudaEventRecordWithFlags
 

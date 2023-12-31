@@ -370,6 +370,17 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_query(JNIEnv* env, jcla
 	return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_record(JNIEnv* env, jclass cls, jlong event, jlong stream) {
+	
+	cudaEvent_t cudaEvent = reinterpret_cast<cudaEvent_t>(event);
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
+
+	cudaError_t cudaStatus = cudaEventRecord(cudaEvent, cudaStream);
+
+	return cudaStatus;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env, jclass cls, jlong event) {
 
 	CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
