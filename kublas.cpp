@@ -13,3 +13,12 @@ JNIEXPORT jlong JNICALL Java_kuda_Kublas_create(JNIEnv* env, jobject obj) {
 	
 	return (jlong) handle;
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_destroy(JNIEnv* env, jobject obj, jlong handle) {
+	
+	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
+
+	cublasStatus_t cublasStatus = cublasDestroy_v2(cublasHandle);
+
+	return cublasStatus;
+}
