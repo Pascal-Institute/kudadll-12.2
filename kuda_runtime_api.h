@@ -126,6 +126,12 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobject obj, jlong mipMappedArray);
 
+	//__host__​cudaError_t cudaGetMipmappedArrayLevel(cudaArray_t* levelArray, cudaMipmappedArray_const_t mipmappedArray, unsigned int  level)
+	//__host__​cudaError_t cudaGetSymbolAddress(void** devPtr, const void* symbol)
+	//__host__​cudaError_t cudaGetSymbolSize(size_t* size, const void* symbol)
+
+	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj, jsize size, jint flags);
+
 	JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr);
 
 	JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_malloc(JNIEnv* env, jobject obj, jsize size);

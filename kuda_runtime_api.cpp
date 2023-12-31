@@ -400,6 +400,23 @@ JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_freeMipmappedArray(JNIEnv* env, jobj
 	return cudaStatus;
 
 }
+JNIEXPORT jlong JNICALL Java_kuda_RuntimeAPI_hostAlloc(JNIEnv* env, jobject obj, jsize size, jint flags) {
+	
+	void* cudaPHost;
+
+	cudaError_t cudaStatus = cudaHostAlloc(&cudaPHost, (size_t)size, (unsigned int) flags);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)cudaPHost;
+
+}
+
+//__host__​cudaError_t cudaGetMipmappedArrayLevel(cudaArray_t* levelArray, cudaMipmappedArray_const_t mipmappedArray, unsigned int  level)
+//__host__​cudaError_t cudaGetSymbolAddress(void** devPtr, const void* symbol)
+//__host__​cudaError_t cudaGetSymbolSize(size_t* size, const void* symbol)
 
 JNIEXPORT jint JNICALL Java_kuda_RuntimeAPI_hostUnregister(JNIEnv* env, jobject obj, jlong ptr) {
 
