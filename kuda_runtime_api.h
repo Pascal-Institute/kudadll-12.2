@@ -8,6 +8,8 @@ extern "C" {
 	//6.1 Device Management
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope);
 
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device);
+
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit);
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getMemPool(JNIEnv* env, jclass cls, jint  device);

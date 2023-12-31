@@ -12,6 +12,19 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_flushGPUDirectRDMAWrit
 	return cudaStatus;
 }
 
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device) {
+
+	cudaMemPool_t memPool;
+
+	cudaError_t cudaStatus = cudaDeviceGetMemPool(&memPool, (int)device);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)memPool;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit) {
 
 	size_t pValue;
