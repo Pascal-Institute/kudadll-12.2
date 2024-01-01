@@ -116,3 +116,12 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_getPointerMode(JNIEnv* env, jobject obj,
 
 	return (jint)static_cast<int>(cublasPointerMode);
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_setPointerMode(JNIEnv* env, jobject obj, jlong handle, jint mode) {
+
+	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
+
+	cublasStatus_t cublasStatus = cublasSetPointerMode(cublasHandle, static_cast<cublasPointerMode_t>(mode));
+
+	return cublasStatus;
+}
