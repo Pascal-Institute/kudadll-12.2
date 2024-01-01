@@ -58,3 +58,8 @@ JNIEXPORT jstring JNICALL Java_kuda_Kublas_getStatusName(JNIEnv* env, jobject ob
 
 	return env->NewStringUTF(cublasGetStatusName(static_cast<cublasStatus_t>(status)));
 }
+
+JNIEXPORT jstring JNICALL Java_kuda_Kublas_getStatusString(JNIEnv* env, jobject obj, jint status) {
+
+	return env->NewStringUTF(cublasGetStatusString(static_cast<cublasStatus_t>(status)));
+}
