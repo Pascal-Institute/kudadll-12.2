@@ -63,3 +63,14 @@ JNIEXPORT jstring JNICALL Java_kuda_Kublas_getStatusString(JNIEnv* env, jobject 
 
 	return env->NewStringUTF(cublasGetStatusString(static_cast<cublasStatus_t>(status)));
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_setStream(JNIEnv* env, jobject obj, jlong handle, jlong streamId) {
+
+	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(streamId);
+
+	cublasStatus_t cublasStatus = cublasSetStream(cublasHandle, cudaStream);
+
+	return cublasStatus;
+}
