@@ -100,3 +100,19 @@ JNIEXPORT jlong JNICALL Java_kuda_Kublas_getStream(JNIEnv* env, jobject obj, jlo
 
 	return (jlong)cudaStream;
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_getPointerMode(JNIEnv* env, jobject obj, jlong handle) {
+
+	//initialize...
+	cublasPointerMode_t cublasPointerMode = CUBLAS_POINTER_MODE_HOST;
+
+	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
+
+	cublasStatus_t cublasStatus = cublasGetPointerMode(cublasHandle, &cublasPointerMode);
+
+	if (cublasStatus != CUBLAS_STATUS_SUCCESS) {
+		return cublasStatus;
+	}
+
+	return (jint)static_cast<int>(cublasPointerMode);
+}
