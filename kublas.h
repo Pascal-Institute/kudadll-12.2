@@ -20,6 +20,8 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_Kublas_setStream(JNIEnv* env, jobject obj, jlong handle, jlong streamId);
 
 	JNIEXPORT jint JNICALL Java_kuda_Kublas_setWorkspace(JNIEnv* env, jobject obj, jlong handle, jsize workspaceSizeInBytes);
+
+	JNIEXPORT jlong JNICALL Java_kuda_Kublas_getStream(JNIEnv* env, jobject obj, jlong handle);
 #ifdef __cplusplus
 }
 #endif

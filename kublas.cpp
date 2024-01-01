@@ -84,5 +84,19 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setWorkspace(JNIEnv* env, jobject obj, j
 	cublasStatus_t cublasStatus = cublasSetWorkspace(cublasHandle, workspace, (size_t)workspaceSizeInBytes);
 
 	return cublasStatus;
+}
 
+JNIEXPORT jlong JNICALL Java_kuda_Kublas_getStream(JNIEnv* env, jobject obj, jlong handle) {
+
+	cudaStream_t cudaStream;
+
+	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
+
+	cublasStatus_t cublasStatus = cublasGetStream(cublasHandle, &cudaStream);
+
+	if (cublasStatus != CUBLAS_STATUS_SUCCESS) {
+		return cublasStatus;
+	}
+
+	return (jlong)cudaStream;
 }
