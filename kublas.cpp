@@ -74,3 +74,9 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setStream(JNIEnv* env, jobject obj, jlon
 
 	return cublasStatus;
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_setWorkspace(JNIEnv* env, jobject obj, jlong handle, jsize workspaceSizeInBytes) {
+
+	void workspace;
+
+}
