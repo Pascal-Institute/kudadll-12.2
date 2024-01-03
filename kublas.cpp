@@ -125,3 +125,14 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setPointerMode(JNIEnv* env, jobject obj,
 
 	return cublasStatus;
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_setVector(JNIEnv* env, jobject obj, jint n, jint elemSize, jlong x, jint incx, jlong y, jint incy) {
+	
+	const void* cublasX = reinterpret_cast<void*>(x);
+
+	void* cublasY = reinterpret_cast<void*>(y);
+
+	cublasStatus_t cublasStatus = cublasSetVector(n, elemSize, cublasX, incx, cublasY, incy);
+
+	return cublasStatus;
+}

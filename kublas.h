@@ -26,6 +26,8 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_Kublas_getPointerMode(JNIEnv* env, jobject obj, jlong handle);
 
 	JNIEXPORT jint JNICALL Java_kuda_Kublas_setPointerMode(JNIEnv* env, jobject obj, jlong handle, jint mode);
+
+	JNIEXPORT jint JNICALL Java_kuda_Kublas_setVector(JNIEnv* env, jobject obj, jlong handle, jint n, jint elemSize, jlong x , jint incx, jlong y, jint incy);
 #ifdef __cplusplus
 }
 #endif
