@@ -136,3 +136,14 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setVector(JNIEnv* env, jobject obj, jint
 
 	return cublasStatus;
 }
+
+JNIEXPORT jint JNICALL Java_kuda_Kublas_getVector(JNIEnv* env, jobject obj, jint n, jint elemSize, jlong x, jint incx, jlong y, jint incy) {
+
+	const void* cublasX = reinterpret_cast<void*>(x);
+
+	void* cublasY = reinterpret_cast<void*>(y);
+
+	cublasStatus_t cublasStatus = cublasGetVector(n, elemSize, cublasX, incx, cublasY, incy);
+
+	return cublasStatus;
+}
