@@ -32,6 +32,8 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_Kublas_getVector(JNIEnv* env, jobject obj, jint n, jint elemSize, jlong x, jint incx, jlong y, jint incy);
 
 	JNIEXPORT jint JNICALL Java_kuda_Kublas_setMatrix(JNIEnv* env, jobject obj, jint rows, jint cols, jint elemSize, jlong A, jint lda, jlong B, jint ldb);
+
+	JNIEXPORT jint JNICALL Java_kuda_Kublas_getMatrix(JNIEnv* env, jobject obj, jint rows, jint cols, jint elemSize, jlong A, jint lda, jlong B, jint ldb);
 #ifdef __cplusplus
 }
 #endif
