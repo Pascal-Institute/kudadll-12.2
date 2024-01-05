@@ -145,12 +145,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="kublas.cpp" />
     <ClCompile Include="kuda_driver_api.cpp" />
     <ClCompile Include="kuda_runtime_api.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="kublas.h" />
     <ClInclude Include="kuda_driver_api.h" />
     <ClInclude Include="kuda_runtime_api.h" />
   </ItemGroup>
