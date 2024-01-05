@@ -2,7 +2,7 @@
 #include <jni.h>
 #include <cublas_v2.h>
 
-JNIEXPORT jlong JNICALL Java_kuda_Kublas_create(JNIEnv* env, jobject obj) {
+JNIEXPORT jlong JNICALL Java_kuda_kublas_Kublas_create(JNIEnv* env, jobject obj) {
 	cublasHandle_t handle;
 
 	cublasStatus_t cublasStatus = cublasCreate(&handle);
@@ -14,7 +14,7 @@ JNIEXPORT jlong JNICALL Java_kuda_Kublas_create(JNIEnv* env, jobject obj) {
 	return (jlong) handle;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_destroy(JNIEnv* env, jobject obj, jlong handle) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_destroy(JNIEnv* env, jobject obj, jlong handle) {
 	
 	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
 
@@ -24,7 +24,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_destroy(JNIEnv* env, jobject obj, jlong 
 }
 
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_getVersion(JNIEnv* env, jobject obj, jlong handle) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_getVersion(JNIEnv* env, jobject obj, jlong handle) {
 
 	int version;
 
@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_getVersion(JNIEnv* env, jobject obj, jlo
 	return version;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_getProperty(JNIEnv* env, jobject obj, jint type) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_getProperty(JNIEnv* env, jobject obj, jint type) {
 	
 	int version;
 
@@ -54,17 +54,17 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_getProperty(JNIEnv* env, jobject obj, ji
 	return version;
 }
 
-JNIEXPORT jstring JNICALL Java_kuda_Kublas_getStatusName(JNIEnv* env, jobject obj, jint status) {
+JNIEXPORT jstring JNICALL Java_kuda_kublas_Kublas_getStatusName(JNIEnv* env, jobject obj, jint status) {
 
 	return env->NewStringUTF(cublasGetStatusName(static_cast<cublasStatus_t>(status)));
 }
 
-JNIEXPORT jstring JNICALL Java_kuda_Kublas_getStatusString(JNIEnv* env, jobject obj, jint status) {
+JNIEXPORT jstring JNICALL Java_kuda_kublas_Kublas_getStatusString(JNIEnv* env, jobject obj, jint status) {
 
 	return env->NewStringUTF(cublasGetStatusString(static_cast<cublasStatus_t>(status)));
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_setStream(JNIEnv* env, jobject obj, jlong handle, jlong streamId) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_setStream(JNIEnv* env, jobject obj, jlong handle, jlong streamId) {
 
 	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
 
@@ -75,7 +75,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setStream(JNIEnv* env, jobject obj, jlon
 	return cublasStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_setWorkspace(JNIEnv* env, jobject obj, jlong handle, jsize workspaceSizeInBytes) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_setWorkspace(JNIEnv* env, jobject obj, jlong handle, jsize workspaceSizeInBytes) {
 
 	void* workspace{};
 
@@ -86,7 +86,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setWorkspace(JNIEnv* env, jobject obj, j
 	return cublasStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_Kublas_getStream(JNIEnv* env, jobject obj, jlong handle) {
+JNIEXPORT jlong JNICALL Java_kuda_kublas_Kublas_getStream(JNIEnv* env, jobject obj, jlong handle) {
 
 	cudaStream_t cudaStream;
 
@@ -101,7 +101,7 @@ JNIEXPORT jlong JNICALL Java_kuda_Kublas_getStream(JNIEnv* env, jobject obj, jlo
 	return (jlong)cudaStream;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_getPointerMode(JNIEnv* env, jobject obj, jlong handle) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_getPointerMode(JNIEnv* env, jobject obj, jlong handle) {
 
 	//initialize...
 	cublasPointerMode_t cublasPointerMode = CUBLAS_POINTER_MODE_HOST;
@@ -117,7 +117,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_getPointerMode(JNIEnv* env, jobject obj,
 	return (jint)static_cast<int>(cublasPointerMode);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_setPointerMode(JNIEnv* env, jobject obj, jlong handle, jint mode) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_setPointerMode(JNIEnv* env, jobject obj, jlong handle, jint mode) {
 
 	cublasHandle_t cublasHandle = reinterpret_cast<cublasHandle_t>(handle);
 
@@ -126,7 +126,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setPointerMode(JNIEnv* env, jobject obj,
 	return cublasStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_setVector(JNIEnv* env, jobject obj, jint n, jint elemSize, jlong x, jint incx, jlong y, jint incy) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_setVector(JNIEnv* env, jobject obj, jint n, jint elemSize, jlong x, jint incx, jlong y, jint incy) {
 	
 	const void* cublasX = reinterpret_cast<void*>(x);
 
@@ -137,7 +137,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setVector(JNIEnv* env, jobject obj, jint
 	return cublasStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_getVector(JNIEnv* env, jobject obj, jint n, jint elemSize, jlong x, jint incx, jlong y, jint incy) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_getVector(JNIEnv* env, jobject obj, jint n, jint elemSize, jlong x, jint incx, jlong y, jint incy) {
 
 	const void* cublasX = reinterpret_cast<void*>(x);
 
@@ -148,7 +148,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_getVector(JNIEnv* env, jobject obj, jint
 	return cublasStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_setMatrix(JNIEnv* env, jobject obj, jint rows, jint cols, jint elemSize, jlong A, jint lda, jlong B, jint ldb) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_setMatrix(JNIEnv* env, jobject obj, jint rows, jint cols, jint elemSize, jlong A, jint lda, jlong B, jint ldb) {
 	
 	const void* cublasA = reinterpret_cast<void*>(A);
 
@@ -159,7 +159,7 @@ JNIEXPORT jint JNICALL Java_kuda_Kublas_setMatrix(JNIEnv* env, jobject obj, jint
 	return cublasStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_Kublas_getMatrix(JNIEnv* env, jobject obj, jint rows, jint cols, jint elemSize, jlong A, jint lda, jlong B, jint ldb) {
+JNIEXPORT jint JNICALL Java_kuda_kublas_Kublas_getMatrix(JNIEnv* env, jobject obj, jint rows, jint cols, jint elemSize, jlong A, jint lda, jlong B, jint ldb) {
 
 	const void* cublasA = reinterpret_cast<void*>(A);
 
