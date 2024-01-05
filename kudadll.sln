@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "kudadll", "kudadll.vcxproj", "{66FC1509-BB1E-4CCE-A239-7DA542287E4E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "kublas", "..\kublas\kublas.vcxproj", "{B56424F9-E558-4982-A29C-40020B4F2EF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{66FC1509-BB1E-4CCE-A239-7DA542287E4E}.Release|x64.Build.0 = Release|x64
 		{66FC1509-BB1E-4CCE-A239-7DA542287E4E}.Release|x86.ActiveCfg = Release|Win32
 		{66FC1509-BB1E-4CCE-A239-7DA542287E4E}.Release|x86.Build.0 = Release|Win32
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Debug|x64.ActiveCfg = Debug|x64
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Debug|x64.Build.0 = Debug|x64
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Debug|x86.ActiveCfg = Debug|Win32
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Debug|x86.Build.0 = Debug|Win32
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Release|x64.ActiveCfg = Release|x64
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Release|x64.Build.0 = Release|x64
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Release|x86.ActiveCfg = Release|Win32
+		{B56424F9-E558-4982-A29C-40020B4F2EF5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
