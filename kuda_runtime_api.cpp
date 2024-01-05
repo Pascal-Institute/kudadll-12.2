@@ -3,7 +3,7 @@
 #include <cuda_runtime_api.h>
 
 //6.1 Device Management
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope) {
 	
 	cudaFlushGPUDirectRDMAWritesTarget e = cudaFlushGPUDirectRDMAWritesTargetCurrentDevice;
 
@@ -12,7 +12,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_flushGPUDir
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device) {
 
 	cudaMemPool_t memPool;
 
@@ -25,7 +25,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getDefault
 	return (jlong)memPool;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit) {
 
 	size_t pValue;
 
@@ -38,7 +38,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getLimit(JN
 	return pValue;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getMemPool(JNIEnv* env, jclass cls, jint  device) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getMemPool(JNIEnv* env, jclass cls, jint  device) {
 
 	cudaMemPool_t memPool;
 
@@ -51,7 +51,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getMemPool
 	return (jlong)memPool;
 }
 
-JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getPCIBusId(JNIEnv* env, jclass cls, jint device) {
+JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceHandler_getPCIBusId(JNIEnv* env, jclass cls, jint device) {
 
 	const int maxBufferLen = 13;
 	char pciBusId[maxBufferLen];
@@ -65,7 +65,7 @@ JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getPCIBu
 	return env->NewStringUTF(pciBusId);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getStreamPriorityRange(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getStreamPriorityRange(JNIEnv* env, jclass cls) {
 
 	int leastPriority;
 	int greatestPriority;
@@ -79,35 +79,35 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_getStreamPr
 	return (leastPriority - greatestPriority);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig) {
 
 	cudaError_t cudaStatus = cudaDeviceSetCacheConfig(static_cast<cudaFuncCache>(cacheConfig));
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value) {
 
 	cudaError_t cudaStatus = cudaDeviceSetLimit(static_cast<cudaLimit>(limit), (size_t)value);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_setSharedMemConfig(JNIEnv* env, jclass cls, jint config) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setSharedMemConfig(JNIEnv* env, jclass cls, jint config) {
 
 	cudaError_t cudaStatus = cudaDeviceSetSharedMemConfig(static_cast<cudaSharedMemConfig>(config));
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_synchronize(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_synchronize(JNIEnv* env, jclass cls) {
 
 	cudaError_t cudaStatus = cudaDeviceSynchronize();
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_DeviceHandler_reset(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jclass cls) {
 
 	cudaError_t cudaStatus = cudaDeviceReset();
 
@@ -192,7 +192,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_peekAtLastError(JNIEnv* e
 }
 
 //6.4 Stream Management
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_ctxResetPersistingL2Cache(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_ctxResetPersistingL2Cache(JNIEnv* env, jclass cls) {
 
 	cudaError_t cudaStatus = cudaCtxResetPersistingL2Cache();
 
@@ -203,7 +203,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_ctxResetPer
 
 //cudaStreamAttachMemAsync
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_beginCapture(JNIEnv* env, jclass cls, jlong stream, jint mode) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_beginCapture(JNIEnv* env, jclass cls, jlong stream, jint mode) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -212,7 +212,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_beginCaptur
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_copyAttributes(JNIEnv* env, jclass cls, jlong dst, jlong src) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_copyAttributes(JNIEnv* env, jclass cls, jlong dst, jlong src) {
 
 	CUstream_st* cudaDstStreamPointer = reinterpret_cast<CUstream_st*>(dst);
 
@@ -223,7 +223,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_copyAttribu
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_create(JNIEnv* env, jclass cls) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_create(JNIEnv* env, jclass cls) {
 
 	cudaStream_t pStream;
 
@@ -237,7 +237,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_create(JNI
 	return (jlong)pStream;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
 
 	cudaStream_t pStream;
 
@@ -250,7 +250,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_createWith
 	return (jlong)pStream;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_createWithPriority(JNIEnv* env, jclass cls, jint flags, jint priority) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithPriority(JNIEnv* env, jclass cls, jint flags, jint priority) {
 
 	cudaStream_t pStream;
 
@@ -263,7 +263,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_createWith
 	return (jlong)pStream;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_destory(JNIEnv* env, jclass cls, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_destory(JNIEnv* env, jclass cls, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -272,7 +272,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_destory(JNI
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_query(JNIEnv* env, jclass cls, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_query(JNIEnv* env, jclass cls, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -283,7 +283,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_query(JNIEn
 
 //cudaStreamSetAttribute
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_synchrnoize(JNIEnv* env, jclass cls, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_synchrnoize(JNIEnv* env, jclass cls, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -296,7 +296,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_synchrnoize
 
 //cudaStreamUpdateCaptureDependencies_v2
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_waitEvent(JNIEnv* env, jclass cls, jlong stream, jlong event, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_waitEvent(JNIEnv* env, jclass cls, jlong stream, jlong event, jint flags) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -309,7 +309,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_StreamHandler_waitEvent(J
 }
 
 //6.5 Event ManageMent
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_create(JNIEnv* env, jclass cls) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_create(JNIEnv* env, jclass cls) {
 
 	cudaEvent_t event;
 
@@ -322,7 +322,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_create(JNIE
 	return (jlong)event;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
 
 	cudaEvent_t event;
 
@@ -335,7 +335,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_createWithF
 	return (jlong)event;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_destroy(JNIEnv* env, jclass cls, jlong event) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_destroy(JNIEnv* env, jclass cls, jlong event) {
 
 	CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
 
@@ -344,7 +344,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_destroy(JNIE
 	return cudaStatus;
 }
 
-JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_elapsedTime(JNIEnv* env, jclass cls, jlong start, jlong end) {
+JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_EventHandler_elapsedTime(JNIEnv* env, jclass cls, jlong start, jlong end) {
 
 	float ms;
 
@@ -361,7 +361,7 @@ JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_elapsedTim
 	return ms;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_query(JNIEnv* env, jclass cls, jlong event) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_query(JNIEnv* env, jclass cls, jlong event) {
 
 	CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
 
@@ -370,7 +370,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_query(JNIEnv
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_record(JNIEnv* env, jclass cls, jlong event, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_record(JNIEnv* env, jclass cls, jlong event, jlong stream) {
 	
 	cudaEvent_t cudaEvent = reinterpret_cast<cudaEvent_t>(event);
 
@@ -381,7 +381,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_record(JNIEn
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_recordWithFlags(JNIEnv* env, jclass cls, jlong event, jlong stream, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_recordWithFlags(JNIEnv* env, jclass cls, jlong event, jlong stream, jint flags) {
 
 	cudaEvent_t cudaEvent = reinterpret_cast<cudaEvent_t>(event);
 
@@ -392,7 +392,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_recordWithFl
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_EventHandler_synchronize(JNIEnv* env, jclass cls, jlong event) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventHandler_synchronize(JNIEnv* env, jclass cls, jlong event) {
 
 	CUevent_st* cudaEventPointer = reinterpret_cast<CUevent_st*>(event);
 
