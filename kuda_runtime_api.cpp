@@ -145,76 +145,16 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	cudaError_t cudaStatus = cudaGetDeviceProperties(&cudaDeviceProp, device);
 
 	if (cudaStatus != cudaSuccess) {
-		// 에러 처리
 		return nullptr;
 	}
 
-	// CudaDeviceProperties 객체 생성
-	jclass cudaDevicePropertiesClass = env->FindClass("fully/qualified/package/CudaDeviceProperties");
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(Ljava/lang/String;Ljava/lang/String;JJIIJ[I[IIIJIIIJ[II[JIIIIIIIIIIIIIJIIIII)V");
+	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(I)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
-		env->NewStringUTF(cudaDeviceProp.name),
-		cudaDeviceProp.uuid,
-		cudaDeviceProp.totalGlobalMem,
-		cudaDeviceProp.sharedMemPerBlock,
-		cudaDeviceProp.regsPerBlock,
-		cudaDeviceProp.warpSize,
-		cudaDeviceProp.memPitch,
-		cudaDeviceProp.maxThreadsPerBlock,
-		cudaDeviceProp.clockRate,
-		cudaDeviceProp.totalConstMem,
-		cudaDeviceProp.major,
-		cudaDeviceProp.minor,
-		cudaDeviceProp.textureAlignment,
-		cudaDeviceProp.texturePitchAlignment,
-		cudaDeviceProp.deviceOverlap,
-		cudaDeviceProp.multiProcessorCount,
-		cudaDeviceProp.kernelExecTimeoutEnabled,
-		cudaDeviceProp.integrated,
-		cudaDeviceProp.canMapHostMemory,
-		cudaDeviceProp.computeMode,
-		cudaDeviceProp.maxTexture1D,
-		cudaDeviceProp.maxTexture1DMipmap,
-		cudaDeviceProp.maxTexture1DLinear,
-		cudaDeviceProp.maxTexture3D,
-		cudaDeviceProp.maxTexture3DAlt,
-		cudaDeviceProp.maxTextureCubemap,
-		cudaDeviceProp.maxSurface1D,
-		cudaDeviceProp.maxSurface2D,
-		cudaDeviceProp.maxSurface3D,
-		cudaDeviceProp.maxSurfaceCubemap,
-		cudaDeviceProp.surfaceAlignment,
-		cudaDeviceProp.concurrentKernels,
-		cudaDeviceProp.ECCEnabled,
-		cudaDeviceProp.pciBusID,
-		cudaDeviceProp.pciDeviceID,
-		cudaDeviceProp.pciDomainID,
-		cudaDeviceProp.tccDriver,
-		cudaDeviceProp.asyncEngineCount,
-		cudaDeviceProp.unifiedAddressing,
-		cudaDeviceProp.memoryClockRate,
-		cudaDeviceProp.memoryBusWidth,
-		cudaDeviceProp.l2CacheSize,
-		cudaDeviceProp.persistingL2CacheMaxSize,
-		cudaDeviceProp.maxThreadsPerMultiProcessor,
-		cudaDeviceProp.streamPrioritiesSupported,
-		cudaDeviceProp.globalL1CacheSupported,
-		cudaDeviceProp.localL1CacheSupported,
-		cudaDeviceProp.sharedMemPerMultiprocessor,
-		cudaDeviceProp.regsPerMultiprocessor,
-		cudaDeviceProp.managedMemory,
-		cudaDeviceProp.isMultiGpuBoard,
-		cudaDeviceProp.multiGpuBoardGroupID,
-		cudaDeviceProp.singleToDoublePrecisionPerfRatio,
-		cudaDeviceProp.pageableMemoryAccess,
-		cudaDeviceProp.concurrentManagedAccess,
-		cudaDeviceProp.computePreemptionSupported,
-		cudaDeviceProp.canUseHostPointerForRegisteredMem,
-		cudaDeviceProp.cooperativeLaunch,
-		cudaDeviceProp.cooperativeMultiDeviceLaunch,
-		cudaDeviceProp.pageableMemoryAccessUsesHostPageTables,
-		cudaDeviceProp.directManagedMemAccessFromHost,
-		cudaDeviceProp.accessPolicyMaxWindowSize);
+		
+		cudaDeviceProp.ECCEnabled
+		
+		);
 
 	env->DeleteLocalRef(cudaDevicePropertiesClass);
 
