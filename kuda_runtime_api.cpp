@@ -8,7 +8,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_flushGPUDirectRDMAWrit
 	cudaFlushGPUDirectRDMAWritesTarget e = cudaFlushGPUDirectRDMAWritesTargetCurrentDevice;
 
 	cudaError_t cudaStatus = cudaDeviceFlushGPUDirectRDMAWrites(e, static_cast<cudaFlushGPUDirectRDMAWritesScope>(scope));
-
+	
 	return cudaStatus;
 }
 
@@ -148,14 +148,113 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		return nullptr;
 	}
 
+	jintArray maxGridSizeArray = env->NewIntArray(3);
+	env->SetIntArrayRegion(maxGridSizeArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxGridSize));
+
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(I)V");
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
+		cudaDeviceProp.ECCEnabled,
+		cudaDeviceProp.accessPolicyMaxWindowSize,
+		cudaDeviceProp.asyncEngineCount,
+		cudaDeviceProp.canMapHostMemory,
+		cudaDeviceProp.canUseHostPointerForRegisteredMem,
+		cudaDeviceProp.clockRate,
+		cudaDeviceProp.clusterLaunch,
+		cudaDeviceProp.computeMode,
+		cudaDeviceProp.computePreemptionSupported,
+		cudaDeviceProp.concurrentKernels,
+
+		cudaDeviceProp.concurrentManagedAccess,
+		cudaDeviceProp.cooperativeLaunch,
+		cudaDeviceProp.cooperativeMultiDeviceLaunch,
+		cudaDeviceProp.deferredMappingCudaArraySupported,
+		cudaDeviceProp.deviceOverlap,
+		cudaDeviceProp.directManagedMemAccessFromHost,
+		cudaDeviceProp.globalL1CacheSupported,
+		cudaDeviceProp.gpuDirectRDMAFlushWritesOptions,
+		cudaDeviceProp.gpuDirectRDMASupported,
+		cudaDeviceProp.gpuDirectRDMAWritesOrdering,
+
+		cudaDeviceProp.hostNativeAtomicSupported,
+		cudaDeviceProp.hostRegisterReadOnlySupported,
+		cudaDeviceProp.hostRegisterSupported,
+		cudaDeviceProp.integrated,
+		cudaDeviceProp.ipcEventSupported,
+		cudaDeviceProp.isMultiGpuBoard,
+		cudaDeviceProp.kernelExecTimeoutEnabled,
+		cudaDeviceProp.l2CacheSize,
+		cudaDeviceProp.localL1CacheSupported,
+		//    char  luid[8]
+		cudaDeviceProp.luidDeviceNodeMask,
 		
-		cudaDeviceProp.ECCEnabled
-		
+		cudaDeviceProp.major,
+		cudaDeviceProp.managedMemory,
+		cudaDeviceProp.maxBlocksPerMultiProcessor,
+		maxGridSizeArray,
+		cudaDeviceProp.maxSurface1D,
+		//int  maxSurface1DLayered[2]
+		//int  maxSurface2D[2]
+		//int  maxSurface2DLayered[3]
+		//int  maxSurface3D[3]
+		cudaDeviceProp.maxSurfaceCubemap,
+		//int  maxSurfaceCubemapLayered[2]
+		cudaDeviceProp.maxTexture1D,
+		//int  maxTexture1DLayered[2]
+		cudaDeviceProp.maxTexture1DLinear,
+		cudaDeviceProp.maxTexture1DMipmap,
+		//int  maxTexture2D[2]
+		//int  maxTexture2DGather[2]
+		//int  maxTexture2DLayered[3]
+		//int  maxTexture2DLinear[3]
+		//int  maxTexture2DMipmap[2]
+		//int  maxTexture3D[3]
+		//int  maxTexture3DAlt[3]
+		cudaDeviceProp.maxTextureCubemap,
+		//int  maxTextureCubemapLayered[2]
+		//int  maxThreadsDim[3]
+		cudaDeviceProp.maxThreadsPerBlock,
+		cudaDeviceProp.maxThreadsPerMultiProcessor,
+		//size_t  memPitch
+		cudaDeviceProp.memoryBusWidth,
+		cudaDeviceProp.memoryClockRate,
+		cudaDeviceProp.memoryPoolSupportedHandleTypes,
+		cudaDeviceProp.memoryPoolsSupported,
+		cudaDeviceProp.minor,
+		cudaDeviceProp.multiGpuBoardGroupID,
+		cudaDeviceProp.multiProcessorCount,
+		//char  name[256]
+		cudaDeviceProp.pageableMemoryAccess,
+		cudaDeviceProp.pageableMemoryAccessUsesHostPageTables,
+		cudaDeviceProp.pciBusID,
+		cudaDeviceProp.pciDeviceID,
+		cudaDeviceProp.pciDomainID,
+		cudaDeviceProp.persistingL2CacheMaxSize,
+		cudaDeviceProp.regsPerBlock,
+		cudaDeviceProp.regsPerMultiprocessor,
+		//int  reserved[60]
+		//int  reserved1[1]
+		//size_t  reservedSharedMemPerBlock
+		//size_t  sharedMemPerBlock
+		//size_t  sharedMemPerBlockOptin
+		//size_t  sharedMemPerMultiprocessor
+		cudaDeviceProp.singleToDoublePrecisionPerfRatio,
+		cudaDeviceProp.sparseCudaArraySupported,
+		cudaDeviceProp.streamPrioritiesSupported,
+		//size_t  surfaceAlignment
+		cudaDeviceProp.tccDriver,
+		//size_t  textureAlignment
+		//size_t  texturePitchAlignment
+		cudaDeviceProp.timelineSemaphoreInteropSupported,
+		//size_t  totalConstMem
+		//size_t  totalGlobalMem
+		cudaDeviceProp.unifiedAddressing,
+		cudaDeviceProp.unifiedFunctionPointers,
+		//cudaUUID_t  uuid
+		cudaDeviceProp.warpSize
 		);
 
+	env->DeleteLocalRef(maxGridSizeArray);
 	env->DeleteLocalRef(cudaDevicePropertiesClass);
 
 	return cudaDevicePropertiesObject;
