@@ -190,9 +190,15 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	jintArray maxTexture3DAltArray = env->NewIntArray(3);
 	env->SetIntArrayRegion(maxTexture3DAltArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture3DAlt));
 
+	jintArray maxTextureCubemapLayeredArray = env->NewIntArray(2);
+	env->SetIntArrayRegion(maxTextureCubemapLayeredArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTextureCubemapLayered));
+
+	jintArray maxThreadsDimArray = env->NewIntArray(3);
+	env->SetIntArrayRegion(maxThreadsDimArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxThreadsDim));
+
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 	
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[II[I[I[I[II[II[III[I[I[I[I[I[I[IIIIIIIIIIIIIIIIIIIIIIIIIII)V");
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIIIIIIIIIIIIIIIIIIIIIIII)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
 		cudaDeviceProp.ECCEnabled,
 		cudaDeviceProp.accessPolicyMaxWindowSize,
@@ -225,7 +231,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.kernelExecTimeoutEnabled,
 		cudaDeviceProp.l2CacheSize,
 		cudaDeviceProp.localL1CacheSupported,
-		//    char  luid[8]
+		//env->NewStringUTF(cudaDeviceProp.luid),
 		cudaDeviceProp.luidDeviceNodeMask,
 		
 		cudaDeviceProp.major,
@@ -252,8 +258,8 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		maxTexture3DArray,
 		maxTexture3DAltArray,
 		cudaDeviceProp.maxTextureCubemap,
-		//int  maxTextureCubemapLayered[2]
-		//int  maxThreadsDim[3]
+		maxTextureCubemapLayeredArray,
+		maxThreadsDimArray,
 		cudaDeviceProp.maxThreadsPerBlock,
 		cudaDeviceProp.maxThreadsPerMultiProcessor,
 		//size_t  memPitch
@@ -311,6 +317,8 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	env->DeleteLocalRef(maxTexture2DMipmapArray);
 	env->DeleteLocalRef(maxTexture3DArray);
 	env->DeleteLocalRef(maxTexture3DAltArray);
+	env->DeleteLocalRef(maxTextureCubemapLayeredArray);
+	env->DeleteLocalRef(maxThreadsDimArray);
 
 	env->DeleteLocalRef(cudaDevicePropertiesClass);
 
