@@ -198,7 +198,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 	
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIIIIIIIIIIIIIIIIIIIIIIII)V");
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIIIIIIIILjava/lang/String;IIIIIIIIIIIIIIII)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
 		cudaDeviceProp.ECCEnabled,
 		cudaDeviceProp.accessPolicyMaxWindowSize,
@@ -231,7 +231,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.kernelExecTimeoutEnabled,
 		cudaDeviceProp.l2CacheSize,
 		cudaDeviceProp.localL1CacheSupported,
-		//env->NewStringUTF(cudaDeviceProp.luid),
+		env->NewStringUTF(cudaDeviceProp.luid),
 		cudaDeviceProp.luidDeviceNodeMask,
 		
 		cudaDeviceProp.major,
@@ -271,7 +271,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.minor,
 		cudaDeviceProp.multiGpuBoardGroupID,
 		cudaDeviceProp.multiProcessorCount,
-		//char  name[256]
+		env->NewStringUTF(cudaDeviceProp.name),
 		cudaDeviceProp.pageableMemoryAccess,
 		cudaDeviceProp.pageableMemoryAccessUsesHostPageTables,
 		cudaDeviceProp.pciBusID,
