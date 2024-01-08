@@ -198,7 +198,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 	
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIIIIIIIILjava/lang/String;IIIIIIIIIIIIIIII)V");
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIIIIIIIIIII)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
 		cudaDeviceProp.ECCEnabled,
 		cudaDeviceProp.accessPolicyMaxWindowSize,
@@ -262,7 +262,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		maxThreadsDimArray,
 		cudaDeviceProp.maxThreadsPerBlock,
 		cudaDeviceProp.maxThreadsPerMultiProcessor,
-		//size_t  memPitch
+		cudaDeviceProp.memPitch,
 		cudaDeviceProp.memoryBusWidth,
 		cudaDeviceProp.memoryClockRate,
 		cudaDeviceProp.memoryPoolSupportedHandleTypes,
