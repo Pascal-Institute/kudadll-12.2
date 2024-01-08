@@ -157,9 +157,19 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	jintArray maxSurface2DArray = env->NewIntArray(2);
 	env->SetIntArrayRegion(maxSurface2DArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurface2D));
 
+	jintArray maxSurface2DLayeredArray = env->NewIntArray(3);
+	env->SetIntArrayRegion(maxSurface2DLayeredArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurface2DLayered));
+
+	jintArray maxSurface3DArray = env->NewIntArray(3);
+	env->SetIntArrayRegion(maxSurface3DArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurface3D));
+
+	jintArray maxSurfaceCubemapLayeredArray = env->NewIntArray(2);
+	env->SetIntArrayRegion(maxSurface3DArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurfaceCubemapLayered));
+
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
-	//total signature : 67 signatures
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[II[I[IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII)V");
+	
+	//total signature : 70 signatures
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[II[I[I[I[II[IIIIIIIIIIIIIIIIIIIIIIIIIIIIII)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
 		cudaDeviceProp.ECCEnabled,
 		cudaDeviceProp.accessPolicyMaxWindowSize,
@@ -202,15 +212,15 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.maxSurface1D,
 		maxSurface1DLayeredArray,
 		maxSurface2DArray,
-		//int  maxSurface2DLayered[3]
-		//int  maxSurface3D[3]
+		maxSurface2DLayeredArray,
+		maxSurface3DArray,
 		cudaDeviceProp.maxSurfaceCubemap,
-		//int  maxSurfaceCubemapLayered[2]
+		maxSurfaceCubemapLayeredArray,
+
 		cudaDeviceProp.maxTexture1D,
 		//int  maxTexture1DLayered[2]
 		cudaDeviceProp.maxTexture1DLinear,
 		cudaDeviceProp.maxTexture1DMipmap,
-
 		//int  maxTexture2D[2]
 		//int  maxTexture2DGather[2]
 		//int  maxTexture2DLayered[3]
@@ -228,10 +238,10 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.memoryClockRate,
 		cudaDeviceProp.memoryPoolSupportedHandleTypes,
 		cudaDeviceProp.memoryPoolsSupported,
+
 		cudaDeviceProp.minor,
 		cudaDeviceProp.multiGpuBoardGroupID,
 		cudaDeviceProp.multiProcessorCount,
-
 		//char  name[256]
 		cudaDeviceProp.pageableMemoryAccess,
 		cudaDeviceProp.pageableMemoryAccessUsesHostPageTables,
@@ -240,6 +250,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.pciDomainID,
 		cudaDeviceProp.persistingL2CacheMaxSize,
 		cudaDeviceProp.regsPerBlock,
+		
 		cudaDeviceProp.regsPerMultiprocessor,
 		//int  reserved[60]
 		//int  reserved1[1]
@@ -249,7 +260,6 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		//size_t  sharedMemPerMultiprocessor
 		cudaDeviceProp.singleToDoublePrecisionPerfRatio,
 		cudaDeviceProp.sparseCudaArraySupported,
-
 		cudaDeviceProp.streamPrioritiesSupported,
 		//size_t  surfaceAlignment
 		cudaDeviceProp.tccDriver,
@@ -267,6 +277,10 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	env->DeleteLocalRef(maxGridSizeArray);
 	env->DeleteLocalRef(maxSurface1DLayeredArray);
 	env->DeleteLocalRef(maxSurface2DArray);
+	env->DeleteLocalRef(maxSurface2DLayeredArray);
+	env->DeleteLocalRef(maxSurface3DArray);
+	env->DeleteLocalRef(maxSurfaceCubemapLayeredArray);
+	
 	env->DeleteLocalRef(cudaDevicePropertiesClass);
 
 	return cudaDevicePropertiesObject;
