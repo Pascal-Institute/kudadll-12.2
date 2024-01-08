@@ -164,7 +164,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	env->SetIntArrayRegion(maxSurface3DArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurface3D));
 
 	jintArray maxSurfaceCubemapLayeredArray = env->NewIntArray(2);
-	env->SetIntArrayRegion(maxSurface3DArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurfaceCubemapLayered));
+	env->SetIntArrayRegion(maxSurfaceCubemapLayeredArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurfaceCubemapLayered));
 
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 	
@@ -215,8 +215,8 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		maxSurface2DLayeredArray,
 		maxSurface3DArray,
 		cudaDeviceProp.maxSurfaceCubemap,
+		
 		maxSurfaceCubemapLayeredArray,
-
 		cudaDeviceProp.maxTexture1D,
 		//int  maxTexture1DLayered[2]
 		cudaDeviceProp.maxTexture1DLinear,
