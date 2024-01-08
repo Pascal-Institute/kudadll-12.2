@@ -176,10 +176,10 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	env->SetIntArrayRegion(maxTexture2DGatherArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DGather));
 
 	jintArray maxTexture2DLayeredArray = env->NewIntArray(3);
-	env->SetIntArrayRegion(maxTexture2DLayeredArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DLayered));
+	env->SetIntArrayRegion(maxTexture2DLayeredArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DLayered));
 
 	jintArray maxTexture2DLinearArray = env->NewIntArray(3);
-	env->SetIntArrayRegion(maxTexture2DLinearArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DLinear));
+	env->SetIntArrayRegion(maxTexture2DLinearArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DLinear));
 
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 	
