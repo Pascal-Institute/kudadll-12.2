@@ -166,10 +166,25 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	jintArray maxSurfaceCubemapLayeredArray = env->NewIntArray(2);
 	env->SetIntArrayRegion(maxSurfaceCubemapLayeredArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxSurfaceCubemapLayered));
 
+	jintArray maxTexture1DLayeredArray = env->NewIntArray(2);
+	env->SetIntArrayRegion(maxTexture1DLayeredArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture1DLayered));
+
+	jintArray maxTexture2DArray = env->NewIntArray(2);
+	env->SetIntArrayRegion(maxTexture2DArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2D));
+
+	jintArray maxTexture2DGatherArray = env->NewIntArray(2);
+	env->SetIntArrayRegion(maxTexture2DGatherArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DGather));
+
+	jintArray maxTexture2DLayeredArray = env->NewIntArray(3);
+	env->SetIntArrayRegion(maxTexture2DLayeredArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DLayered));
+
+	jintArray maxTexture2DLinearArray = env->NewIntArray(3);
+	env->SetIntArrayRegion(maxTexture2DLinearArray, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.maxTexture2DLinear));
+
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 	
 	//total signature : 70 signatures
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[II[I[I[I[II[IIIIIIIIIIIIIIIIIIIIIIIIIIIIII)V");
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII[II[I[I[I[II[II[III[I[I[I[IIIIIIIIIIIIIIIIIIIIIIIIIII)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
 		cudaDeviceProp.ECCEnabled,
 		cudaDeviceProp.accessPolicyMaxWindowSize,
@@ -218,13 +233,13 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		
 		maxSurfaceCubemapLayeredArray,
 		cudaDeviceProp.maxTexture1D,
-		//int  maxTexture1DLayered[2]
+		maxTexture1DLayeredArray,
 		cudaDeviceProp.maxTexture1DLinear,
 		cudaDeviceProp.maxTexture1DMipmap,
-		//int  maxTexture2D[2]
-		//int  maxTexture2DGather[2]
-		//int  maxTexture2DLayered[3]
-		//int  maxTexture2DLinear[3]
+		maxTexture2DArray,
+		maxTexture2DGatherArray,
+		maxTexture2DLayeredArray,
+		maxTexture2DLinearArray,
 		//int  maxTexture2DMipmap[2]
 		//int  maxTexture3D[3]
 		//int  maxTexture3DAlt[3]
@@ -280,6 +295,11 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	env->DeleteLocalRef(maxSurface2DLayeredArray);
 	env->DeleteLocalRef(maxSurface3DArray);
 	env->DeleteLocalRef(maxSurfaceCubemapLayeredArray);
+	env->DeleteLocalRef(maxTexture1DLayeredArray);
+	env->DeleteLocalRef(maxTexture2DArray);
+	env->DeleteLocalRef(maxTexture2DGatherArray);
+	env->DeleteLocalRef(maxTexture2DLayeredArray);
+	env->DeleteLocalRef(maxTexture2DLinearArray);
 	
 	env->DeleteLocalRef(cudaDevicePropertiesClass);
 
