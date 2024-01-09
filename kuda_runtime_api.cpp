@@ -176,6 +176,32 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 	jint* maxSurface2DArrayElements = env->GetIntArrayElements(maxSurface2DArray, nullptr);
 	std::copy(maxSurface2DArrayElements, maxSurface2DArrayElements + 2, cDeviceProp.maxSurface2D);
 	env->ReleaseIntArrayElements(maxSurface2DArray, maxSurface2DArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxTexture2DGather", "[I");
+	jintArray maxTexture2DGatherArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxTexture2DGatherArrayElements = env->GetIntArrayElements(maxTexture2DGatherArray, nullptr);
+	std::copy(maxTexture2DGatherArrayElements, maxTexture2DGatherArrayElements + 2, cDeviceProp.maxTexture2DGather);
+	env->ReleaseIntArrayElements(maxTexture2DGatherArray, maxTexture2DGatherArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxTexture2DLayered", "[I");
+	jintArray maxTexture2DLayeredArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxTexture2DLayeredArrayElements = env->GetIntArrayElements(maxTexture2DLayeredArray, nullptr);
+	std::copy(maxTexture2DLayeredArrayElements, maxTexture2DLayeredArrayElements + 3, cDeviceProp.maxTexture2DLayered);
+	env->ReleaseIntArrayElements(maxTexture2DLayeredArray, maxTexture2DLayeredArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxTexture2DLinear", "[I");
+	jintArray maxTexture2DLinearArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxTexture2DLinearArrayElements = env->GetIntArrayElements(maxTexture2DLinearArray, nullptr);
+	std::copy(maxTexture2DLinearArrayElements, maxTexture2DLinearArrayElements + 3, cDeviceProp.maxTexture2DLinear);
+	env->ReleaseIntArrayElements(maxTexture2DLinearArray, maxTexture2DLinearArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxTexture2DMipmap", "[I");
+	jintArray maxTexture2DMipmapArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxTexture2DMipmapArrayElements = env->GetIntArrayElements(maxTexture2DMipmapArray, nullptr);
+	std::copy(maxTexture2DMipmapArrayElements, maxTexture2DMipmapArrayElements + 2, cDeviceProp.maxTexture2DMipmap);
+	env->ReleaseIntArrayElements(maxTexture2DMipmapArray, maxTexture2DMipmapArrayElements, JNI_ABORT);
+
+
 	return 1;
 }
 
