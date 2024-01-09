@@ -4,6 +4,132 @@
 #include <cuda_runtime_api.h>
 
 //6.1 Device Management
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* env, jclass cls, jobject deviceProp) {
+
+	//"(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIII[I[IJJJJIIIJIJJIJJII[BI)V";
+
+	int device;
+	cudaDeviceProp cDeviceProp;
+
+	jclass devicePropClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
+
+	jfieldID fid;
+
+	fid = env->GetFieldID(devicePropClass, "eccEnabled", "I");
+	cDeviceProp.ECCEnabled = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "accessPolicyMaxWindowSize", "I");
+	cDeviceProp.accessPolicyMaxWindowSize = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "asyncEngineCount", "I");
+	cDeviceProp.asyncEngineCount = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "canMapHostMemory", "I");
+	cDeviceProp.canMapHostMemory = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "canUseHostPointerForRegisteredMem", "I");
+	cDeviceProp.canUseHostPointerForRegisteredMem = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "clockRate", "I");
+	cDeviceProp.clockRate = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "clusterLaunch", "I");
+	cDeviceProp.clusterLaunch = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "computeMode", "I");
+	cDeviceProp.computeMode = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "computePreemptionSupported", "I");
+	cDeviceProp.computePreemptionSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "concurrentKernels", "I");
+	cDeviceProp.concurrentKernels = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "concurrentManagedAccess", "I");
+	cDeviceProp.concurrentManagedAccess = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "cooperativeLaunch", "I");
+	cDeviceProp.cooperativeLaunch = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "cooperativeMultiDeviceLaunch", "I");
+	cDeviceProp.cooperativeMultiDeviceLaunch = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "deferredMappingCudaArraySupported", "I");
+	cDeviceProp.deferredMappingCudaArraySupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "deviceOverlap", "I");
+	cDeviceProp.deviceOverlap = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "directManagedMemAccessFromHost", "I");
+	cDeviceProp.directManagedMemAccessFromHost = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "globalL1CacheSupported", "I");
+	cDeviceProp.globalL1CacheSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "gpuDirectRDMAFlushWritesOptions", "I");
+	cDeviceProp.gpuDirectRDMAFlushWritesOptions = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "gpuDirectRDMASupported", "I");
+	cDeviceProp.gpuDirectRDMASupported = env->GetIntField(deviceProp, fid);
+	
+	fid = env->GetFieldID(devicePropClass, "gpuDirectRDMAWritesOrdering", "I");
+	cDeviceProp.gpuDirectRDMAWritesOrdering = env->GetIntField(deviceProp, fid);
+	
+	fid = env->GetFieldID(devicePropClass, "hostNativeAtomicSupported", "I");
+	cDeviceProp.hostNativeAtomicSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "hostRegisterReadOnlySupported", "I");
+	cDeviceProp.hostRegisterReadOnlySupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "hostRegisterSupported", "I");
+	cDeviceProp.hostRegisterSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "integrated", "I");
+	cDeviceProp.integrated = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "ipcEventSupported", "I");
+	cDeviceProp.ipcEventSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "isMultiGpuBoard", "I");
+	cDeviceProp.isMultiGpuBoard = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "kernelExecTimeoutEnabled", "I");
+	cDeviceProp.kernelExecTimeoutEnabled = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "l2CacheSize", "I");
+	cDeviceProp.l2CacheSize = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "localL1CacheSupported", "I");
+	cDeviceProp.localL1CacheSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "luid", "Ljava/lang/String;");
+	jstring luidString = (jstring)env->GetObjectField(deviceProp, fid);
+	const char* luidChars = env->GetStringUTFChars(luidString, nullptr);
+	strcpy_s(cDeviceProp.luid, luidChars);
+	env->ReleaseStringUTFChars(luidString, luidChars);
+
+	fid = env->GetFieldID(devicePropClass, "luidDeviceNodeMask", "I");
+	cDeviceProp.luidDeviceNodeMask = env->GetIntField(deviceProp, fid);
+	
+	fid = env->GetFieldID(devicePropClass, "major", "I");
+	cDeviceProp.major = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "managedMemory", "I");
+	cDeviceProp.managedMemory = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxBlocksPerMultiProcessor", "I");
+	cDeviceProp.maxBlocksPerMultiProcessor = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxGridSize", "[I");
+	jintArray maxGridSizeArray = (jintArray) env->GetObjectField(deviceProp, fid);
+	jint* maxGridSizeArrayElements =  env->GetIntArrayElements(maxGridSizeArray, nullptr);
+	std::copy(maxGridSizeArrayElements, maxGridSizeArrayElements + 3, cDeviceProp.maxGridSize);
+	env->ReleaseIntArrayElements(maxGridSizeArray, maxGridSizeArrayElements, JNI_ABORT);
+
+	return 1;
+}
+
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope) {
 	
 	cudaFlushGPUDirectRDMAWritesTarget e = cudaFlushGPUDirectRDMAWritesTargetCurrentDevice;
@@ -208,9 +334,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 
-	const char *str = "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIII[I[IJJJJIIIJIJJIJJII[BI)V";
-
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", str);
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIII[I[IJJJJIIIJIJJIJJII[BI)V");
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
 		cudaDeviceProp.ECCEnabled,
 		cudaDeviceProp.accessPolicyMaxWindowSize,
