@@ -203,9 +203,12 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	jintArray reserved2Array = env->NewIntArray(2);
 	env->SetIntArrayRegion(reserved2Array, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.reserved2));
 
+	jbyteArray uuidArray = env->NewByteArray(16);
+	env->SetByteArrayRegion(uuidArray, 0, 16, reinterpret_cast<const jbyte*>(cudaDeviceProp.uuid.bytes));
+
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
 
-	const char *str = "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIII[I[IJJJJIIIIIIII)V";
+	const char *str = "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIII[I[IJJJJIIIJIJJIJJII[BI)V";
 
 	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", str);
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
@@ -301,16 +304,16 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.singleToDoublePrecisionPerfRatio,
 		cudaDeviceProp.sparseCudaArraySupported,
 		cudaDeviceProp.streamPrioritiesSupported,
-		//size_t  surfaceAlignment
+		cudaDeviceProp.surfaceAlignment,
 		cudaDeviceProp.tccDriver,
-		//size_t  textureAlignment
-		//size_t  texturePitchAlignment
+		cudaDeviceProp.textureAlignment,
+		cudaDeviceProp.texturePitchAlignment,
 		cudaDeviceProp.timelineSemaphoreInteropSupported,
-		//size_t  totalConstMem
-		//size_t  totalGlobalMem
+		cudaDeviceProp.totalConstMem,
+		cudaDeviceProp.totalGlobalMem,
 		cudaDeviceProp.unifiedAddressing,
 		cudaDeviceProp.unifiedFunctionPointers,
-		//cudaUUID_t  uuid
+		uuidArray,
 		cudaDeviceProp.warpSize
 		);
 
@@ -332,6 +335,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	env->DeleteLocalRef(maxThreadsDimArray);
 	env->DeleteLocalRef(reservedArray);
 	env->DeleteLocalRef(reserved2Array);
+	env->DeleteLocalRef(uuidArray);
 
 	env->DeleteLocalRef(cudaDevicePropertiesClass);
 
