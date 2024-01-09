@@ -6,8 +6,6 @@
 //6.1 Device Management
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* env, jclass cls, jobject deviceProp) {
 
-	//"(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIII[I[IJJJJIIIJIJJIJJII[BI)V";
-
 	int device;
 	cudaDeviceProp cDeviceProp;
 
@@ -201,7 +199,94 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 	std::copy(maxTexture2DMipmapArrayElements, maxTexture2DMipmapArrayElements + 2, cDeviceProp.maxTexture2DMipmap);
 	env->ReleaseIntArrayElements(maxTexture2DMipmapArray, maxTexture2DMipmapArrayElements, JNI_ABORT);
 
+	fid = env->GetFieldID(devicePropClass, "maxTexture3D", "[I");
+	jintArray maxTexture3DArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxTexture3DArrayElements = env->GetIntArrayElements(maxTexture3DArray, nullptr);
+	std::copy(maxTexture3DArrayElements, maxTexture3DArrayElements + 3, cDeviceProp.maxTexture3D);
+	env->ReleaseIntArrayElements(maxTexture3DArray, maxTexture3DArrayElements, JNI_ABORT);
 
+	fid = env->GetFieldID(devicePropClass, "maxTexture3DAlt", "[I");
+	jintArray maxSurface3DAltArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxSurface3DAltArrayElements = env->GetIntArrayElements(maxSurface3DAltArray, nullptr);
+	std::copy(maxSurface3DAltArrayElements, maxSurface3DAltArrayElements + 3, cDeviceProp.maxTexture3DAlt);
+	env->ReleaseIntArrayElements(maxSurface3DAltArray, maxSurface3DAltArrayElements, JNI_ABORT);
+	
+	fid = env->GetFieldID(devicePropClass, "maxTextureCubemap", "I");
+	cDeviceProp.maxTextureCubemap = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxTextureCubemapLayered", "[I");
+	jintArray maxTextureCubemapLayeredArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxTextureCubemapLayeredArrayElements = env->GetIntArrayElements(maxTextureCubemapLayeredArray, nullptr);
+	std::copy(maxTextureCubemapLayeredArrayElements, maxTextureCubemapLayeredArrayElements + 2, cDeviceProp.maxTextureCubemapLayered);
+	env->ReleaseIntArrayElements(maxTextureCubemapLayeredArray, maxTextureCubemapLayeredArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxThreadsDim", "[I");
+	jintArray maxThreadsDimdArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxThreadsDimdArrayElements = env->GetIntArrayElements(maxThreadsDimdArray, nullptr);
+	std::copy(maxThreadsDimdArrayElements, maxThreadsDimdArrayElements + 3, cDeviceProp.maxThreadsDim);
+	env->ReleaseIntArrayElements(maxThreadsDimdArray, maxThreadsDimdArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxThreadsPerBlock", "I");
+	cDeviceProp.maxThreadsPerBlock = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxThreadsPerMultiProcessor", "I");
+	cDeviceProp.maxThreadsPerMultiProcessor = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "memPitch", "J");
+	cDeviceProp.memPitch = (size_t)env->GetLongField(deviceProp, fid);
+	
+	fid = env->GetFieldID(devicePropClass, "memoryBusWidth", "I");
+	cDeviceProp.memoryBusWidth = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "memoryClockRate", "I");
+	cDeviceProp.memoryClockRate = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "memoryPoolSupportedHandleTypes", "I");
+	cDeviceProp.memoryPoolSupportedHandleTypes = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "memoryPoolsSupported", "I");
+	cDeviceProp.memoryPoolsSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "minor", "I");
+	cDeviceProp.minor = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "multiGpuBoardGroupID", "I");
+	cDeviceProp.multiGpuBoardGroupID = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "multiProcessorCount", "I");
+	cDeviceProp.multiProcessorCount = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "name", "Ljava/lang/String;");
+	jstring nameString = (jstring)env->GetObjectField(deviceProp, fid);
+	const char* nameChars = env->GetStringUTFChars(nameString, nullptr);
+	strcpy_s(cDeviceProp.name, nameChars);
+	env->ReleaseStringUTFChars(nameString, nameChars);
+
+	fid = env->GetFieldID(devicePropClass, "pageableMemoryAccess", "I");
+	cDeviceProp.pageableMemoryAccess = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "pageableMemoryAccessUsesHostPageTables", "I");
+	cDeviceProp.pageableMemoryAccessUsesHostPageTables = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "pciBusID", "I");
+	cDeviceProp.pciBusID = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "pciDeviceID", "I");
+	cDeviceProp.pciDeviceID = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "pciDomainID", "I");
+	cDeviceProp.pciDomainID = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "persistingL2CacheMaxSize", "I");
+	cDeviceProp.persistingL2CacheMaxSize = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "regsPerBlock", "I");
+	cDeviceProp.regsPerBlock = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "regsPerMultiprocessor", "I");
+	cDeviceProp.regsPerMultiprocessor = env->GetIntField(deviceProp, fid);
+
+	//TBD...
 	return 1;
 }
 
