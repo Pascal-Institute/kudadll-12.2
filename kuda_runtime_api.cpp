@@ -1,5 +1,6 @@
 ﻿#include "kuda_runtime_api.h"
 #include <jni.h>
+#include <string>
 #include <cuda_runtime_api.h>
 
 //6.1 Device Management
@@ -196,9 +197,17 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	jintArray maxThreadsDimArray = env->NewIntArray(3);
 	env->SetIntArrayRegion(maxThreadsDimArray, 0, 3, reinterpret_cast<const jint*>(cudaDeviceProp.maxThreadsDim));
 
+	jintArray reservedArray = env->NewIntArray(61);
+	env->SetIntArrayRegion(reservedArray, 0, 61, reinterpret_cast<const jint*>(cudaDeviceProp.reserved));
+
+	jintArray reserved2Array = env->NewIntArray(2);
+	env->SetIntArrayRegion(reserved2Array, 0, 2, reinterpret_cast<const jint*>(cudaDeviceProp.reserved2));
+
 	jclass cudaDevicePropertiesClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
-	
-	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIIIIIIIIIII)V");
+
+	const char *str = "(IIIIIIIIIIIIIIIIIIIIIIIIIIIIILjava/lang/String;IIII[II[I[I[I[II[II[III[I[I[I[I[I[I[II[I[IIIJIIIIIIILjava/lang/String;IIIIIIII[I[IJJJJIIIIIIII)V";
+
+	jmethodID constructor = env->GetMethodID(cudaDevicePropertiesClass, "<init>", str);
 	jobject cudaDevicePropertiesObject = env->NewObject(cudaDevicePropertiesClass, constructor,
 		cudaDeviceProp.ECCEnabled,
 		cudaDeviceProp.accessPolicyMaxWindowSize,
@@ -232,8 +241,8 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.l2CacheSize,
 		cudaDeviceProp.localL1CacheSupported,
 		env->NewStringUTF(cudaDeviceProp.luid),
-		cudaDeviceProp.luidDeviceNodeMask,
 		
+		cudaDeviceProp.luidDeviceNodeMask,
 		cudaDeviceProp.major,
 		cudaDeviceProp.managedMemory,
 		cudaDeviceProp.maxBlocksPerMultiProcessor,
@@ -243,8 +252,8 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		maxSurface2DArray,
 		maxSurface2DLayeredArray,
 		maxSurface3DArray,
-		cudaDeviceProp.maxSurfaceCubemap,
 		
+		cudaDeviceProp.maxSurfaceCubemap,
 		maxSurfaceCubemapLayeredArray,
 		cudaDeviceProp.maxTexture1D,
 		maxTexture1DLayeredArray,
@@ -254,6 +263,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		maxTexture2DGatherArray,
 		maxTexture2DLayeredArray,
 		maxTexture2DLinearArray,
+
 		maxTexture2DMipmapArray,
 		maxTexture3DArray,
 		maxTexture3DAltArray,
@@ -264,10 +274,10 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.maxThreadsPerMultiProcessor,
 		cudaDeviceProp.memPitch,
 		cudaDeviceProp.memoryBusWidth,
+
 		cudaDeviceProp.memoryClockRate,
 		cudaDeviceProp.memoryPoolSupportedHandleTypes,
 		cudaDeviceProp.memoryPoolsSupported,
-
 		cudaDeviceProp.minor,
 		cudaDeviceProp.multiGpuBoardGroupID,
 		cudaDeviceProp.multiProcessorCount,
@@ -275,18 +285,19 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.pageableMemoryAccess,
 		cudaDeviceProp.pageableMemoryAccessUsesHostPageTables,
 		cudaDeviceProp.pciBusID,
+		
 		cudaDeviceProp.pciDeviceID,
 		cudaDeviceProp.pciDomainID,
 		cudaDeviceProp.persistingL2CacheMaxSize,
 		cudaDeviceProp.regsPerBlock,
 		
 		cudaDeviceProp.regsPerMultiprocessor,
-		//int  reserved[60]
-		//int  reserved1[1]
-		//size_t  reservedSharedMemPerBlock
-		//size_t  sharedMemPerBlock
-		//size_t  sharedMemPerBlockOptin
-		//size_t  sharedMemPerMultiprocessor
+		reservedArray,
+		reserved2Array,
+		cudaDeviceProp.reservedSharedMemPerBlock,
+		cudaDeviceProp.sharedMemPerBlock,
+		cudaDeviceProp.sharedMemPerBlockOptin,
+		cudaDeviceProp.sharedMemPerMultiprocessor,
 		cudaDeviceProp.singleToDoublePrecisionPerfRatio,
 		cudaDeviceProp.sparseCudaArraySupported,
 		cudaDeviceProp.streamPrioritiesSupported,
@@ -319,6 +330,8 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	env->DeleteLocalRef(maxTexture3DAltArray);
 	env->DeleteLocalRef(maxTextureCubemapLayeredArray);
 	env->DeleteLocalRef(maxThreadsDimArray);
+	env->DeleteLocalRef(reservedArray);
+	env->DeleteLocalRef(reserved2Array);
 
 	env->DeleteLocalRef(cudaDevicePropertiesClass);
 
