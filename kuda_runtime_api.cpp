@@ -126,6 +126,35 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 	std::copy(maxGridSizeArrayElements, maxGridSizeArrayElements + 3, cDeviceProp.maxGridSize);
 	env->ReleaseIntArrayElements(maxGridSizeArray, maxGridSizeArrayElements, JNI_ABORT);
 
+	fid = env->GetFieldID(devicePropClass, "maxSurface1D", "I");
+	cDeviceProp.maxSurface1D = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxSurface1DLayered", "[I");
+	jintArray maxSurface1DLayeredArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxSurface1DLayeredArrayElements = env->GetIntArrayElements(maxSurface1DLayeredArray, nullptr);
+	std::copy(maxSurface1DLayeredArrayElements, maxSurface1DLayeredArrayElements + 2, cDeviceProp.maxSurface1DLayered);
+	env->ReleaseIntArrayElements(maxSurface1DLayeredArray, maxSurface1DLayeredArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxSurface2DLayered", "[I");
+	jintArray maxSurface2DLayeredArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxSurface2DLayeredArrayElements = env->GetIntArrayElements(maxSurface2DLayeredArray, nullptr);
+	std::copy(maxSurface2DLayeredArrayElements, maxSurface2DLayeredArrayElements + 3, cDeviceProp.maxSurface2DLayered);
+	env->ReleaseIntArrayElements(maxSurface2DLayeredArray, maxSurface2DLayeredArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxSurface3D", "[I");
+	jintArray maxSurface3DArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxSurface3DArrayElements = env->GetIntArrayElements(maxSurface3DArray, nullptr);
+	std::copy(maxSurface3DArrayElements, maxSurface3DArrayElements + 3, cDeviceProp.maxSurface3D);
+	env->ReleaseIntArrayElements(maxSurface3DArray, maxSurface3DArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxSurfaceCubemap", "I");
+	cDeviceProp.maxSurfaceCubemap = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxSurfaceCubemapLayered", "[I");
+	jintArray maxSurfaceCubemapLayeredArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxSurfaceCubemapLayeredArrayElements = env->GetIntArrayElements(maxSurfaceCubemapLayeredArray, nullptr);
+	std::copy(maxSurfaceCubemapLayeredArrayElements, maxSurfaceCubemapLayeredArrayElements + 2, cDeviceProp.maxSurfaceCubemapLayered);
+	env->ReleaseIntArrayElements(maxSurfaceCubemapLayeredArray, maxSurfaceCubemapLayeredArrayElements, JNI_ABORT);
 	return 1;
 }
 
