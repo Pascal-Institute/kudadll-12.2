@@ -155,6 +155,27 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 	jint* maxSurfaceCubemapLayeredArrayElements = env->GetIntArrayElements(maxSurfaceCubemapLayeredArray, nullptr);
 	std::copy(maxSurfaceCubemapLayeredArrayElements, maxSurfaceCubemapLayeredArrayElements + 2, cDeviceProp.maxSurfaceCubemapLayered);
 	env->ReleaseIntArrayElements(maxSurfaceCubemapLayeredArray, maxSurfaceCubemapLayeredArrayElements, JNI_ABORT);
+	
+	fid = env->GetFieldID(devicePropClass, "maxTexture1D", "I");
+	cDeviceProp.maxTexture1D = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxTexture1DLayered", "[I");
+	jintArray maxTexture1DLayeredArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxTexture1DLayeredArrayElements = env->GetIntArrayElements(maxTexture1DLayeredArray, nullptr);
+	std::copy(maxTexture1DLayeredArrayElements, maxTexture1DLayeredArrayElements + 2, cDeviceProp.maxTexture1DLayered);
+	env->ReleaseIntArrayElements(maxTexture1DLayeredArray, maxTexture1DLayeredArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "maxTexture1DLinear", "I");
+	cDeviceProp.maxTexture1DLinear = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxTexture1DMipmap", "I");
+	cDeviceProp.maxTexture1DMipmap = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "maxSurface2D", "[I");
+	jintArray maxSurface2DArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxSurface2DArrayElements = env->GetIntArrayElements(maxSurface2DArray, nullptr);
+	std::copy(maxSurface2DArrayElements, maxSurface2DArrayElements + 2, cDeviceProp.maxSurface2D);
+	env->ReleaseIntArrayElements(maxSurface2DArray, maxSurface2DArrayElements, JNI_ABORT);
 	return 1;
 }
 
