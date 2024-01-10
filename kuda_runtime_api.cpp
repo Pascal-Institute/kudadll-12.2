@@ -345,6 +345,15 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 
 	fid = env->GetFieldID(devicePropClass, "unifiedFunctionPointers", "I");
 	cDeviceProp.unifiedFunctionPointers = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "uuid", "[B");
+	jbyteArray uuidArray = (jbyteArray)env->GetObjectField(deviceProp, fid);
+	jbyte* uuidArrayElements = env->GetByteArrayElements(uuidArray, nullptr);
+	std::copy(uuidArrayElements, uuidArrayElements + 16, cDeviceProp.uuid);
+	env->ReleaseByteArrayElements(uuidArray, uuidArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "warpSize", "I");
+	cDeviceProp.warpSize = env->GetIntField(deviceProp, fid);
 	//TBD...
 	return 1;
 }
