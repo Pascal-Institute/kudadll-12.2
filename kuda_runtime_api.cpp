@@ -6,7 +6,6 @@
 //6.1 Device Management
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* env, jclass cls, jobject deviceProp) {
 
-	int device;
 	cudaDeviceProp cDeviceProp;
 
 	jclass devicePropClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
@@ -349,13 +348,23 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 	fid = env->GetFieldID(devicePropClass, "uuid", "[B");
 	jbyteArray uuidArray = (jbyteArray)env->GetObjectField(deviceProp, fid);
 	jbyte* uuidArrayElements = env->GetByteArrayElements(uuidArray, nullptr);
-	std::copy(uuidArrayElements, uuidArrayElements + 16, cDeviceProp.uuid);
+	for (int i = 0; i < 16; ++i) {
+		cDeviceProp.uuid.bytes[i] = static_cast<char>(uuidArrayElements[i]);
+	}
 	env->ReleaseByteArrayElements(uuidArray, uuidArrayElements, JNI_ABORT);
 
 	fid = env->GetFieldID(devicePropClass, "warpSize", "I");
 	cDeviceProp.warpSize = env->GetIntField(deviceProp, fid);
-	//TBD...
-	return 1;
+
+	int device;
+	
+	cudaError_t cudaStatus = cudaChooseDevice(&device, &cDeviceProp);
+	
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jint)device;
 }
 
 
