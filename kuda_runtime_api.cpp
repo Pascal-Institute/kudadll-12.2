@@ -6,7 +6,6 @@
 //6.1 Device Management
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* env, jclass cls, jobject deviceProp) {
 
-	int device;
 	cudaDeviceProp cDeviceProp;
 
 	jclass devicePropClass = env->FindClass("kuda/runtimeapi/structure/DeviceProp");
@@ -286,8 +285,86 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 	fid = env->GetFieldID(devicePropClass, "regsPerMultiprocessor", "I");
 	cDeviceProp.regsPerMultiprocessor = env->GetIntField(deviceProp, fid);
 
-	//TBD...
-	return 1;
+	fid = env->GetFieldID(devicePropClass, "reserved", "[I");
+	jintArray reservedArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* reservedArrayElements = env->GetIntArrayElements(reservedArray, nullptr);
+	std::copy(reservedArrayElements, reservedArrayElements + 61, cDeviceProp.reserved);
+	env->ReleaseIntArrayElements(reservedArray, reservedArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "reserved2", "[I");
+	jintArray reserved2Array = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* reserved2ArrayElements = env->GetIntArrayElements(reserved2Array, nullptr);
+	std::copy(reserved2ArrayElements, reserved2ArrayElements + 2, cDeviceProp.reserved2);
+	env->ReleaseIntArrayElements(reserved2Array, reserved2ArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "reservedSharedMemPerBlock", "J");
+	cDeviceProp.reservedSharedMemPerBlock = env->GetIntField(deviceProp, fid);
+	
+	fid = env->GetFieldID(devicePropClass, "sharedMemPerBlock", "J");
+	cDeviceProp.sharedMemPerBlock = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "sharedMemPerBlockOptin", "J");
+	cDeviceProp.sharedMemPerBlockOptin = env->GetIntField(deviceProp, fid);
+	
+	fid = env->GetFieldID(devicePropClass, "sharedMemPerMultiprocessor", "J");
+	cDeviceProp.sharedMemPerMultiprocessor = env->GetIntField(deviceProp, fid);
+	
+	fid = env->GetFieldID(devicePropClass, "singleToDoublePrecisionPerfRatio", "I");
+	cDeviceProp.singleToDoublePrecisionPerfRatio = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "sparseCudaArraySupported", "I");
+	cDeviceProp.sparseCudaArraySupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "streamPrioritiesSupported", "I");
+	cDeviceProp.streamPrioritiesSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "surfaceAlignment", "J");
+	cDeviceProp.surfaceAlignment = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "tccDriver", "I");
+	cDeviceProp.tccDriver = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "textureAlignment", "J");
+	cDeviceProp.textureAlignment = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "texturePitchAlignment", "J");
+	cDeviceProp.texturePitchAlignment = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "timelineSemaphoreInteropSupported", "I");
+	cDeviceProp.timelineSemaphoreInteropSupported = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "totalConstMem", "J");
+	cDeviceProp.totalConstMem = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "totalGlobalMem", "J");
+	cDeviceProp.totalGlobalMem = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "unifiedAddressing", "I");
+	cDeviceProp.unifiedAddressing = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "unifiedFunctionPointers", "I");
+	cDeviceProp.unifiedFunctionPointers = env->GetIntField(deviceProp, fid);
+
+	fid = env->GetFieldID(devicePropClass, "uuid", "[B");
+	jbyteArray uuidArray = (jbyteArray)env->GetObjectField(deviceProp, fid);
+	jbyte* uuidArrayElements = env->GetByteArrayElements(uuidArray, nullptr);
+	for (int i = 0; i < 16; ++i) {
+		cDeviceProp.uuid.bytes[i] = static_cast<char>(uuidArrayElements[i]);
+	}
+	env->ReleaseByteArrayElements(uuidArray, uuidArrayElements, JNI_ABORT);
+
+	fid = env->GetFieldID(devicePropClass, "warpSize", "I");
+	cDeviceProp.warpSize = env->GetIntField(deviceProp, fid);
+
+	int device;
+	
+	cudaError_t cudaStatus = cudaChooseDevice(&device, &cDeviceProp);
+	
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jint)device;
 }
 
 
