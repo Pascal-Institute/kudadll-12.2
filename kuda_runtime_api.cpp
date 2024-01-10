@@ -295,7 +295,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* e
 	fid = env->GetFieldID(devicePropClass, "reserved2", "[I");
 	jintArray reserved2Array = (jintArray)env->GetObjectField(deviceProp, fid);
 	jint* reserved2ArrayElements = env->GetIntArrayElements(reserved2Array, nullptr);
-	std::copy(reserved2ArrayElements, reserved2ArrayElements + 61, cDeviceProp.reserved2);
+	std::copy(reserved2ArrayElements, reserved2ArrayElements + 2, cDeviceProp.reserved2);
 	env->ReleaseIntArrayElements(reserved2Array, reserved2ArrayElements, JNI_ABORT);
 
 	fid = env->GetFieldID(devicePropClass, "reservedSharedMemPerBlock", "J");
