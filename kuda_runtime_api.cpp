@@ -479,7 +479,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jcl
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDevice(JNIEnv* env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getDevice(JNIEnv* env, jobject instance) {
 
 	int diviceCode;
 
@@ -492,7 +492,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDevice(JNIEnv* env, jo
 	return diviceCode;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDiviceCount(JNIEnv* env, jobject instance) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getDiviceCount(JNIEnv* env, jobject instance) {
 	int diviceCount;
 
 	cudaError_t cudaStatus = cudaGetDeviceCount(&diviceCount);
@@ -504,7 +504,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDiviceCount(JNIEnv* en
 	return diviceCount;
 }
 
-JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JNIEnv* env, jobject obj, jint device) {
+JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_DeviceHandler_getDeviceProperties(JNIEnv* env, jobject obj, jint device) {
 	cudaDeviceProp cudaDeviceProp;
 
 	cudaError_t cudaStatus = cudaGetDeviceProperties(&cudaDeviceProp, device);
@@ -704,28 +704,28 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	return cudaDevicePropertiesObject;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags) {
 
 	cudaError_t cudaStatus = cudaInitDevice((int)device, (unsigned int)deviceFlags, (unsigned int)flags);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jobject instance, jlong devicePtr) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_lpcCloseMemHandle(JNIEnv* env, jobject instance, jlong devicePtr) {
 
 	cudaError_t cudaStatus = cudaIpcCloseMemHandle((void*)devicePtr);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jobject instance, jint device) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setDevice(JNIEnv* env, jobject instance, jint device) {
 
 	cudaError_t cudaStatus = cudaSetDevice((int)device);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDeviceFlags(JNIEnv* env, jobject instance, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setDeviceFlags(JNIEnv* env, jobject instance, jint flags) {
 
 	cudaError_t cudaStatus = cudaSetDeviceFlags((unsigned int)flags);
 
