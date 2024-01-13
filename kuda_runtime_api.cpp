@@ -3,7 +3,7 @@
 #include <string>
 #include <cuda_runtime_api.h>
 
-//6.1 Device Management
+//1 Device Management
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* env, jclass cls, jobject deviceProp) {
 
 	cudaDeviceProp cDeviceProp;
@@ -388,6 +388,19 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getDefaultMemPool(JNI
 	}
 
 	return (jlong)memPool;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getAttribute(JNIEnv* env, jclass cls, jint deviceAttr, jint device) {
+	
+	int value;
+
+	cudaError_t cudaStatus = cudaDeviceGetAttribute(&value, static_cast<cudaDeviceAttr>(deviceAttr), device);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return value;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit) {
