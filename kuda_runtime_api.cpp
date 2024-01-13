@@ -804,7 +804,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_peekAtLastError(JNIEnv* e
 }
 
 //4. Stream Management
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_ctxResetPersistingL2Cache(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_ctxResetPersistingL2Cache(JNIEnv* env, jclass cls) {
 
 	cudaError_t cudaStatus = cudaCtxResetPersistingL2Cache();
 
@@ -815,7 +815,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_ctxResetPersistingL2Ca
 
 //cudaStreamAttachMemAsync
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_beginCapture(JNIEnv* env, jclass cls, jlong stream, jint mode) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_beginCapture(JNIEnv* env, jclass cls, jlong stream, jint mode) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -824,7 +824,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_beginCapture(JNIEnv* e
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_copyAttributes(JNIEnv* env, jclass cls, jlong dst, jlong src) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_copyAttributes(JNIEnv* env, jclass cls, jlong dst, jlong src) {
 
 	CUstream_st* cudaDstStreamPointer = reinterpret_cast<CUstream_st*>(dst);
 
@@ -835,7 +835,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_copyAttributes(JNIEnv*
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_create(JNIEnv* env, jclass cls) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamManager_create(JNIEnv* env, jclass cls) {
 
 	cudaStream_t pStream;
 
@@ -849,7 +849,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_create(JNIEnv* env, j
 	return (jlong)pStream;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamManager_createWithFlags(JNIEnv* env, jclass cls, jint flags) {
 
 	cudaStream_t pStream;
 
@@ -862,7 +862,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithFlags(JNIEn
 	return (jlong)pStream;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithPriority(JNIEnv* env, jclass cls, jint flags, jint priority) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamManager_createWithPriority(JNIEnv* env, jclass cls, jint flags, jint priority) {
 
 	cudaStream_t pStream;
 
@@ -875,7 +875,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithPriority(JN
 	return (jlong)pStream;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_destory(JNIEnv* env, jclass cls, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_destory(JNIEnv* env, jclass cls, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -884,7 +884,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_destory(JNIEnv* env, j
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_query(JNIEnv* env, jclass cls, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_query(JNIEnv* env, jclass cls, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -895,7 +895,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_query(JNIEnv* env, jcl
 
 //cudaStreamSetAttribute
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_synchrnoize(JNIEnv* env, jclass cls, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_synchrnoize(JNIEnv* env, jclass cls, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -908,7 +908,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_synchrnoize(JNIEnv* en
 
 //cudaStreamUpdateCaptureDependencies_v2
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamHandler_waitEvent(JNIEnv* env, jclass cls, jlong stream, jlong event, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_waitEvent(JNIEnv* env, jclass cls, jlong stream, jlong event, jint flags) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
