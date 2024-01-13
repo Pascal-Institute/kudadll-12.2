@@ -377,11 +377,11 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_flushGPUDirectRDMAWrit
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getDefaultMemPool(JNIEnv* env, jclass cls, jint device) {
 
 	cudaMemPool_t memPool;
 
-	cudaError_t cudaStatus = cudaDeviceGetMemPool(&memPool, (int)device);
+	cudaError_t cudaStatus = cudaDeviceGetMemPool(&memPool, device);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
@@ -416,11 +416,11 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, 
 	return pValue;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getMemPool(JNIEnv* env, jclass cls, jint  device) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getMemPool(JNIEnv* env, jclass cls, jint device) {
 
 	cudaMemPool_t memPool;
 
-	cudaError_t cudaStatus = cudaDeviceGetMemPool(&memPool, (int)device);
+	cudaError_t cudaStatus = cudaDeviceGetMemPool(&memPool, device);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
@@ -732,7 +732,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_DeviceHandler_getDeviceProperties
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags) {
 
-	cudaError_t cudaStatus = cudaInitDevice((int)device, (unsigned int)deviceFlags, (unsigned int)flags);
+	cudaError_t cudaStatus = cudaInitDevice(device, (unsigned int)deviceFlags, (unsigned int)flags);
 
 	return cudaStatus;
 }
@@ -746,7 +746,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_lpcCloseMemHandle(JNIE
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setDevice(JNIEnv* env, jobject instance, jint device) {
 
-	cudaError_t cudaStatus = cudaSetDevice((int)device);
+	cudaError_t cudaStatus = cudaSetDevice(device);
 
 	return cudaStatus;
 }
@@ -845,7 +845,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamHandler_createWithPriority(JN
 
 	cudaStream_t pStream;
 
-	cudaError_t cudaStatus = cudaStreamCreateWithPriority(&pStream, (unsigned int)flags, (int)priority);
+	cudaError_t cudaStatus = cudaStreamCreateWithPriority(&pStream, (unsigned int)flags, priority);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
@@ -1122,7 +1122,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_mallocHost(JNIEnv* env, 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceCanAccessPeer(JNIEnv* env, jobject obj, jint  device, jint  peerDevice) {
 	int canAccessPeer;
 
-	cudaError_t cudaStatus = cudaDeviceCanAccessPeer(&canAccessPeer, (int)device, (int)peerDevice);
+	cudaError_t cudaStatus = cudaDeviceCanAccessPeer(&canAccessPeer, device, peerDevice);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
@@ -1133,14 +1133,14 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceCanAccessPeer(JNIEn
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceDisablePeerAccess(JNIEnv* env, jobject obj, jint peerDevice) {
 	
-	cudaError_t cudaStatus = cudaDeviceDisablePeerAccess((int)peerDevice);
+	cudaError_t cudaStatus = cudaDeviceDisablePeerAccess(peerDevice);
 
 	return cudaStatus;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceEnablePeerAccess(JNIEnv* env, jobject obj, jint  peerDevice, jint flags) {
 	
-	cudaError_t cudaStatus = cudaDeviceEnablePeerAccess((int)peerDevice, (unsigned int)flags);
+	cudaError_t cudaStatus = cudaDeviceEnablePeerAccess(peerDevice, (unsigned int)flags);
 
 	return cudaStatus;
 }
