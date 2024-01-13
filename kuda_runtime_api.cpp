@@ -435,9 +435,18 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getMemPool(JNIEnv* en
 	return (jlong)memPool;
 }
 
-//JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getP2PAttribute(JNIEnv* env, jint attr, jint scrDevice, jint dstDevice) {
-//
-//}
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getP2PAttribute(JNIEnv* env, jclass cls, jint attr, jint scrDevice, jint dstDevice) {
+	
+	int value;
+
+	cudaError_t cudaStatus = cudaDeviceGetP2PAttribute(&value, static_cast<cudaDeviceP2PAttr>(attr), scrDevice, dstDevice);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return value;
+}
 
 
 JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceHandler_getPCIBusId(JNIEnv* env, jclass cls, jint device) {
