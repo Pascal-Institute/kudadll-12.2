@@ -6,51 +6,51 @@
 extern "C" {
 #endif
 	//1. Device Management
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_chooseDevice(JNIEnv* env, jclass cls, jobject cudaDeviceProp);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_chooseDevice(JNIEnv* env, jclass cls, jobject cudaDeviceProp);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getAttribute(JNIEnv* env, jclass cls, jint cudaDeviceAttr, jint device);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getAttribute(JNIEnv* env, jclass cls, jint cudaDeviceAttr, jint device);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceManager_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getLimit(JNIEnv* env, jclass cls, jbyte limit);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getLimit(JNIEnv* env, jclass cls, jbyte limit);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceHandler_getMemPool(JNIEnv* env, jclass cls, jint  device);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceManager_getMemPool(JNIEnv* env, jclass cls, jint  device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getP2PAttribute(JNIEnv* env, jclass cls, jint attr, jint scrDevice, jint dstDevice);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getP2PAttribute(JNIEnv* env, jclass cls, jint attr, jint scrDevice, jint dstDevice);
 
-	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceHandler_getPCIBusId(JNIEnv* env, jclass cls, jint device);
+	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceManager_getPCIBusId(JNIEnv* env, jclass cls, jint device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getStreamPriorityRange(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getStreamPriorityRange(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setSharedMemConfig(JNIEnv* env, jclass cls, jint config);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setSharedMemConfig(JNIEnv* env, jclass cls, jint config);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_synchronize(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_synchronize(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_reset(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_reset(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getDevice(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getDevice(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_getDiviceCount(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getDiviceCount(JNIEnv* env, jclass cls);
 
-	JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_DeviceHandler_getDeviceProperties(JNIEnv* env, jclass cls, jint device);
+	JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_DeviceManager_getDeviceProperties(JNIEnv* env, jclass cls, jint device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_initDevice(JNIEnv* env, jclass cls, jint device, jint deviceFlags, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_initDevice(JNIEnv* env, jclass cls, jint device, jint deviceFlags, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_lpcCloseMemHandle(JNIEnv* env, jclass cls, jlong devicePtr);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_lpcCloseMemHandle(JNIEnv* env, jclass cls, jlong devicePtr);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_lpcCloseMemHandle(JNIEnv* env, jclass cls, jlong devicePtr);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_lpcCloseMemHandle(JNIEnv* env, jclass cls, jlong devicePtr);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setDevice(JNIEnv* env, jclass cls, jint device);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setDevice(JNIEnv* env, jclass cls, jint device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setDeviceFlags(JNIEnv* env, jclass cls, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setDeviceFlags(JNIEnv* env, jclass cls, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceHandler_setValidDevices(JNIEnv* env, jclass cls, jint len);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setValidDevices(JNIEnv* env, jclass cls, jint len);
 
 	//6.3 Error Handling
 	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getErrorName(JNIEnv* env, jobject obj, jint error);
