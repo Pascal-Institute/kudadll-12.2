@@ -9,7 +9,7 @@ extern "C" {
 	//2. Error Handling
 	JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorName(JNIEnv* env, jobject obj, jint error);
 
-    //CUresult cuGetErrorString(CUresult error, const char** pStr)
+	JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorString(JNIEnv* env, jobject obj, jint error);
 
 	//3. Initialization
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject obj, jint flags);

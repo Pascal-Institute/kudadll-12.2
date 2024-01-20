@@ -11,6 +11,15 @@ JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorName(JNIEnv* env
 	return (jstring) pStr;
 }
 
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorString(JNIEnv* env, jobject obj, jint error) {
+
+	const char* pStr;
+
+	CUresult cudaStatus = cuGetErrorString(static_cast<CUresult>(error), &pStr);
+
+	return (jstring)pStr;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject obj, jint flags) {
 	
 	CUresult cudaStatus = cuInit((unsigned int) flags);
