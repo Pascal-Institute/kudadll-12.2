@@ -2,14 +2,14 @@
 #include <jni.h>
 #include <cuda.h>
 
-JNIEXPORT jint JNICALL Java_kuda_DriverAPI_init(JNIEnv* env, jobject obj, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject obj, jint flags) {
 	
 	CUresult cudaStatus = cuInit((unsigned int) flags);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDriverVersion(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDriverVersion(JNIEnv* env, jobject obj) {
 	
 	int driverVersion;
 
@@ -22,7 +22,7 @@ JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDriverVersion(JNIEnv* env, jobject
 	return driverVersion;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDevice(JNIEnv* env, jobject obj, jint ordinal) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDevice(JNIEnv* env, jobject obj, jint ordinal) {
 
 	CUdevice device;
 
@@ -35,7 +35,7 @@ JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDevice(JNIEnv* env, jobject obj, j
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_DriverAPI_getDeviceCount(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDeviceCount(JNIEnv* env, jobject obj) {
 	
 	int count;
 
