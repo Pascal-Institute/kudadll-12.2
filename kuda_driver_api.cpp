@@ -2,6 +2,15 @@
 #include <jni.h>
 #include <cuda.h>
 
+//2. Error Handling
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorName(JNIEnv* env, jobject obj, jint error) {
+	const char* pStr;
+
+	CUresult cudaStatus = cuGetErrorName(static_cast<CUresult>(error), &pStr);
+	
+	return (jstring) pStr;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject obj, jint flags) {
 	
 	CUresult cudaStatus = cuInit((unsigned int) flags);
