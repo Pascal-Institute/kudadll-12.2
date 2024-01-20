@@ -4,11 +4,14 @@
 
 //2. Error Handling
 JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorName(JNIEnv* env, jobject obj, jint error) {
+	
 	const char* pStr;
 
 	CUresult cudaStatus = cuGetErrorName(static_cast<CUresult>(error), &pStr);
 	
-	return (jstring) pStr;
+	jstring javaString = env->NewStringUTF(pStr);
+
+	return javaString;
 }
 
 JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorString(JNIEnv* env, jobject obj, jint error) {
@@ -17,7 +20,9 @@ JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorString(JNIEnv* e
 
 	CUresult cudaStatus = cuGetErrorString(static_cast<CUresult>(error), &pStr);
 
-	return (jstring)pStr;
+	jstring javaString = env->NewStringUTF(pStr);
+
+	return javaString;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject obj, jint flags) {
