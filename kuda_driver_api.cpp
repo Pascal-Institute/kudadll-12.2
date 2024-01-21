@@ -45,7 +45,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDriverVersion(JNIEnv* en
 	return driverVersion;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDevice(JNIEnv* env, jobject obj, jint ordinal) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGet(JNIEnv* env, jobject obj, jint ordinal) {
 
 	CUdevice device;
 
@@ -58,7 +58,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDevice(JNIEnv* env, jobj
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDeviceCount(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env, jobject obj) {
 	
 	int count;
 
