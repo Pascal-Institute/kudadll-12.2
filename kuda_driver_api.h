@@ -24,9 +24,9 @@ extern "C" {
 
 	//7. Context Management
 	//CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int* flags, int* active)
-	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRelease(JNIEnv* env, jobject obj, jint device);
-	//CUresult cuDevicePrimaryCtxRelease(CUdevice dev)
-	//CUresult cuDevicePrimaryCtxReset(CUdevice dev)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRelease(JNIEnv* env, jobject obj, jint dev);
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxReset(JNIEnv* env, jobject obj, jint dev);
 	//CUresult cuDevicePrimaryCtxRetain(CUcontext* pctx, CUdevice dev)
 	//CUresult cuDevicePrimaryCtxSetFlags(CUdevice dev, unsigned int  flags)
 
