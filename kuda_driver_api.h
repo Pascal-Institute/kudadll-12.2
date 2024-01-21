@@ -52,7 +52,7 @@ extern "C" {
 	//CUresult cuCtxResetPersistingL2Cache(void)
 	//CUresult cuCtxSetCacheConfig(CUfunc_cache config)
 	//CUresult cuCtxSetCurrent(CUcontext ctx)
-	//CUresult cuCtxSetFlags(unsigned int  flags)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags);
 	//CUresult cuCtxSetLimit(CUlimit limit, size_t value)
 	//CUresult cuCtxSetSharedMemConfig(CUsharedconfig config)
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env, jobject obj);

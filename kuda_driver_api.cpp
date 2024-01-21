@@ -117,7 +117,14 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JN
 //CUresult cuCtxResetPersistingL2Cache(void)
 //CUresult cuCtxSetCacheConfig(CUfunc_cache config)
 //CUresult cuCtxSetCurrent(CUcontext ctx)
-//CUresult cuCtxSetFlags(unsigned int  flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags) {
+	
+	CUresult cudaStatus = cuCtxSetFlags((unsigned int) flags);
+	
+	return cudaStatus;
+}
+
 //CUresult cuCtxSetLimit(CUlimit limit, size_t value)
 //CUresult cuCtxSetSharedMemConfig(CUsharedconfig config)
 
