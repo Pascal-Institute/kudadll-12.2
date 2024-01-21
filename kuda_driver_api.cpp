@@ -71,7 +71,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env,
 	return count;
 }
 
-//7. Context Management
+//7. Primary Context Management
 
 //CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int* flags, int* active)
 
@@ -94,6 +94,36 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxReset(JNIEn
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags) {
 
 	CUresult cudaStatus = cuDevicePrimaryCtxSetFlags(dev, (unsigned int)flags);
+
+	return cudaStatus;
+}
+
+//8. Context Management
+//CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
+//CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
+//CUresult cuCtxDestroy(CUcontext ctx)
+//CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
+//CUresult cuCtxGetCacheConfig(CUfunc_cache * pconfig)
+//CUresult cuCtxGetCurrent(CUcontext * pctx)
+//CUresult cuCtxGetDevice(CUdevice * device)
+//CUresult cuCtxGetExecAffinity(CUexecAffinityParam * pExecAffinity, CUexecAffinityType type)
+//CUresult cuCtxGetFlags(unsigned int* flags)
+//CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
+//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
+//CUresult cuCtxGetSharedMemConfig(CUsharedconfig * pConfig)
+//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
+//CUresult cuCtxPopCurrent(CUcontext * pctx)
+//CUresult cuCtxPushCurrent(CUcontext ctx)
+//CUresult cuCtxResetPersistingL2Cache(void)
+//CUresult cuCtxSetCacheConfig(CUfunc_cache config)
+//CUresult cuCtxSetCurrent(CUcontext ctx)
+//CUresult cuCtxSetFlags(unsigned int  flags)
+//CUresult cuCtxSetLimit(CUlimit limit, size_t value)
+//CUresult cuCtxSetSharedMemConfig(CUsharedconfig config)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env, jobject obj) {
+
+	CUresult cudaStatus = cuCtxSynchronize();
 
 	return cudaStatus;
 }
