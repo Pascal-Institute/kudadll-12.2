@@ -42,14 +42,18 @@ extern "C" {
 	//CUresult cuCtxGetCurrent(CUcontext * pctx)
 	//CUresult cuCtxGetDevice(CUdevice * device)
 	//CUresult cuCtxGetExecAffinity(CUexecAffinityParam * pExecAffinity, CUexecAffinityType type)
+	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jobject obj);
+	
 	//CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 	//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
 	//CUresult cuCtxGetSharedMemConfig(CUsharedconfig * pConfig)
 	//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
 	//CUresult cuCtxPopCurrent(CUcontext * pctx)
 	//CUresult cuCtxPushCurrent(CUcontext ctx)
-	//CUresult cuCtxResetPersistingL2Cache(void)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
+	
 	//CUresult cuCtxSetCacheConfig(CUfunc_cache config)
 	//CUresult cuCtxSetCurrent(CUcontext ctx)
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags);
