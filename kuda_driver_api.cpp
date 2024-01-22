@@ -132,7 +132,13 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(J
 	return cudaStatus;
 }
 
-//CUresult cuCtxSetCacheConfig(CUfunc_cache config)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCacheConfig(JNIEnv* env, jobject obj, jint config) {
+	
+	CUresult cudaStatus = cuCtxSetCacheConfig(static_cast<CUfunc_cache>(config));
+	
+	return cudaStatus;
+}
+
 //CUresult cuCtxSetCurrent(CUcontext ctx)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags) {
