@@ -2,6 +2,29 @@
 #include <jni.h>
 #include <cuda.h>
 
+//2. Error Handling
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorName(JNIEnv* env, jobject obj, jint error) {
+	
+	const char* pStr;
+
+	CUresult cudaStatus = cuGetErrorName(static_cast<CUresult>(error), &pStr);
+	
+	jstring javaString = env->NewStringUTF(pStr);
+
+	return javaString;
+}
+
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_getErrorString(JNIEnv* env, jobject obj, jint error) {
+
+	const char* pStr;
+
+	CUresult cudaStatus = cuGetErrorString(static_cast<CUresult>(error), &pStr);
+
+	jstring javaString = env->NewStringUTF(pStr);
+
+	return javaString;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject obj, jint flags) {
 	
 	CUresult cudaStatus = cuInit((unsigned int) flags);
@@ -9,7 +32,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject o
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDriverVersion(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_driverGetVersion(JNIEnv* env, jobject obj) {
 	
 	int driverVersion;
 
@@ -22,7 +45,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDriverVersion(JNIEnv* en
 	return driverVersion;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDevice(JNIEnv* env, jobject obj, jint ordinal) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGet(JNIEnv* env, jobject obj, jint ordinal) {
 
 	CUdevice device;
 
@@ -35,7 +58,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDevice(JNIEnv* env, jobj
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDeviceCount(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env, jobject obj) {
 	
 	int count;
 
@@ -46,4 +69,90 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_getDeviceCount(JNIEnv* env,
 	}
 
 	return count;
+}
+
+//7. Primary Context Management
+
+//CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int* flags, int* active)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRelease(JNIEnv* env, jobject obj, jint dev) {
+	
+	CUresult cudaStatus = cuDevicePrimaryCtxRelease(dev);
+
+	return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxReset(JNIEnv* env, jobject obj, jint dev) {
+
+	CUresult cudaStatus = cuDevicePrimaryCtxReset(dev);
+
+	return cudaStatus;
+}
+
+//CUresult cuDevicePrimaryCtxRetain(CUcontext* pctx, CUdevice dev)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags) {
+
+	CUresult cudaStatus = cuDevicePrimaryCtxSetFlags(dev, (unsigned int)flags);
+
+	return cudaStatus;
+}
+
+//8. Context Management
+//CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
+//CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
+//CUresult cuCtxDestroy(CUcontext ctx)
+//CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
+//CUresult cuCtxGetCacheConfig(CUfunc_cache * pconfig)
+//CUresult cuCtxGetCurrent(CUcontext * pctx)
+//CUresult cuCtxGetDevice(CUdevice * device)
+//CUresult cuCtxGetExecAffinity(CUexecAffinityParam * pExecAffinity, CUexecAffinityType type)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jobject obj) {
+	unsigned int flags;
+
+	CUresult cudaStatus = cuCtxGetFlags(&flags);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+	
+	return (jint)flags;
+}
+//CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
+//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
+//CUresult cuCtxGetSharedMemConfig(CUsharedconfig * pConfig)
+//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
+//CUresult cuCtxPopCurrent(CUcontext * pctx)
+//CUresult cuCtxPushCurrent(CUcontext ctx)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj) {
+
+	CUresult cudaStatus = cuCtxResetPersistingL2Cache();
+
+	return cudaStatus;
+}
+
+//CUresult cuCtxSetCacheConfig(CUfunc_cache config)
+//CUresult cuCtxSetCurrent(CUcontext ctx)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags) {
+	
+	CUresult cudaStatus = cuCtxSetFlags((unsigned int) flags);
+	
+	return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value) {
+	CUresult cudaStatus = cuCtxSetLimit(static_cast<CUlimit>(limit), value);
+	
+	return cudaStatus;
+}
+
+//CUresult cuCtxSetSharedMemConfig(CUsharedconfig config)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env, jobject obj) {
+
+	CUresult cudaStatus = cuCtxSynchronize();
+
+	return cudaStatus;
 }
