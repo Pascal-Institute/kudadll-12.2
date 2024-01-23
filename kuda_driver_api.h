@@ -87,7 +87,8 @@ extern "C" {
 	//CUresult cuModuleLoadData(CUmodule * module, const void* image)
 	//CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)
 	//CUresult cuModuleLoadFatBinary(CUmodule * module, const void* fatCubin)
-	//CUresult cuModuleUnload(CUmodule hmod)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleUnload(JNIEnv* env, jobject obj, jlong hmod);
 
 #ifdef __cplusplus
 }
