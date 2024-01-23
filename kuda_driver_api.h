@@ -38,7 +38,9 @@ extern "C" {
 	//CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
 	//CUresult cuCtxDestroy(CUcontext ctx)
 	//CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
-	//CUresult cuCtxGetCacheConfig(CUfunc_cache * pconfig)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj);
+	
 	//CUresult cuCtxGetCurrent(CUcontext * pctx)
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetDevice(JNIEnv* env, jobject obj);
