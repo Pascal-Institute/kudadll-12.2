@@ -198,7 +198,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env,
 //CUresult cuLinkComplete(CUlinkState state, void** cubinOut, size_t* sizeOut)
 //CUresult cuLinkCreate(unsigned int  numOptions, CUjit_option* options, void** optionValues, CUlinkState* stateOut)
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestory(JNIEnv* env, jobject obj, jlong state) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestroy(JNIEnv* env, jobject obj, jlong state) {
 	
 	CUlinkState cuLinkState = reinterpret_cast<CUlinkState>(state);
 

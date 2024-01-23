@@ -78,7 +78,7 @@ extern "C" {
 	//CUresult cuLinkComplete(CUlinkState state, void** cubinOut, size_t* sizeOut)
 	//CUresult cuLinkCreate(unsigned int  numOptions, CUjit_option* options, void** optionValues, CUlinkState* stateOut)
 
-	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestory(JNIEnv* env, jobject obj, jlong state);
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestroy(JNIEnv* env, jobject obj, jlong state);
 
 	//CUresult cuModuleGetFunction(CUfunction * hfunc, CUmodule hmod, const char* name)
 	//CUresult cuModuleGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUmodule hmod, const char* name)
