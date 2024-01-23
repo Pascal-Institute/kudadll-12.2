@@ -61,12 +61,33 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCacheConfig(JNIEnv* env, jobject obj, jint config);
 
 	//CUresult cuCtxSetCurrent(CUcontext ctx)
+	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value);
 
 	//CUresult cuCtxSetSharedMemConfig(CUsharedconfig config)
+
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env, jobject obj);
+
+	//9. Context Management (DEPRECATED)
+
+	//10. Module Management
+	//CUresult cuLinkAddData(CUlinkState state, CUjitInputType type, void* data, size_t size, const char* name, unsigned int  numOptions, CUjit_option* options, void** optionValues)
+	//CUresult cuLinkAddFile(CUlinkState state, CUjitInputType type, const char* path, unsigned int  numOptions, CUjit_option* options, void** optionValues)
+	//CUresult cuLinkComplete(CUlinkState state, void** cubinOut, size_t* sizeOut)
+	//CUresult cuLinkCreate(unsigned int  numOptions, CUjit_option* options, void** optionValues, CUlinkState* stateOut)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestory(JNIEnv* env, jobject obj, jlong state);
+
+	//CUresult cuModuleGetFunction(CUfunction * hfunc, CUmodule hmod, const char* name)
+	//CUresult cuModuleGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUmodule hmod, const char* name)
+	//CUresult cuModuleGetLoadingMode(CUmoduleLoadingMode * mode)
+	//CUresult cuModuleLoad(CUmodule * module, const char* fname)
+	//CUresult cuModuleLoadData(CUmodule * module, const void* image)
+	//CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)
+	//CUresult cuModuleLoadFatBinary(CUmodule * module, const void* fatCubin)
+	//CUresult cuModuleUnload(CUmodule hmod)
 
 #ifdef __cplusplus
 }
