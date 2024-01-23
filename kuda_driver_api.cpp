@@ -103,10 +103,37 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JN
 //CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
 //CUresult cuCtxDestroy(CUcontext ctx)
 //CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
-//CUresult cuCtxGetCacheConfig(CUfunc_cache * pconfig)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy) {
+	
+	CUfunc_cache pconfig;
+
+	CUresult cudaStatus = cuCtxGetCacheConfig(&pconfig);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(pconfig);
+}
+
 //CUresult cuCtxGetCurrent(CUcontext * pctx)
-//CUresult cuCtxGetDevice(CUdevice * device)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetDevice(JNIEnv* env, jobject obj) {
+	
+	CUdevice device;
+
+	CUresult cudaStatus = cuCtxGetDevice(&device);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jint)device;
+}
+
 //CUresult cuCtxGetExecAffinity(CUexecAffinityParam * pExecAffinity, CUexecAffinityType type)
+
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jobject obj) {
 	unsigned int flags;
 
@@ -132,7 +159,13 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(J
 	return cudaStatus;
 }
 
-//CUresult cuCtxSetCacheConfig(CUfunc_cache config)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCacheConfig(JNIEnv* env, jobject obj, jint config) {
+	
+	CUresult cudaStatus = cuCtxSetCacheConfig(static_cast<CUfunc_cache>(config));
+	
+	return cudaStatus;
+}
+
 //CUresult cuCtxSetCurrent(CUcontext ctx)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags) {
@@ -153,6 +186,65 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetLimit(JNIEnv* env, jo
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env, jobject obj) {
 
 	CUresult cudaStatus = cuCtxSynchronize();
+
+	return cudaStatus;
+}
+
+//9. Context Management (DEPRECATED)
+
+//10. Module Management
+//CUresult cuLinkAddData(CUlinkState state, CUjitInputType type, void* data, size_t size, const char* name, unsigned int  numOptions, CUjit_option* options, void** optionValues)
+//CUresult cuLinkAddFile(CUlinkState state, CUjitInputType type, const char* path, unsigned int  numOptions, CUjit_option* options, void** optionValues)
+//CUresult cuLinkComplete(CUlinkState state, void** cubinOut, size_t* sizeOut)
+//CUresult cuLinkCreate(unsigned int  numOptions, CUjit_option* options, void** optionValues, CUlinkState* stateOut)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestroy(JNIEnv* env, jobject obj, jlong state) {
+	
+	CUlinkState cuLinkState = reinterpret_cast<CUlinkState>(state);
+
+	CUresult cudaStatus = cuLinkDestroy(cuLinkState);
+
+	return cudaStatus;
+}
+
+//CUresult cuModuleGetFunction(CUfunction * hfunc, CUmodule hmod, const char* name)
+//CUresult cuModuleGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUmodule hmod, const char* name)
+//CUresult cuModuleGetLoadingMode(CUmoduleLoadingMode * mode)
+//CUresult cuModuleLoad(CUmodule * module, const char* fname)
+//CUresult cuModuleLoadData(CUmodule * module, const void* image)
+//CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)
+//CUresult cuModuleLoadFatBinary(CUmodule * module, const void* fatCubin)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleUnload(JNIEnv* env, jobject obj, jlong hmod) {
+
+	CUmodule cuModule = reinterpret_cast<CUmodule>(hmod);
+
+	CUresult cudaStatus = cuModuleUnload(cuModule);
+
+	return cudaStatus;
+}
+
+//11. Module Management (DEPRECATED)
+
+//12. Library Management
+//CUresult cuKernelGetAttribute(int* pi, CUfunction_attribute attrib, CUkernel kernel, CUdevice dev)
+//CUresult cuKernelGetFunction(CUfunction* pFunc, CUkernel kernel)
+//CUresult cuKernelGetName(const char** name, CUkernel hfunc)
+//CUresult cuKernelSetAttribute(CUfunction_attribute attrib, int  val, CUkernel kernel, CUdevice dev)
+//CUresult cuKernelSetCacheConfig(CUkernel kernel, CUfunc_cache config, CUdevice dev)
+//CUresult cuLibraryGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
+//CUresult cuLibraryGetKernel(CUkernel * pKernel, CUlibrary library, const char* name)
+//CUresult cuLibraryGetManaged(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
+//CUresult cuLibraryGetModule(CUmodule * pMod, CUlibrary library)
+//CUresult cuLibraryGetUnifiedFunction(void** fptr, CUlibrary library, const char* symbol)
+//CUresult cuLibraryLoadData(CUlibrary * library, const void* code, CUjit_option * jitOptions, void** jitOptionsValues, unsigned int  numJitOptions, CUlibraryOption * libraryOptions, void** libraryOptionValues, unsigned int  numLibraryOptions)
+//CUresult cuLibraryLoadFromFile(CUlibrary * library, const char* fileName, CUjit_option * jitOptions, void** jitOptionsValues, unsigned int  numJitOptions, CUlibraryOption * libraryOptions, void** libraryOptionValues, unsigned int  numLibraryOptions)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_libraryUnload(JNIEnv* env, jobject obj, jlong library) {
+	
+	CUlibrary cuLibrary = reinterpret_cast<CUlibrary>(library);
+
+	CUresult cudaStatus = cuLibraryUnload(cuLibrary);
 
 	return cudaStatus;
 }
