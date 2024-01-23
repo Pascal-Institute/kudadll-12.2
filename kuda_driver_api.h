@@ -39,7 +39,7 @@ extern "C" {
 	//CUresult cuCtxDestroy(CUcontext ctx)
 	//CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
 
-	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy);
 	
 	//CUresult cuCtxGetCurrent(CUcontext * pctx)
 
