@@ -105,7 +105,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JN
 //CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
 //CUresult cuCtxGetCacheConfig(CUfunc_cache * pconfig)
 //CUresult cuCtxGetCurrent(CUcontext * pctx)
-//CUresult cuCtxGetDevice(CUdevice * device)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetDevice(JNIEnv* env, jobject obj) {
+	
+	CUdevice device;
+
+	CUresult cudaStatus = cuCtxGetDevice(&device);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jint)device;
+}
+
 //CUresult cuCtxGetExecAffinity(CUexecAffinityParam * pExecAffinity, CUexecAffinityType type)
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jobject obj) {
 	unsigned int flags;
