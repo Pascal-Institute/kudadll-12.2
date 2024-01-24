@@ -255,6 +255,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_libraryUnload(JNIEnv* env, 
 //CUresult cuArrayCreate(CUarray * pHandle, const CUDA_ARRAY_DESCRIPTOR * pAllocateArray)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_arrayDestroy(JNIEnv* env, jobject obj, jlong hArray) {
+	
 	CUarray cuArray = reinterpret_cast<CUarray>(hArray);
 	
 	CUresult cudaStatus = cuArrayDestroy(cuArray);
@@ -268,7 +269,14 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_arrayDestroy(JNIEnv* env, j
 //CUresult cuArrayGetSparseProperties(CUDA_ARRAY_SPARSE_PROPERTIES * sparseProperties, CUarray array)
 //CUresult cuDeviceGetByPCIBusId(CUdevice * dev, const char* pciBusId)
 //CUresult cuDeviceGetPCIBusId(char* pciBusId, int  len, CUdevice dev)
-//CUresult cuIpcCloseMemHandle(CUdeviceptr dptr)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ipcCloseMemHandle(JNIEnv* env, jobject obj, jlong dptr) {
+
+	CUresult cudaStatus = cuIpcCloseMemHandle(dptr);
+
+	return cudaStatus;
+}
+
 //CUresult cuIpcGetEventHandle(CUipcEventHandle * pHandle, CUevent event)
 //CUresult cuIpcGetMemHandle(CUipcMemHandle * pHandle, CUdeviceptr dptr)
 //CUresult cuIpcOpenEventHandle(CUevent * phEvent, CUipcEventHandle handle)
