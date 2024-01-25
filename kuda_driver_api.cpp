@@ -293,7 +293,14 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFree(JNIEnv* env, jobjec
 	return cudaStatus;
 }
 
-//CUresult cuMemFreeHost(void* p)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeHost(JNIEnv* env, jobject obj, jlong p) {
+	void* hostMemoryPointer = (void*)p;
+
+	CUresult result = cuMemFreeHost(hostMemoryPointer);
+
+	return result;
+}
+
 //CUresult cuMemGetAddressRange(CUdeviceptr * pbase, size_t * psize, CUdeviceptr dptr)
 //CUresult cuMemGetHandleForAddressRange(void* handle, CUdeviceptr dptr, size_t size, CUmemRangeHandleType handleType, unsigned long long flags)
 //CUresult cuMemGetInfo(size_t * free, size_t * total)
