@@ -380,6 +380,5 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memRelease(JNIEnv* env, job
 	return result;
 }
 
-//CUresult cuMemRelease(CUmemGenericAllocationHandle handle)
 //CUresult cuMemRetainAllocationHandle(CUmemGenericAllocationHandle * handle, void* addr)
 //CUresult cuMemSetAccess(CUdeviceptr ptr, size_t size, const CUmemAccessDesc * desc, size_t count)	//CUresult cuMemUnmap(CUdeviceptr ptr, size_t size)
