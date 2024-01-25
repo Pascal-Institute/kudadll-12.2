@@ -294,6 +294,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFree(JNIEnv* env, jobjec
 }
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeHost(JNIEnv* env, jobject obj, jlong p) {
+	
 	void* hostMemoryPointer = (void*)p;
 
 	CUresult result = cuMemFreeHost(hostMemoryPointer);
@@ -308,7 +309,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeHost(JNIEnv* env, jo
 //CUresult cuMemHostGetDevicePointer(CUdeviceptr * pdptr, void* p, unsigned int  Flags)
 //CUresult cuMemHostGetFlags(unsigned int* pFlags, void* p)
 //CUresult cuMemHostRegister(void* p, size_t bytesize, unsigned int  Flags)
-//CUresult cuMemHostUnregister(void* p)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memHostUnregister(JNIEnv* env, jobject obj, jlong p) {
+
+	void* hostMemoryPointer = (void*)p;
+
+	CUresult result = cuMemHostUnregister(hostMemoryPointer);
+
+	return result;
+}
+
 //CUresult cuMemcpy(CUdeviceptr dst, CUdeviceptr src, size_t ByteCount)
 //CUresult cuMemcpy2D(const CUDA_MEMCPY2D * pCopy)
 //CUresult cuMemcpy2DAsync(const CUDA_MEMCPY2D * pCopy, CUstream hStream)
