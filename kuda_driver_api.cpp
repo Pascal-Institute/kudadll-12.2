@@ -516,4 +516,12 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventQuery(JNIEnv* env, job
 
 //CUresult cuEventRecord(CUevent hEvent, CUstream hStream)
 //CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
-//CUresult cuEventSynchronize(CUevent hEvent)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong hEvent) {
+
+	CUevent cuEvent = reinterpret_cast<CUevent>(hEvent);
+
+	CUresult result = cuEventSynchronize(cuEvent);
+
+	return result;
+}

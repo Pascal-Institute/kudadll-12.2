@@ -288,7 +288,8 @@ extern "C" {
 	//CUresult cuEventQuery(CUevent hEvent)
 	//CUresult cuEventRecord(CUevent hEvent, CUstream hStream)
 	//CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
-	//CUresult cuEventSynchronize(CUevent hEvent)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong hEvent);
 
 #ifdef __cplusplus
 }
