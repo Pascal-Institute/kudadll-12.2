@@ -633,7 +633,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphDestroyNode(JNIEnv* en
 //CUresult cuGraphEventWaitNodeSetEvent(CUgraphNode hNode, CUevent event)
 //CUresult cuGraphExecBatchMemOpNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_BATCH_MEM_OP_NODE_PARAMS * nodeParams)
 //CUresult cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph)
-//CUresult cuGraphExecDestroy(CUgraphExec hGraphExec)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* env, jobject obj, jlong hGraphExec) {
+
+	CUgraphExec cuGraphExec = reinterpret_cast<CUgraphExec>(hGraphExec);
+
+	CUresult result = cuGraphExecDestroy(cuGraphExec);
+
+	return result;
+}
+
 //CUresult cuGraphExecEventRecordNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event)
 //CUresult cuGraphExecEventWaitNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event)
 //CUresult cuGraphExecExternalSemaphoresSignalNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS * nodeParams)
