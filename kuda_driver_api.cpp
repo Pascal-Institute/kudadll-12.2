@@ -489,3 +489,39 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCapture
 
 	return result;
 }
+
+//19.Event Management
+
+//CUresult cuEventCreate(CUevent * phEvent, unsigned int  Flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, jobject obj, jlong hEvent) {
+	
+	CUevent cuEvent = reinterpret_cast<CUevent>(hEvent);
+
+	CUresult result = cuEventDestroy(cuEvent);
+
+	return result;
+}
+
+//CUresult cuEventElapsedTime(float* pMilliseconds, CUevent hStart, CUevent hEnd)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventQuery(JNIEnv* env, jobject obj, jlong hEvent) {
+
+	CUevent cuEvent = reinterpret_cast<CUevent>(hEvent);
+
+	CUresult result = cuEventQuery(cuEvent);
+
+	return result;
+}
+
+//CUresult cuEventRecord(CUevent hEvent, CUstream hStream)
+//CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong hEvent) {
+
+	CUevent cuEvent = reinterpret_cast<CUevent>(hEvent);
+
+	CUresult result = cuEventSynchronize(cuEvent);
+
+	return result;
+}
