@@ -537,7 +537,15 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_destroyExternalMemory(JNIEn
 	return result;
 }
 
-//CUresult cuDestroyExternalSemaphore(CUexternalSemaphore extSem)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_destroyExternalSemaphore(JNIEnv* env, jobject obj, jlong extSem) {
+
+	CUexternalSemaphore cuExternalSemaphore = reinterpret_cast<CUexternalSemaphore>(extSem);
+
+	CUresult result = cuDestroyExternalSemaphore(cuExternalSemaphore);
+
+	return result;
+}
+
 //CUresult cuExternalMemoryGetMappedBuffer(CUdeviceptr* devPtr, CUexternalMemory extMem, const CUDA_EXTERNAL_MEMORY_BUFFER_DESC* bufferDesc)
 //CUresult cuExternalMemoryGetMappedMipmappedArray(CUmipmappedArray* mipmap, CUexternalMemory extMem, const CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC* mipmapDesc)
 //CUresult cuImportExternalMemory(CUexternalMemory* extMem_out, const CUDA_EXTERNAL_MEMORY_HANDLE_DESC* memHandleDesc)
