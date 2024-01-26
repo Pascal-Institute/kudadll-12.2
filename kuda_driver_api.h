@@ -276,6 +276,15 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jint mode);
 
+	//19.Event Management
+	//CUresult cuEventCreate(CUevent * phEvent, unsigned int  Flags)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, jobject obj, jlong hEvent);
+	//CUresult cuEventElapsedTime(float* pMilliseconds, CUevent hStart, CUevent hEnd)
+	//CUresult cuEventQuery(CUevent hEvent)
+	//CUresult cuEventRecord(CUevent hEvent, CUstream hStream)
+	//CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
+	//CUresult cuEventSynchronize(CUevent hEvent)
+
 #ifdef __cplusplus
 }
 #endif
