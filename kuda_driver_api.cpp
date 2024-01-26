@@ -495,6 +495,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCapture
 //CUresult cuEventCreate(CUevent * phEvent, unsigned int  Flags)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, jobject obj, jlong hEvent) {
+	
 	CUevent cuEvent = reinterpret_cast<CUevent>(hEvent);
 
 	CUresult result = cuEventDestroy(cuEvent);
@@ -503,7 +504,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, j
 }
 
 //CUresult cuEventElapsedTime(float* pMilliseconds, CUevent hStart, CUevent hEnd)
-//CUresult cuEventQuery(CUevent hEvent)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventQuery(JNIEnv* env, jobject obj, jlong hEvent) {
+
+	CUevent cuEvent = reinterpret_cast<CUevent>(hEvent);
+
+	CUresult result = cuEventQuery(cuEvent);
+
+	return result;
+}
+
 //CUresult cuEventRecord(CUevent hEvent, CUstream hStream)
 //CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
 //CUresult cuEventSynchronize(CUevent hEvent)
