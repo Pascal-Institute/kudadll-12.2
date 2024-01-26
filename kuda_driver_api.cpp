@@ -608,7 +608,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGraphMemTrim(JNIEnv* 
 //CUresult cuGraphConditionalHandleCreate(CUgraphConditionalHandle * pHandle_out, CUgraph hGraph, CUcontext ctx, unsigned int  defaultLaunchValue, unsigned int  flags)
 //CUresult cuGraphCreate(CUgraph * phGraph, unsigned int  flags)
 //CUresult cuGraphDebugDotPrint(CUgraph hGraph, const char* path, unsigned int  flags)
-//CUresult cuGraphDestroy(CUgraph hGraph)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphDestroy(JNIEnv* env, jobject obj, jlong hGraph) {
+
+	CUgraph cuGraph= reinterpret_cast<CUgraph>(hGraph);
+
+	CUresult result = cuGraphDestroy(cuGraph);
+
+	return result;
+}
+
 //CUresult cuGraphDestroyNode(CUgraphNode hNode)
 //CUresult cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
 //CUresult cuGraphEventRecordNodeSetEvent(CUgraphNode hNode, CUevent event)
