@@ -722,3 +722,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_textObjectDestroy(JNIEnv* e
 //CUresult cuTexObjectGetResourceDesc(CUDA_RESOURCE_DESC* pResDesc, CUtexObject texObject)
 //CUresult cuTexObjectGetResourceViewDesc(CUDA_RESOURCE_VIEW_DESC * pResViewDesc, CUtexObject texObject)
 //CUresult cuTexObjectGetTextureDesc(CUDA_TEXTURE_DESC * pTexDesc, CUtexObject texObject)
+
+
+//29. Surface Object Management
+//CUresult cuSurfObjectCreate(CUsurfObject* pSurfObject, const CUDA_RESOURCE_DESC* pResDesc)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_surfObjectDestroy(JNIEnv* env, jobject obj, jlong surfObject) {
+
+	CUresult result = cuSurfObjectDestroy(surfObject);
+
+	return result;
+}
+
+//CUresult cuSurfObjectGetResourceDesc(CUDA_RESOURCE_DESC* pResDesc, CUsurfObject surfObject)
