@@ -23,6 +23,7 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env, jobject obj);
 
 	//7. Context Management
+	// 
 	//CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int* flags, int* active)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRelease(JNIEnv* env, jobject obj, jint dev);
@@ -41,7 +42,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy);
 	
-	//CUresult cuCtxGetCurrent(CUcontext * pctx)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCurrent(JNIEnv* env, jobject obj);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetDevice(JNIEnv* env, jobject obj);
 	
@@ -474,6 +475,19 @@ extern "C" {
 	//CUresult cuGraphicsUnmapResources(unsigned int  count, CUgraphicsResource * resources, CUstream hStream)
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphicsUnregisterResource(JNIEnv* env, jobject obj, jlong resource);
 
+	//33.Driver Entry Point Access
+	//CUresult cuGetProcAddress(const char* symbol, void** pfn, int  cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult * symbolStatus)
+
+	//34. Coredump Attributes Control API
+	//CUresult cuCoredumpGetAttribute(CUcoredumpSettings attrib, void* value, size_t * size)
+	//CUresult cuCoredumpGetAttributeGlobal(CUcoredumpSettings attrib, void* value, size_t * size)
+	//CUresult cuCoredumpSetAttribute(CUcoredumpSettings attrib, void* value, size_t * size)
+	//CUresult cuCoredumpSetAttributeGlobal(CUcoredumpSettings attrib, void* value, size_t * size)
+
+	//35. Profiler Control (DEPRECATED)
+
+	//36. Profiler Control
+	
 #ifdef __cplusplus
 }
 #endif

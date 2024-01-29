@@ -117,7 +117,17 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* e
 	return static_cast<int>(pconfig);
 }
 
-//CUresult cuCtxGetCurrent(CUcontext * pctx)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCurrent(JNIEnv* env, jobject obj) {
+	CUcontext pctx;
+
+	CUresult cudaStatus = cuCtxGetCurrent(&pctx);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jlong)pctx;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetDevice(JNIEnv* env, jobject obj) {
 	
@@ -774,3 +784,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphicsUnregisterResource(
 }
 
 //CUresult cuGraphicsUnregisterResource(CUgraphicsResource resource)
+
+//33.Driver Entry Point Access
+//CUresult cuGetProcAddress(const char* symbol, void** pfn, int  cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult * symbolStatus)
+
+//34. Coredump Attributes Control API
+//CUresult cuCoredumpGetAttribute(CUcoredumpSettings attrib, void* value, size_t * size)
+//CUresult cuCoredumpGetAttributeGlobal(CUcoredumpSettings attrib, void* value, size_t * size)
+//CUresult cuCoredumpSetAttribute(CUcoredumpSettings attrib, void* value, size_t * size)
+//CUresult cuCoredumpSetAttributeGlobal(CUcoredumpSettings attrib, void* value, size_t * size)
+
+//35. Profiler Control (DEPRECATED)
+
+//36. Profiler Control
