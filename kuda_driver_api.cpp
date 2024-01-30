@@ -101,7 +101,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JN
 //8. Context Management
 //CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
 //CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
-//CUresult cuCtxDestroy(CUcontext ctx)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDestroy(JNIEnv* env, jobject obj, jlong ctx){
+	
+	CUcontext cuContext = reinterpret_cast<CUcontext>(ctx);
+
+	CUresult cudaStatus = cuCtxDestroy(cuContext);
+
+	return cudaStatus;
+}
+
 //CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy) {
