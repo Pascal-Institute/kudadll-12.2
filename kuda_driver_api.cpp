@@ -101,20 +101,42 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JN
 //8. Context Management
 //CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
 //CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
-//CUresult cuCtxDestroy(CUcontext ctx)
-//CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDestroy(JNIEnv* env, jobject obj, jlong ctx){
 	
-	CUfunc_cache pconfig;
+	CUcontext cuContext = reinterpret_cast<CUcontext>(ctx);
 
-	CUresult cudaStatus = cuCtxGetCacheConfig(&pconfig);
+	CUresult cudaStatus = cuCtxDestroy(cuContext);
+
+	return cudaStatus;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetApiVersion(JNIEnv* env, jobject obj, jint ctx) {
+	
+	unsigned int version;
+
+	CUcontext cuContext = reinterpret_cast<CUcontext>(ctx);
+
+	CUresult cudaStatus = cuCtxGetApiVersion(cuContext, &version);
 
 	if (cudaStatus != CUDA_SUCCESS) {
 		return cudaStatus;
 	}
 
-	return static_cast<int>(pconfig);
+	return version;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy) {
+	
+	CUfunc_cache pConfig;
+
+	CUresult cudaStatus = cuCtxGetCacheConfig(&pConfig);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(pConfig);
 }
 
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCurrent(JNIEnv* env, jobject obj) {
@@ -157,10 +179,63 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jo
 }
 //CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 //CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
-//CUresult cuCtxGetSharedMemConfig(CUsharedconfig * pConfig)
-//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy) {
+	
+	CUsharedconfig pConfig;
+
+	CUresult cudaStatus = cuCtxGetSharedMemConfig(&pConfig);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(pConfig);
+}
+
+JNIEXPORT jintArray JNICALL Java_kuda_driverapi_DriverAPI_ctxGetStreamPriorityRange(JNIEnv* env, jobject obj) {
+	
+	int leastPriority;
+
+	int greatestPriority;
+
+	jintArray result = env->NewIntArray(2);
+	jint value[2];
+
+	CUresult cudaStatus = cuCtxGetStreamPriorityRange(&leastPriority, &greatestPriority);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		
+		jintArray failResult = env->NewIntArray(1);
+		jint failValue[1];
+
+		result = env->NewIntArray(1);
+
+		value[1] = cudaStatus;
+
+		env->SetIntArrayRegion(result, 0, 1, value);
+		
+		return result;
+	}
+
+	value[0] = leastPriority;
+	value[1] = greatestPriority;
+
+	env->SetIntArrayRegion(result, 0, 2, value);
+	
+	return result;
+}
+
 //CUresult cuCtxPopCurrent(CUcontext * pctx)
-//CUresult cuCtxPushCurrent(CUcontext ctx)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx) {
+
+	CUcontext cuContext = reinterpret_cast<CUcontext>(ctx);
+
+	CUresult cudaStatus = cuCtxPushCurrent(cuContext);
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj) {
 
@@ -176,7 +251,14 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCacheConfig(JNIEnv* e
 	return cudaStatus;
 }
 
-//CUresult cuCtxSetCurrent(CUcontext ctx)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCurrent(JNIEnv* env, jobject obj, jlong ctx) {
+
+	CUcontext cuContext = reinterpret_cast<CUcontext>(ctx);
+
+	CUresult cudaStatus = cuCtxSetCurrent(cuContext);
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags) {
 	
@@ -219,7 +301,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestroy(JNIEnv* env, jo
 
 //CUresult cuModuleGetFunction(CUfunction * hfunc, CUmodule hmod, const char* name)
 //CUresult cuModuleGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUmodule hmod, const char* name)
-//CUresult cuModuleGetLoadingMode(CUmoduleLoadingMode * mode)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleGetLoadingMode(JNIEnv* env, jobject obj, jboolean dummy) {
+
+	CUmoduleLoadingMode cuLoadingModuleMode;
+
+	CUresult cudaStatus = cuModuleGetLoadingMode(&cuLoadingModuleMode);
+	
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(cuLoadingModuleMode);
+}
+
 //CUresult cuModuleLoad(CUmodule * module, const char* fname)
 //CUresult cuModuleLoadData(CUmodule * module, const void* image)
 //CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)

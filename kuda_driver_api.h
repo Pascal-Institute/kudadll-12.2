@@ -37,8 +37,10 @@ extern "C" {
 	//8. Context Management
 	//CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
 	//CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
-	//CUresult cuCtxDestroy(CUcontext ctx)
-	//CUresult cuCtxGetApiVersion(CUcontext ctx, unsigned int* version)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDestroy(JNIEnv* env, jobject obj, jlong ctx);
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetApiVersion(JNIEnv* env, jobject obj, jint ctx);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy);
 	
@@ -52,17 +54,23 @@ extern "C" {
 	
 	//CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 	//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
-	//CUresult cuCtxGetSharedMemConfig(CUsharedconfig * pConfig)
-	//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy);
+	
+	JNIEXPORT jintArray JNICALL Java_kuda_driverapi_DriverAPI_ctxGetStreamPriorityRange(JNIEnv* env, jobject obj);
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx);
+
 	//CUresult cuCtxPopCurrent(CUcontext * pctx)
-	//CUresult cuCtxPushCurrent(CUcontext ctx)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCacheConfig(JNIEnv* env, jobject obj, jint config);
 
-	//CUresult cuCtxSetCurrent(CUcontext ctx)
-	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCurrent(JNIEnv* env, jobject obj, jlong ctx);
+
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value);
@@ -83,7 +91,9 @@ extern "C" {
 
 	//CUresult cuModuleGetFunction(CUfunction * hfunc, CUmodule hmod, const char* name)
 	//CUresult cuModuleGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUmodule hmod, const char* name)
-	//CUresult cuModuleGetLoadingMode(CUmoduleLoadingMode * mode)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleGetLoadingMode(JNIEnv* env, jobject obj, jboolean dummy);
+	
 	//CUresult cuModuleLoad(CUmodule * module, const char* fname)
 	//CUresult cuModuleLoadData(CUmodule * module, const void* image)
 	//CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)
