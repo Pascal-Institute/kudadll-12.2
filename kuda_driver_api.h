@@ -54,7 +54,9 @@ extern "C" {
 	
 	//CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 	//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
-	//CUresult cuCtxGetSharedMemConfig(CUsharedconfig * pConfig)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj);
+	
 	//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
 	//CUresult cuCtxPopCurrent(CUcontext * pctx)
 	//CUresult cuCtxPushCurrent(CUcontext ctx)

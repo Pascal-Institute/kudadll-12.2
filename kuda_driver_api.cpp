@@ -128,15 +128,15 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetApiVersion(JNIEnv* en
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy) {
 	
-	CUfunc_cache pconfig;
+	CUfunc_cache pConfig;
 
-	CUresult cudaStatus = cuCtxGetCacheConfig(&pconfig);
+	CUresult cudaStatus = cuCtxGetCacheConfig(&pConfig);
 
 	if (cudaStatus != CUDA_SUCCESS) {
 		return cudaStatus;
 	}
 
-	return static_cast<int>(pconfig);
+	return static_cast<int>(pConfig);
 }
 
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetCurrent(JNIEnv* env, jobject obj) {
@@ -179,7 +179,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jo
 }
 //CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 //CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
-//CUresult cuCtxGetSharedMemConfig(CUsharedconfig * pConfig)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj) {
+	
+	CUsharedconfig pConfig;
+
+	CUresult cudaStatus = cuCtxGetSharedMemConfig(&pConfig);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(pConfig);
+}
+
 //CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
 //CUresult cuCtxPopCurrent(CUcontext * pctx)
 //CUresult cuCtxPushCurrent(CUcontext ctx)
