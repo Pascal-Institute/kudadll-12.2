@@ -92,7 +92,7 @@ extern "C" {
 	//CUresult cuModuleGetFunction(CUfunction * hfunc, CUmodule hmod, const char* name)
 	//CUresult cuModuleGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUmodule hmod, const char* name)
 	
-	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleGetLoadingMode(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleGetLoadingMode(JNIEnv* env, jobject obj, jboolean dummy);
 	
 	//CUresult cuModuleLoad(CUmodule * module, const char* fname)
 	//CUresult cuModuleLoadData(CUmodule * module, const void* image)
