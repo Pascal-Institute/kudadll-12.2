@@ -194,6 +194,40 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEn
 }
 
 //CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
+
+JNIEXPORT jintArray JNICALL Java_kuda_driverapi_DriverAPI_ctxGetStreamPriorityRange(JNIEnv* env, jobject obj) {
+	
+	int leastPriority;
+
+	int greatestPriority;
+
+	jintArray result = env->NewIntArray(2);
+	jint value[2];
+
+	CUresult cudaStatus = cuCtxGetStreamPriorityRange(&leastPriority, &greatestPriority);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		
+		jintArray failResult = env->NewIntArray(1);
+		jint failValue[1];
+
+		result = env->NewIntArray(1);
+
+		value[1] = cudaStatus;
+
+		env->SetIntArrayRegion(result, 0, 1, value);
+		
+		return result;
+	}
+
+	value[0] = leastPriority;
+	value[1] = greatestPriority;
+
+	env->SetIntArrayRegion(result, 0, 2, value);
+	
+	return result
+}
+
 //CUresult cuCtxPopCurrent(CUcontext * pctx)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx) {
