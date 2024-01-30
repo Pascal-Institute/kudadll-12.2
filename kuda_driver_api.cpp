@@ -195,7 +195,15 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEn
 
 //CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
 //CUresult cuCtxPopCurrent(CUcontext * pctx)
-//CUresult cuCtxPushCurrent(CUcontext ctx)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx) {
+
+	CUcontext cuContext = reinterpret_cast<CUcontext>(ctx);
+
+	CUresult cudaStatus = cuCtxPushCurrent(cuContext);
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj) {
 

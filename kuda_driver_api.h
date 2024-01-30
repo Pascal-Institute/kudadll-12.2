@@ -59,7 +59,8 @@ extern "C" {
 	
 	//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
 	//CUresult cuCtxPopCurrent(CUcontext * pctx)
-	//CUresult cuCtxPushCurrent(CUcontext ctx)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 	
