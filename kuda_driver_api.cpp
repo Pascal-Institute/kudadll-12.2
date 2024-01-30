@@ -301,7 +301,21 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_linkDestroy(JNIEnv* env, jo
 
 //CUresult cuModuleGetFunction(CUfunction * hfunc, CUmodule hmod, const char* name)
 //CUresult cuModuleGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUmodule hmod, const char* name)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleGetLoadingMode(JNIEnv* env, jobject obj) {
+
+	CUmoduleLoadingMode cuLoadingModuleMode;
+
+	CUresult cudaStatus = cuModuleGetLoadingMode(&cuLoadingModuleMode);
+	
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(cuLoadingModuleMode);
+}
 //CUresult cuModuleGetLoadingMode(CUmoduleLoadingMode * mode)
+
 //CUresult cuModuleLoad(CUmodule * module, const char* fname)
 //CUresult cuModuleLoadData(CUmodule * module, const void* image)
 //CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)
