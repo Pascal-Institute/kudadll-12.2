@@ -180,7 +180,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jo
 //CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 //CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy) {
 	
 	CUsharedconfig pConfig;
 
