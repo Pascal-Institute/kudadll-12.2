@@ -225,7 +225,7 @@ JNIEXPORT jintArray JNICALL Java_kuda_driverapi_DriverAPI_ctxGetStreamPriorityRa
 
 	env->SetIntArrayRegion(result, 0, 2, value);
 	
-	return result
+	return result;
 }
 
 //CUresult cuCtxPopCurrent(CUcontext * pctx)
