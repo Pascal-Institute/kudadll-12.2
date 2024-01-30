@@ -69,8 +69,8 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCacheConfig(JNIEnv* env, jobject obj, jint config);
 
-	//CUresult cuCtxSetCurrent(CUcontext ctx)
-	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCurrent(JNIEnv* env, jobject obj, jlong ctx);
+
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value);

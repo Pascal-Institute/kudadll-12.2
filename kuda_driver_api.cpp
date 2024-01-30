@@ -193,8 +193,6 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEn
 	return static_cast<int>(pConfig);
 }
 
-//CUresult cuCtxGetStreamPriorityRange(int* leastPriority, int* greatestPriority)
-
 JNIEXPORT jintArray JNICALL Java_kuda_driverapi_DriverAPI_ctxGetStreamPriorityRange(JNIEnv* env, jobject obj) {
 	
 	int leastPriority;
@@ -253,7 +251,14 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCacheConfig(JNIEnv* e
 	return cudaStatus;
 }
 
-//CUresult cuCtxSetCurrent(CUcontext ctx)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetCurrent(JNIEnv* env, jobject obj, jlong ctx) {
+
+	CUcontext cuContext = reinterpret_cast<CUcontext>(ctx);
+
+	CUresult cudaStatus = cuCtxSetCurrent(cuContext);
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jobject obj, jint flags) {
 	
