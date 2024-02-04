@@ -89,7 +89,19 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxReset(JNIEn
 	return cudaStatus;
 }
 
-//CUresult cuDevicePrimaryCtxRetain(CUcontext* pctx, CUdevice dev)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRetain(JNIEnv* env, jobject obj, jint dev) {
+
+	CUcontext pctx;
+
+	CUresult cudaStatus = cuDevicePrimaryCtxRetain(&pctx, (CUdevice)dev);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jlong)pctx;
+
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags) {
 

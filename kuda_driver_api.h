@@ -30,7 +30,7 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxReset(JNIEnv* env, jobject obj, jint dev);
 	
-	//CUresult cuDevicePrimaryCtxRetain(CUcontext* pctx, CUdevice dev)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRetain(JNIEnv* env, jobject obj, jint dev);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags);
 	
