@@ -238,7 +238,18 @@ JNIEXPORT jintArray JNICALL Java_kuda_driverapi_DriverAPI_ctxGetStreamPriorityRa
 	return result;
 }
 
-//CUresult cuCtxPopCurrent(CUcontext * pctx)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxPopCurrent(JNIEnv* env, jobject obj) {
+	
+	CUcontext pctx;
+
+	CUresult cudaStatus = cuCtxPopCurrent(&pctx);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jlong)pctx;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx) {
 
