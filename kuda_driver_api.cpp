@@ -291,12 +291,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jo
 }
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value) {
+	
 	CUresult cudaStatus = cuCtxSetLimit(static_cast<CUlimit>(limit), value);
 	
 	return cudaStatus;
 }
 
-//CUresult cuCtxSetSharedMemConfig(CUsharedconfig config)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetSharedMemConfig(JNIEnv* env, jobject obj, jint config){
+	
+	CUresult cudaStatus = cuCtxSetSharedMemConfig(static_cast<CUsharedconfig>(config));
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env, jobject obj) {
 
