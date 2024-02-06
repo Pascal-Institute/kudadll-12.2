@@ -431,7 +431,16 @@ JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetByPCIBusId(JNIE
 	return javaString;
 }
 
-//CUresult cuDeviceGetPCIBusId(char* pciBusId, int  len, CUdevice dev)
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint len, jint dev) {
+
+	char* pciBusId;
+
+	CUresult cudaStatus = cuDeviceGetPCIBusId(pciBusId, len, (CUdevice) dev);
+
+	jstring javaString = env->NewStringUTF(pciBusId);
+
+	return javaString;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ipcCloseMemHandle(JNIEnv* env, jobject obj, jlong dptr) {
 
