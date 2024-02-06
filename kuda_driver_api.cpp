@@ -362,6 +362,22 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleUnload(JNIEnv* env, j
 
 //12. Library Management
 //CUresult cuKernelGetAttribute(int* pi, CUfunction_attribute attrib, CUkernel kernel, CUdevice dev)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_kernelGetFunction(JNIEnv* env, jobject obj, jlong kernel) {
+	
+	CUfunction pFunc;
+
+	CUkernel cuKernel = reinterpret_cast<CUkernel>(kernel);
+
+	CUresult cudaStatus = cuKernelGetFunction(&pFunc, cuKernel);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jlong)pFunc;
+}
+
 //CUresult cuKernelGetFunction(CUfunction* pFunc, CUkernel kernel)
 //CUresult cuKernelGetName(const char** name, CUkernel hfunc)
 //CUresult cuKernelSetAttribute(CUfunction_attribute attrib, int  val, CUkernel kernel, CUdevice dev)

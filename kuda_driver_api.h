@@ -105,7 +105,9 @@ extern "C" {
 
 	//12. Library Management
 	//CUresult cuKernelGetAttribute(int* pi, CUfunction_attribute attrib, CUkernel kernel, CUdevice dev)
-	//CUresult cuKernelGetFunction(CUfunction* pFunc, CUkernel kernel)
+
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_kernelGetFunction(JNIEnv* env, jobject obj, jlong kernel);
+
 	//CUresult cuKernelGetName(const char** name, CUkernel hfunc)
 	//CUresult cuKernelSetAttribute(CUfunction_attribute attrib, int  val, CUkernel kernel, CUdevice dev)
 	//CUresult cuKernelSetCacheConfig(CUkernel kernel, CUfunc_cache config, CUdevice dev)
