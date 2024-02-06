@@ -378,8 +378,8 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_kernelGetFunction(JNIEnv* 
 	return (jlong)pFunc;
 }
 
-//CUresult cuKernelGetFunction(CUfunction* pFunc, CUkernel kernel)
-//CUresult cuKernelGetName(const char** name, CUkernel hfunc)
+//CUresult cuKernelGetName(const char** name, CUkernel hfunc)next
+
 //CUresult cuKernelSetAttribute(CUfunction_attribute attrib, int  val, CUkernel kernel, CUdevice dev)
 //CUresult cuKernelSetCacheConfig(CUkernel kernel, CUfunc_cache config, CUdevice dev)
 //CUresult cuLibraryGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
@@ -417,7 +417,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_arrayDestroy(JNIEnv* env, j
 //CUresult cuArrayGetMemoryRequirements(CUDA_ARRAY_MEMORY_REQUIREMENTS * memoryRequirements, CUarray array, CUdevice device)
 //CUresult cuArrayGetPlane(CUarray * pPlaneArray, CUarray hArray, unsigned int  planeIdx)
 //CUresult cuArrayGetSparseProperties(CUDA_ARRAY_SPARSE_PROPERTIES * sparseProperties, CUarray array)
-//CUresult cuDeviceGetByPCIBusId(CUdevice * dev, const char* pciBusId)
+
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetByPCIBusId(JNIEnv* env, jobject obj) {
+
+	const char* pciBusId;
+
+	CUdevice dev;
+
+	CUresult cudaStatus = cuDeviceGetByPCIBusId(&dev, pciBusId);
+
+	jstring javaString = env->NewStringUTF(pciBusId);
+
+	return javaString;
+}
+
 //CUresult cuDeviceGetPCIBusId(char* pciBusId, int  len, CUdevice dev)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ipcCloseMemHandle(JNIEnv* env, jobject obj, jlong dptr) {
