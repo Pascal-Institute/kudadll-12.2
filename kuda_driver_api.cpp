@@ -420,7 +420,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_arrayDestroy(JNIEnv* env, j
 
 JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetByPCIBusId(JNIEnv* env, jobject obj) {
 
-	const char* pciBusId;
+	const char* pciBusId = "";
 
 	CUdevice dev;
 
@@ -433,7 +433,7 @@ JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetByPCIBusId(JNIE
 
 JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint len, jint dev) {
 
-	char* pciBusId;
+	char* pciBusId = (char*)malloc(sizeof(char) * (len + 1));
 
 	CUresult cudaStatus = cuDeviceGetPCIBusId(pciBusId, len, (CUdevice) dev);
 
