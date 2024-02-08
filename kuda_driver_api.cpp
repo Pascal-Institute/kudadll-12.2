@@ -940,7 +940,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxEnablePeerAccess(JNIEnv*
 //CUresult cuGraphicsMapResources(unsigned int  count, CUgraphicsResource* resources, CUstream hStream)
 //CUresult cuGraphicsResourceGetMappedMipmappedArray(CUmipmappedArray * pMipmappedArray, CUgraphicsResource resource)
 //CUresult cuGraphicsResourceGetMappedPointer(CUdeviceptr * pDevPtr, size_t * pSize, CUgraphicsResource resource)
-//CUresult cuGraphicsResourceSetMapFlags(CUgraphicsResource resource, unsigned int  flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphicsResourceSetMapFlags(JNIEnv* env, jobject obj, jlong resource, jint flags) {
+
+	CUgraphicsResource cuResource = reinterpret_cast<CUgraphicsResource>(resource);
+
+	CUresult result = cuGraphicsResourceSetMapFlags(cuResource, (unsigned int)flags);
+
+	return result;
+}
+
 //CUresult cuGraphicsSubResourceGetMappedArray(CUarray * pArray, CUgraphicsResource resource, unsigned int  arrayIndex, unsigned int  mipLevel)
 //CUresult cuGraphicsUnmapResources(unsigned int  count, CUgraphicsResource * resources, CUstream hStream)
 
