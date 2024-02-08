@@ -476,8 +476,9 @@ extern "C" {
 	//31. Peer Context Memory Access
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDisablePeerAccess(JNIEnv* env, jobject obj, jlong peerContext);
-	
-	//CUresult cuCtxEnablePeerAccess(CUcontext peerContext, unsigned int  Flags)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxEnablePeerAccess(JNIEnv* env, jobject obj, jlong peerContext, jint flags);
+
 	//CUresult cuDeviceCanAccessPeer(int* canAccessPeer, CUdevice dev, CUdevice peerDev)
 	//CUresult cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice)
 

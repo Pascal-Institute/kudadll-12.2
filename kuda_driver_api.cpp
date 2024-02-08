@@ -924,7 +924,15 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDisablePeerAccess(JNIEnv
 	return result;
 }
 
-//CUresult cuCtxEnablePeerAccess(CUcontext peerContext, unsigned int  Flags)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxEnablePeerAccess(JNIEnv* env, jobject obj, jlong peerContext, jint flags) {
+
+	CUcontext cuContext = reinterpret_cast<CUcontext>(peerContext);
+
+	CUresult result = cuCtxEnablePeerAccess(cuContext, (unsigned int)flags);
+
+	return result;
+}
+
 //CUresult cuDeviceCanAccessPeer(int* canAccessPeer, CUdevice dev, CUdevice peerDev)
 //CUresult cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice)
 
