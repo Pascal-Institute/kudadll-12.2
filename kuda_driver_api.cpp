@@ -800,7 +800,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphDestroyNode(JNIEnv* en
 }
 
 //CUresult cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
-//CUresult cuGraphEventRecordNodeSetEvent(CUgraphNode hNode, CUevent event)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventRecordNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event) {
+
+	CUgraphNode cuGraphNode = reinterpret_cast<CUgraphNode>(hNode);
+
+	CUevent cuEvent = reinterpret_cast<CUevent>(event);
+
+	CUresult result = cuGraphEventRecordNodeSetEvent(cuGraphNode, cuEvent);
+
+	return result;
+}
+
 //CUresult cuGraphEventWaitNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event) {
