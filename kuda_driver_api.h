@@ -409,7 +409,9 @@ extern "C" {
 	//CUresult cuGraphHostNodeSetParams(CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphInstantiate(CUgraphExec * phGraphExec, CUgraph hGraph, unsigned long long flags)
 	//CUresult cuGraphInstantiateWithParams(CUgraphExec * phGraphExec, CUgraph hGraph, CUDA_GRAPH_INSTANTIATE_PARAMS * instantiateParams)
-	//CUresult cuGraphKernelNodeCopyAttributes(CUgraphNode dst, CUgraphNode src)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphKernelNodeCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
+	
 	//CUresult cuGraphKernelNodeGetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, CUkernelNodeAttrValue * value_out)
 	//CUresult cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphKernelNodeSetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, const CUkernelNodeAttrValue * value)
