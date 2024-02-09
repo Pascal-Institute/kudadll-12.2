@@ -624,7 +624,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamDestroy(JNIEnv* env, 
 //CUresult cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus* captureStatus_out, cuuint64_t* id_out, CUgraph* graph_out, const CUgraphNode** dependencies_out, size_t* numDependencies_out)
 //CUresult cuStreamGetCaptureInfo_v3(CUstream hStream, CUstreamCaptureStatus * captureStatus_out, cuuint64_t * id_out, CUgraph * graph_out, const CUgraphNode * *dependencies_out, const CUgraphEdgeData * *edgeData_out, size_t * numDependencies_out)
 //CUresult cuStreamGetCtx(CUstream hStream, CUcontext * pctx)
-//CUresult cuStreamGetFlags(CUstream hStream, unsigned int* flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetFlags(JNIEnv* env, jobject obj, jlong hStream) {
+
+	unsigned int flags;
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult result = cuStreamGetFlags(cuStream, &flags);
+
+	return (jint)flags;
+}
+
 //CUresult cuStreamGetId(CUstream hStream, unsigned long long* streamId)
 //CUresult cuStreamGetPriority(CUstream hStream, int* priority)
 //CUresult cuStreamIsCapturing(CUstream hStream, CUstreamCaptureStatus * captureStatus)
