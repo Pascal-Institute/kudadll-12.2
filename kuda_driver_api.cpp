@@ -89,7 +89,19 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxReset(JNIEn
 	return cudaStatus;
 }
 
-//CUresult cuDevicePrimaryCtxRetain(CUcontext* pctx, CUdevice dev)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRetain(JNIEnv* env, jobject obj, jint dev) {
+
+	CUcontext pctx;
+
+	CUresult cudaStatus = cuDevicePrimaryCtxRetain(&pctx, (CUdevice)dev);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jlong)pctx;
+
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags) {
 
@@ -226,7 +238,18 @@ JNIEXPORT jintArray JNICALL Java_kuda_driverapi_DriverAPI_ctxGetStreamPriorityRa
 	return result;
 }
 
-//CUresult cuCtxPopCurrent(CUcontext * pctx)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxPopCurrent(JNIEnv* env, jobject obj) {
+	
+	CUcontext pctx;
+
+	CUresult cudaStatus = cuCtxPopCurrent(&pctx);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jlong)pctx;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxPushCurrent(JNIEnv* env, jobject obj, jlong ctx) {
 
@@ -268,12 +291,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetFlags(JNIEnv* env, jo
 }
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value) {
+	
 	CUresult cudaStatus = cuCtxSetLimit(static_cast<CUlimit>(limit), value);
 	
 	return cudaStatus;
 }
 
-//CUresult cuCtxSetSharedMemConfig(CUsharedconfig config)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSetSharedMemConfig(JNIEnv* env, jobject obj, jint config){
+	
+	CUresult cudaStatus = cuCtxSetSharedMemConfig(static_cast<CUsharedconfig>(config));
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxSynchronize(JNIEnv* env, jobject obj) {
 
@@ -333,8 +362,24 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleUnload(JNIEnv* env, j
 
 //12. Library Management
 //CUresult cuKernelGetAttribute(int* pi, CUfunction_attribute attrib, CUkernel kernel, CUdevice dev)
-//CUresult cuKernelGetFunction(CUfunction* pFunc, CUkernel kernel)
-//CUresult cuKernelGetName(const char** name, CUkernel hfunc)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_kernelGetFunction(JNIEnv* env, jobject obj, jlong kernel) {
+	
+	CUfunction pFunc;
+
+	CUkernel cuKernel = reinterpret_cast<CUkernel>(kernel);
+
+	CUresult cudaStatus = cuKernelGetFunction(&pFunc, cuKernel);
+
+	if (cudaStatus != CUDA_SUCCESS) {
+		return cudaStatus;
+	}
+
+	return (jlong)pFunc;
+}
+
+//CUresult cuKernelGetName(const char** name, CUkernel hfunc)next
+
 //CUresult cuKernelSetAttribute(CUfunction_attribute attrib, int  val, CUkernel kernel, CUdevice dev)
 //CUresult cuKernelSetCacheConfig(CUkernel kernel, CUfunc_cache config, CUdevice dev)
 //CUresult cuLibraryGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
@@ -372,8 +417,30 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_arrayDestroy(JNIEnv* env, j
 //CUresult cuArrayGetMemoryRequirements(CUDA_ARRAY_MEMORY_REQUIREMENTS * memoryRequirements, CUarray array, CUdevice device)
 //CUresult cuArrayGetPlane(CUarray * pPlaneArray, CUarray hArray, unsigned int  planeIdx)
 //CUresult cuArrayGetSparseProperties(CUDA_ARRAY_SPARSE_PROPERTIES * sparseProperties, CUarray array)
-//CUresult cuDeviceGetByPCIBusId(CUdevice * dev, const char* pciBusId)
-//CUresult cuDeviceGetPCIBusId(char* pciBusId, int  len, CUdevice dev)
+
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetByPCIBusId(JNIEnv* env, jobject obj) {
+
+	const char* pciBusId = "";
+
+	CUdevice dev;
+
+	CUresult cudaStatus = cuDeviceGetByPCIBusId(&dev, pciBusId);
+
+	jstring javaString = env->NewStringUTF(pciBusId);
+
+	return javaString;
+}
+
+JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint len, jint dev) {
+
+	char* pciBusId = (char*)malloc(sizeof(char) * (len + 1));
+
+	CUresult cudaStatus = cuDeviceGetPCIBusId(pciBusId, len, (CUdevice) dev);
+
+	jstring javaString = env->NewStringUTF(pciBusId);
+
+	return javaString;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ipcCloseMemHandle(JNIEnv* env, jobject obj, jlong dptr) {
 
@@ -776,7 +843,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* en
 //CUresult cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS * nodeParams)
 //CUresult cuGraphKernelNodeSetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, const CUkernelNodeAttrValue * value)
 //CUresult cuGraphKernelNodeSetParams(CUgraphNode hNode, const CUDA_KERNEL_NODE_PARAMS * nodeParams)
-//CUresult cuGraphLaunch(CUgraphExec hGraphExec, CUstream hStream)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphLaunch(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hStream) {
+
+	CUgraphExec cuGraphExec = reinterpret_cast<CUgraphExec>(hGraphExec);
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult result = cuGraphLaunch(cuGraphExec, cuStream);
+
+	return result;
+}
+
 //CUresult cuGraphMemAllocNodeGetParams(CUgraphNode hNode, CUDA_MEM_ALLOC_NODE_PARAMS * params_out)
 //CUresult cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr * dptr_out)
 //CUresult cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D * nodeParams)
@@ -796,10 +874,37 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* en
 //CUresult cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode * from, const CUgraphNode * to, size_t numDependencies)
 //CUresult cuGraphRemoveDependencies_v2(CUgraph hGraph, const CUgraphNode * from, const CUgraphNode * to, const CUgraphEdgeData * edgeData, size_t numDependencies)
 //CUresult cuGraphRetainUserObject(CUgraph graph, CUuserObject object, unsigned int  count, unsigned int  flags)
-//CUresult cuGraphUpload(CUgraphExec hGraphExec, CUstream hStream)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphUpload(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hStream) {
+
+	CUgraphExec cuGraphExec = reinterpret_cast<CUgraphExec>(hGraphExec);
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult result = cuGraphUpload(cuGraphExec, cuStream);
+
+	return result;
+}
+
 //CUresult cuUserObjectCreate(CUuserObject * object_out, void* ptr, CUhostFn destroy, unsigned int  initialRefcount, unsigned int  flags)
-//CUresult cuUserObjectRelease(CUuserObject object, unsigned int  count)
-//CUresult cuUserObjectRetain(CUuserObject object, unsigned int  count)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_userObjectRelease(JNIEnv* env, jobject obj, jlong object, jint count) {
+
+	CUuserObject cuUserObject = reinterpret_cast<CUuserObject>(object);
+
+	CUresult result = cuUserObjectRelease(cuUserObject, (unsigned int) count);
+
+	return result;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_userObjectRetain(JNIEnv* env, jobject obj, jlong object, jint count) {
+
+	CUuserObject cuObject = reinterpret_cast<CUuserObject>(object);
+
+	CUresult result = cuUserObjectRetain(cuObject, (unsigned int)count);
+
+	return result;
+}
 
 //25. Occupancy
 //CUresult cuOccupancyAvailableDynamicSMemPerBlock(size_t* dynamicSmemSize, CUfunction func, int  numBlocks, int  blockSize)
@@ -857,7 +962,15 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDisablePeerAccess(JNIEnv
 	return result;
 }
 
-//CUresult cuCtxEnablePeerAccess(CUcontext peerContext, unsigned int  Flags)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxEnablePeerAccess(JNIEnv* env, jobject obj, jlong peerContext, jint flags) {
+
+	CUcontext cuContext = reinterpret_cast<CUcontext>(peerContext);
+
+	CUresult result = cuCtxEnablePeerAccess(cuContext, (unsigned int)flags);
+
+	return result;
+}
+
 //CUresult cuDeviceCanAccessPeer(int* canAccessPeer, CUdevice dev, CUdevice peerDev)
 //CUresult cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice)
 
@@ -865,7 +978,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDisablePeerAccess(JNIEnv
 //CUresult cuGraphicsMapResources(unsigned int  count, CUgraphicsResource* resources, CUstream hStream)
 //CUresult cuGraphicsResourceGetMappedMipmappedArray(CUmipmappedArray * pMipmappedArray, CUgraphicsResource resource)
 //CUresult cuGraphicsResourceGetMappedPointer(CUdeviceptr * pDevPtr, size_t * pSize, CUgraphicsResource resource)
-//CUresult cuGraphicsResourceSetMapFlags(CUgraphicsResource resource, unsigned int  flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphicsResourceSetMapFlags(JNIEnv* env, jobject obj, jlong resource, jint flags) {
+
+	CUgraphicsResource cuResource = reinterpret_cast<CUgraphicsResource>(resource);
+
+	CUresult result = cuGraphicsResourceSetMapFlags(cuResource, (unsigned int)flags);
+
+	return result;
+}
+
 //CUresult cuGraphicsSubResourceGetMappedArray(CUarray * pArray, CUgraphicsResource resource, unsigned int  arrayIndex, unsigned int  mipLevel)
 //CUresult cuGraphicsUnmapResources(unsigned int  count, CUgraphicsResource * resources, CUstream hStream)
 
