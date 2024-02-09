@@ -380,7 +380,9 @@ extern "C" {
 	//CUresult cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
 	//CUresult cuGraphEventRecordNodeSetEvent(CUgraphNode hNode, CUevent event)
 	//CUresult cuGraphEventWaitNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
-	//CUresult cuGraphEventWaitNodeSetEvent(CUgraphNode hNode, CUevent event)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event);
+	
 	//CUresult cuGraphExecBatchMemOpNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_BATCH_MEM_OP_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph)
 
