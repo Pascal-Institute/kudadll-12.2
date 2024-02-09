@@ -606,7 +606,19 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolDestroy(JNIEnv* env,
 //CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
 //CUresult cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode)
 //CUresult cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode* dependencies, const CUgraphEdgeData* dependencyData, size_t numDependencies, CUstreamCaptureMode mode)
-//CUresult cuStreamCopyAttributes(CUstream dst, CUstream src)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src) {
+
+	CUstream cuStreamDst = reinterpret_cast<CUstream>(dst);
+
+	CUstream cuStreamSrc = reinterpret_cast<CUstream>(src);
+
+
+	CUresult result = cuStreamCopyAttributes(cuStreamDst, cuStreamSrc);
+
+	return result;
+}
+
 //CUresult cuStreamCreate(CUstream* phStream, unsigned int  Flags)
 //CUresult cuStreamCreateWithPriority(CUstream* phStream, unsigned int  flags, int  priority)
 
