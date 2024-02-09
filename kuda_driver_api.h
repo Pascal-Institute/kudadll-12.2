@@ -274,10 +274,15 @@ extern "C" {
 	//CUresult cuStreamGetAttribute(CUstream hStream, CUstreamAttrID attr, CUstreamAttrValue* value_out)
 	//CUresult cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus* captureStatus_out, cuuint64_t* id_out, CUgraph* graph_out, const CUgraphNode** dependencies_out, size_t* numDependencies_out)
 	//CUresult cuStreamGetCaptureInfo_v3(CUstream hStream, CUstreamCaptureStatus * captureStatus_out, cuuint64_t * id_out, CUgraph * graph_out, const CUgraphNode * *dependencies_out, const CUgraphEdgeData * *edgeData_out, size_t * numDependencies_out)
-	//CUresult cuStreamGetCtx(CUstream hStream, CUcontext * pctx)
-	//CUresult cuStreamGetFlags(CUstream hStream, unsigned int* flags)
+
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetCtx(JNIEnv* env, jobject obj, jlong hStream);
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetFlags(JNIEnv* env, jobject obj, jlong hStream);
+
 	//CUresult cuStreamGetId(CUstream hStream, unsigned long long* streamId)
-	//CUresult cuStreamGetPriority(CUstream hStream, int* priority)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream);
+	
 	//CUresult cuStreamIsCapturing(CUstream hStream, CUstreamCaptureStatus * captureStatus)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamQuery(JNIEnv* env, jobject obj, jlong hStream);
@@ -288,7 +293,8 @@ extern "C" {
 
 	//CUresult cuStreamUpdateCaptureDependencies(CUstream hStream, CUgraphNode * dependencies, size_t numDependencies, unsigned int  flags)
 	//CUresult cuStreamUpdateCaptureDependencies_v2(CUstream hStream, CUgraphNode * dependencies, const CUgraphEdgeData * dependencyData, size_t numDependencies, unsigned int  flags)
-	//CUresult cuStreamWaitEvent(CUstream hStream, CUevent hEvent, unsigned int  Flags)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong hStream, jlong hEvent, jint flags);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jint mode);
 
@@ -378,9 +384,13 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphDestroyNode(JNIEnv* env, jobject obj, jlong hNode);
 	
 	//CUresult cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
-	//CUresult cuGraphEventRecordNodeSetEvent(CUgraphNode hNode, CUevent event)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventRecordNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event);
+	
 	//CUresult cuGraphEventWaitNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
-	//CUresult cuGraphEventWaitNodeSetEvent(CUgraphNode hNode, CUevent event)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event);
+	
 	//CUresult cuGraphExecBatchMemOpNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_BATCH_MEM_OP_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph)
 
@@ -409,7 +419,9 @@ extern "C" {
 	//CUresult cuGraphHostNodeSetParams(CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphInstantiate(CUgraphExec * phGraphExec, CUgraph hGraph, unsigned long long flags)
 	//CUresult cuGraphInstantiateWithParams(CUgraphExec * phGraphExec, CUgraph hGraph, CUDA_GRAPH_INSTANTIATE_PARAMS * instantiateParams)
-	//CUresult cuGraphKernelNodeCopyAttributes(CUgraphNode dst, CUgraphNode src)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphKernelNodeCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
+	
 	//CUresult cuGraphKernelNodeGetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, CUkernelNodeAttrValue * value_out)
 	//CUresult cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphKernelNodeSetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, const CUkernelNodeAttrValue * value)
