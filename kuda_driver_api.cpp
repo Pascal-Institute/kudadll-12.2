@@ -865,8 +865,24 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* en
 //CUresult cuGraphRetainUserObject(CUgraph graph, CUuserObject object, unsigned int  count, unsigned int  flags)
 //CUresult cuGraphUpload(CUgraphExec hGraphExec, CUstream hStream)
 //CUresult cuUserObjectCreate(CUuserObject * object_out, void* ptr, CUhostFn destroy, unsigned int  initialRefcount, unsigned int  flags)
-//CUresult cuUserObjectRelease(CUuserObject object, unsigned int  count)
-//CUresult cuUserObjectRetain(CUuserObject object, unsigned int  count)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_userObjectRelease(JNIEnv* env, jobject obj, jlong object, jint count) {
+
+	CUuserObject cuObject = reinterpret_cast<CUuserObject>(object);
+
+	CUresult result = cuUserObjectRelease(cuObject, (unsigned int) count);
+
+	return result;
+}
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_userObjectRetain(JNIEnv* env, jobject obj, jlong object, jint count) {
+
+	CUuserObject cuObject = reinterpret_cast<CUuserObject>(object);
+
+	CUresult result = cuUserObjectRetain(cuObject, (unsigned int)count);
+
+	return result;
+}
 
 //25. Occupancy
 //CUresult cuOccupancyAvailableDynamicSMemPerBlock(size_t* dynamicSmemSize, CUfunction func, int  numBlocks, int  blockSize)

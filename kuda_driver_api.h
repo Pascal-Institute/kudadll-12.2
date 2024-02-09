@@ -436,8 +436,10 @@ extern "C" {
 	//CUresult cuGraphRetainUserObject(CUgraph graph, CUuserObject object, unsigned int  count, unsigned int  flags)
 	//CUresult cuGraphUpload(CUgraphExec hGraphExec, CUstream hStream)
 	//CUresult cuUserObjectCreate(CUuserObject * object_out, void* ptr, CUhostFn destroy, unsigned int  initialRefcount, unsigned int  flags)
-	//CUresult cuUserObjectRelease(CUuserObject object, unsigned int  count)
-	//CUresult cuUserObjectRetain(CUuserObject object, unsigned int  count)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_userObjectRelease(JNIEnv* env, jobject obj, jlong object, jint count);
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_userObjectRetain(JNIEnv* env, jobject obj, jlong object, jint count);
 
 	//25. Occupancy
 	//CUresult cuOccupancyAvailableDynamicSMemPerBlock(size_t* dynamicSmemSize, CUfunction func, int  numBlocks, int  blockSize)
@@ -489,7 +491,6 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphicsResourceSetMapFlags(JNIEnv* env, jobject obj, jlong resource, jint flags);
 
-	//CUresult cuGraphicsResourceSetMapFlags(CUgraphicsResource resource, unsigned int  flags)
 	//CUresult cuGraphicsSubResourceGetMappedArray(CUarray * pArray, CUgraphicsResource resource, unsigned int  arrayIndex, unsigned int  mipLevel)
 	//CUresult cuGraphicsUnmapResources(unsigned int  count, CUgraphicsResource * resources, CUstream hStream)
 
