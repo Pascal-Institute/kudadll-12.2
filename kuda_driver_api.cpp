@@ -843,7 +843,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* en
 //CUresult cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS * nodeParams)
 //CUresult cuGraphKernelNodeSetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, const CUkernelNodeAttrValue * value)
 //CUresult cuGraphKernelNodeSetParams(CUgraphNode hNode, const CUDA_KERNEL_NODE_PARAMS * nodeParams)
-//CUresult cuGraphLaunch(CUgraphExec hGraphExec, CUstream hStream)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphLaunch(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hStream) {
+
+	CUgraphExec cuGraphExec = reinterpret_cast<CUgraphExec>(hGraphExec);
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult result = cuGraphLaunch(cuGraphExec, cuStream);
+
+	return result;
+}
+
 //CUresult cuGraphMemAllocNodeGetParams(CUgraphNode hNode, CUDA_MEM_ALLOC_NODE_PARAMS * params_out)
 //CUresult cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr * dptr_out)
 //CUresult cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D * nodeParams)
