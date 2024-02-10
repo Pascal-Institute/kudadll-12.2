@@ -241,7 +241,9 @@ extern "C" {
 	//CUresult cuMemPoolTrimTo(CUmemoryPool pool, size_t minBytesToKeep)
 
 	//16. Multicast Object Management
-	//CUresult cuMulticastAddDevice(CUmemGenericAllocationHandle mcHandle, CUdevice dev)
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_multicastAddDevice(JNIEnv* env, jobject obj, jlong mcHandle, jint dev);
+
 	//CUresult cuMulticastBindAddr(CUmemGenericAllocationHandle mcHandle, size_t mcOffset, CUdeviceptr memptr, size_t size, unsigned long long flags)
 	//CUresult cuMulticastBindMem(CUmemGenericAllocationHandle mcHandle, size_t mcOffset, CUmemGenericAllocationHandle memHandle, size_t memOffset, size_t size, unsigned long long flags)
 	//CUresult cuMulticastCreate(CUmemGenericAllocationHandle* mcHandle, const CUmulticastObjectProp* prop)
@@ -264,7 +266,9 @@ extern "C" {
 	//CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
 	//CUresult cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode)
 	//CUresult cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode* dependencies, const CUgraphEdgeData* dependencyData, size_t numDependencies, CUstreamCaptureMode mode)
-	//CUresult cuStreamCopyAttributes(CUstream dst, CUstream src)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
+
 	//CUresult cuStreamCreate(CUstream* phStream, unsigned int  Flags)
 	//CUresult cuStreamCreateWithPriority(CUstream* phStream, unsigned int  flags, int  priority)
 	
