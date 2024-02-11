@@ -794,7 +794,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventRecord(JNIEnv* env, jo
 	return cuResult;
 }
 
-//CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventRecordWithFlags(JNIEnv* env, jobject obj, jlong hEvent, jlong hStream, jint flags) {
+
+	CUevent cuEvent = reinterpret_cast<CUevent>(hEvent);
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult cuResult = cuEventRecordWithFlags(cuEvent, cuStream, (unsigned int)flags);
+
+	return cuResult;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong hEvent) {
 
