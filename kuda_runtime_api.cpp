@@ -4,7 +4,7 @@
 #include <cuda_runtime_api.h>
 
 //1. Device Management
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env, jclass cls, jobject deviceProp) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env, jobject obj, jobject deviceProp) {
 
 	cudaDeviceProp cDeviceProp;
 
@@ -374,7 +374,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 }
 
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_flushGPUDirectRDMAWrites(JNIEnv* env, jobject obj, jint scope) {
 	
 	cudaFlushGPUDirectRDMAWritesTarget e = cudaFlushGPUDirectRDMAWritesTargetCurrentDevice;
 
@@ -383,7 +383,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_flushGPUDirectRDMAWrites(
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDefaultMemPool(JNIEnv* env, jclass cls, jint device) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDefaultMemPool(JNIEnv* env, jobject obj, jint device) {
 
 	cudaMemPool_t memPool;
 
@@ -396,7 +396,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDefaultMemPool(JNIEnv
 	return (jlong)memPool;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getAttribute(JNIEnv* env, jclass cls, jint deviceAttr, jint device) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getAttribute(JNIEnv* env, jobject obj, jint deviceAttr, jint device) {
 	
 	int value;
 
@@ -409,7 +409,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getAttribute(JNIEnv* env,
 	return value;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getLimit(JNIEnv* env, jclass cls, jbyte limit) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getLimit(JNIEnv* env, jobject obj, jbyte limit) {
 
 	size_t pValue;
 
@@ -422,7 +422,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getLimit(JNIEnv* env, jcl
 	return pValue;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_getMemPool(JNIEnv* env, jclass cls, jint device) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_getMemPool(JNIEnv* env, jobject obj, jint device) {
 
 	cudaMemPool_t memPool;
 
@@ -435,7 +435,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_getMemPool(JNIEnv* env, 
 	return (jlong)memPool;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getP2PAttribute(JNIEnv* env, jclass cls, jint attr, jint scrDevice, jint dstDevice) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getP2PAttribute(JNIEnv* env, jobject obj, jint attr, jint scrDevice, jint dstDevice) {
 	
 	int value;
 
@@ -449,7 +449,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getP2PAttribute(JNIEnv* e
 }
 
 
-JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getPCIBusId(JNIEnv* env, jclass cls, jint device) {
+JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getPCIBusId(JNIEnv* env, jobject obj, jint device) {
 
 	const int maxBufferLen = 13;
 	char pciBusId[maxBufferLen];
@@ -463,7 +463,7 @@ JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getPCIBusId(JNIEnv* en
 	return env->NewStringUTF(pciBusId);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getStreamPriorityRange(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getStreamPriorityRange(JNIEnv* env, jobject obj) {
 
 	int leastPriority;
 	int greatestPriority;
@@ -477,42 +477,42 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getStreamPriorityRange(JN
 	return (leastPriority - greatestPriority);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setCacheConfig(JNIEnv* env, jobject obj, jint cacheConfig) {
 
 	cudaError_t cudaStatus = cudaDeviceSetCacheConfig(static_cast<cudaFuncCache>(cacheConfig));
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value) {
 
 	cudaError_t cudaStatus = cudaDeviceSetLimit(static_cast<cudaLimit>(limit), (size_t)value);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setSharedMemConfig(JNIEnv* env, jclass cls, jint config) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setSharedMemConfig(JNIEnv* env, jobject obj, jint config) {
 
 	cudaError_t cudaStatus = cudaDeviceSetSharedMemConfig(static_cast<cudaSharedMemConfig>(config));
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_synchronize(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_synchronize(JNIEnv* env, jobject obj) {
 
 	cudaError_t cudaStatus = cudaDeviceSynchronize();
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_reset(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_reset(JNIEnv* env, jobject obj) {
 
 	cudaError_t cudaStatus = cudaDeviceReset();
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDevice(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDevice(JNIEnv* env, jobject obj) {
 
 	int diviceCode;
 
@@ -525,7 +525,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDevice(JNIEnv* env, jc
 	return diviceCode;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDiviceCount(JNIEnv* env, jclass cls) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDiviceCount(JNIEnv* env, jobject obj) {
 	int diviceCount;
 
 	cudaError_t cudaStatus = cudaGetDeviceCount(&diviceCount);
@@ -537,7 +537,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDiviceCount(JNIEnv* en
 	return diviceCount;
 }
 
-JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JNIEnv* env, jclass cls, jint device) {
+JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JNIEnv* env, jobject obj, jint device) {
 	cudaDeviceProp cudaDeviceProp;
 
 	cudaError_t cudaStatus = cudaGetDeviceProperties(&cudaDeviceProp, device);
@@ -738,35 +738,35 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 	return cudaDevicePropertiesObject;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_initDevice(JNIEnv* env, jclass cls, jint device, jint deviceFlags, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags) {
 
 	cudaError_t cudaStatus = cudaInitDevice(device, (unsigned int)deviceFlags, (unsigned int)flags);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jclass cls, jlong devicePtr) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jobject obj, jlong devicePtr) {
 
 	cudaError_t cudaStatus = cudaIpcCloseMemHandle((void*)devicePtr);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jclass cls, jint device) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jobject obj, jint device) {
 
 	cudaError_t cudaStatus = cudaSetDevice(device);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDeviceFlags(JNIEnv* env, jclass cls, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDeviceFlags(JNIEnv* env, jobject obj, jint flags) {
 
 	cudaError_t cudaStatus = cudaSetDeviceFlags((unsigned int)flags);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setValidDevices(JNIEnv* env, jclass cls, jintArray device_arr, jint len) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setValidDevices(JNIEnv* env, jobject obj, jintArray device_arr, jint len) {
 
 	jint* jintArr = env->GetIntArrayElements(device_arr, NULL);
 	env->ReleaseIntArrayElements(device_arr, jintArr, 0);
