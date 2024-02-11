@@ -269,7 +269,8 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
 
-	//CUresult cuStreamCreate(CUstream* phStream, unsigned int  Flags)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreate(JNIEnv* env, jobject obj, jint flags);
+
 	//CUresult cuStreamCreateWithPriority(CUstream* phStream, unsigned int  flags, int  priority)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamDestroy(JNIEnv* env, jobject obj, jlong hStream);

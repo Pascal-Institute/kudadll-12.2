@@ -625,7 +625,16 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv
 	return cuResult;
 }
 
-//CUresult cuStreamCreate(CUstream* phStream, unsigned int  Flags)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreate(JNIEnv* env, jobject obj, jint flags) {
+
+	CUstream cuStream;
+
+	CUresult cuResult = cuStreamCreate(&cuStream, (unsigned int)flags);
+
+	return cuResult;
+}
+
 //CUresult cuStreamCreateWithPriority(CUstream* phStream, unsigned int  flags, int  priority)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamDestroy(JNIEnv* env, jobject obj, jlong hStream) {
