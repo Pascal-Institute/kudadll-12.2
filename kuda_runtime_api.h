@@ -96,22 +96,22 @@ extern "C" {
 
 	//cudaThreadExchangeStreamCaptureMode
 
-	//6.5 Event ManageMent
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventManager_create(JNIEnv* env, jclass cls);
+	//5. Event ManageMent
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_EventManager_createWithFlags(JNIEnv* env, jclass cls, jint flags);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventCreateWithFlags(JNIEnv* env, jobject obj, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventManager_destroy(JNIEnv* env, jclass cls, jlong event);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventDestroy(JNIEnv* env, jobject obj, jlong event);
 
-	JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_EventManager_elapsedTime(JNIEnv* env, jclass cls, jlong start, jlong end);
+	JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventElapsedTime(JNIEnv* env, jobject obj, jlong start, jlong end);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventManager_query(JNIEnv* env, jclass cls, jlong event);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventQuery(JNIEnv* env, jobject obj, jlong event);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventManager_record(JNIEnv* env, jclass cls, jlong event, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventRecord(JNIEnv* env, jobject obj, jlong event, jlong stream);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventManager_recordWithFlags(JNIEnv* env, jclass cls, jlong event, jlong stream, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventRecordWithFlags(JNIEnv* env, jobject obj, jlong event, jlong stream, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_EventManager_synchronize(JNIEnv* env, jclass cls, jlong event);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong event);
 
 	//6.6 External Reource Interoperability
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destroyExternalMemory(JNIEnv* env, jobject obj, jlong extMem);
