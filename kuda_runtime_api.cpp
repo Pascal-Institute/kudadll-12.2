@@ -815,7 +815,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ctxResetPersistingL2Cache
 
 //cudaStreamAttachMemAsync
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_beginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -824,7 +824,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_beginCapture(JNIEnv* env,
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_copyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src) {
 
 	CUstream_st* cudaDstStreamPointer = reinterpret_cast<CUstream_st*>(dst);
 
@@ -835,7 +835,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_copyAttributes(JNIEnv* en
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_create(JNIEnv* env, jobject obj) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj) {
 
 	cudaStream_t pStream;
 
@@ -849,7 +849,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_create(JNIEnv* env, jobj
 	return (jlong)pStream;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_createWithFlags(JNIEnv* env, jobject obj, jint flags) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, jobject obj, jint flags) {
 
 	cudaStream_t pStream;
 
@@ -862,7 +862,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_createWithFlags(JNIEnv* 
 	return (jlong)pStream;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_createWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreateWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority) {
 
 	cudaStream_t pStream;
 
@@ -875,7 +875,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_createWithPriority(JNIEn
 	return (jlong)pStream;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destory(JNIEnv* env, jobject obj, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -884,7 +884,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destory(JNIEnv* env, jobj
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_query(JNIEnv* env, jobject obj, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -895,7 +895,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_query(JNIEnv* env, jobjec
 
 //cudaStreamSetAttribute
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_synchrnoize(JNIEnv* env, jobject obj, jlong stream) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
@@ -908,7 +908,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_synchrnoize(JNIEnv* env, 
 
 //cudaStreamUpdateCaptureDependencies_v2
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_waitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
 
