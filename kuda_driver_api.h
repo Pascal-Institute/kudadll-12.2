@@ -1,6 +1,6 @@
 #include <jni.h>
 
-//https://docs.nvidia.com/cuda/cuda-driver-api/index.html
+//https://docs.nvidia.com/cuda/archive/12.2.2/cuda-driver-api/index.html
 
 #ifdef __cplusplus
 extern "C" {
@@ -269,12 +269,14 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
 
-	//CUresult cuStreamCreate(CUstream* phStream, unsigned int  Flags)
-	//CUresult cuStreamCreateWithPriority(CUstream* phStream, unsigned int  flags, int  priority)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreate(JNIEnv* env, jobject obj, jint flags);
+
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreateWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamDestroy(JNIEnv* env, jobject obj, jlong hStream);
 	
-	//CUresult cuStreamEndCapture(CUstream hStream, CUgraph* phGraph)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamEndCapture(JNIEnv* env, jobject obj, jlong hStream);
+	
 	//CUresult cuStreamGetAttribute(CUstream hStream, CUstreamAttrID attr, CUstreamAttrValue* value_out)
 	//CUresult cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus* captureStatus_out, cuuint64_t* id_out, CUgraph* graph_out, const CUgraphNode** dependencies_out, size_t* numDependencies_out)
 	//CUresult cuStreamGetCaptureInfo_v3(CUstream hStream, CUstreamCaptureStatus * captureStatus_out, cuuint64_t * id_out, CUgraph * graph_out, const CUgraphNode * *dependencies_out, const CUgraphEdgeData * *edgeData_out, size_t * numDependencies_out)
@@ -303,17 +305,17 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jint mode);
 
 	//19.Event Management
-	//CUresult cuEventCreate(CUevent * phEvent, unsigned int  Flags)
-	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_eventCreate(JNIEnv* env, jobject obj, jint flags);
+
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, jobject obj, jlong hEvent);
 	
-	//CUresult cuEventElapsedTime(float* pMilliseconds, CUevent hStart, CUevent hEnd)
+	JNIEXPORT jfloat JNICALL Java_kuda_driverapi_DriverAPI_eventElapsedTime(JNIEnv* env, jobject obj, jlong hStart, jlong hEnd);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventQuery(JNIEnv* env, jobject obj, jlong hEvent);
 	
-	//CUresult cuEventQuery(CUevent hEvent)
-	//CUresult cuEventRecord(CUevent hEvent, CUstream hStream)
-	//CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventRecord(JNIEnv* env, jobject obj, jlong hEvent, jlong hStream);
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventRecordWithFlags(JNIEnv* env, jobject obj, jlong hEvent, jlong hStream, jint flags);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong hEvent);
 
@@ -380,7 +382,9 @@ extern "C" {
 	//CUresult cuGraphChildGraphNodeGetGraph(CUgraphNode hNode, CUgraph * phGraph)
 	//CUresult cuGraphClone(CUgraph * phGraphClone, CUgraph originalGraph)
 	//CUresult cuGraphConditionalHandleCreate(CUgraphConditionalHandle * pHandle_out, CUgraph hGraph, CUcontext ctx, unsigned int  defaultLaunchValue, unsigned int  flags)
-	//CUresult cuGraphCreate(CUgraph * phGraph, unsigned int  flags)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphCreate(JNIEnv* env, jobject obj, jint flags);
+	
 	//CUresult cuGraphDebugDotPrint(CUgraph hGraph, const char* path, unsigned int  flags)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphDestroy(JNIEnv* env, jobject obj, jlong hGraph);
