@@ -610,7 +610,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_multicastAddDevice(JNIEnv* 
 //18. Stream Management
 //CUresult cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void* userData, unsigned int  flags)
 //CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
-//CUresult cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong dst, jlong hStream, jint mode) {
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUstreamCaptureMode cuStreamCaptureMode =  static_cast<CUstreamCaptureMode>(mode);
+
+	CUresult cuResult = cuStreamBeginCapture(cuStream, cuStreamCaptureMode);
+
+	return cuResult;
+}
+
 //CUresult cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode* dependencies, const CUgraphEdgeData* dependencyData, size_t numDependencies, CUstreamCaptureMode mode)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src) {
@@ -618,7 +629,6 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv
 	CUstream cuStreamDst = reinterpret_cast<CUstream>(dst);
 
 	CUstream cuStreamSrc = reinterpret_cast<CUstream>(src);
-
 
 	CUresult cuResult = cuStreamCopyAttributes(cuStreamDst, cuStreamSrc);
 
