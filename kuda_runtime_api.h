@@ -96,22 +96,22 @@ extern "C" {
 
 	//cudaThreadExchangeStreamCaptureMode
 
-	//6.5 Event ManageMent
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_create(JNIEnv* env, jclass cls);
+	//5 Event ManageMent
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_create(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_createWithFlags(JNIEnv* env, jclass cls, jint flags);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_createWithFlags(JNIEnv* env, jobject obj, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destroy(JNIEnv* env, jclass cls, jlong event);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destroy(JNIEnv* env, jobject obj, jlong event);
 
-	JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_RuntimeAPI_elapsedTime(JNIEnv* env, jclass cls, jlong start, jlong end);
+	JNIEXPORT jfloat JNICALL Java_kuda_runtimeapi_RuntimeAPI_elapsedTime(JNIEnv* env, jobject obj, jlong start, jlong end);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_query(JNIEnv* env, jclass cls, jlong event);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_query(JNIEnv* env, jobject obj, jlong event);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_record(JNIEnv* env, jclass cls, jlong event, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_record(JNIEnv* env, jobject obj, jlong event, jlong stream);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_recordWithFlags(JNIEnv* env, jclass cls, jlong event, jlong stream, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_recordWithFlags(JNIEnv* env, jobject obj, jlong event, jlong stream, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_synchronize(JNIEnv* env, jclass cls, jlong event);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_synchronize(JNIEnv* env, jobject obj, jlong event);
 
 	//6.6 External Reource Interoperability
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destroyExternalMemory(JNIEnv* env, jobject obj, jlong extMem);
