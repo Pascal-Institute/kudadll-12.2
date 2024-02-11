@@ -1,6 +1,6 @@
 #include <jni.h>
 
-//https://docs.nvidia.com/cuda/cuda-driver-api/index.html
+//https://docs.nvidia.com/cuda/archive/12.2.2/cuda-driver-api/index.html
 
 #ifdef __cplusplus
 extern "C" {
@@ -303,8 +303,8 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jint mode);
 
 	//19.Event Management
-	//CUresult cuEventCreate(CUevent * phEvent, unsigned int  Flags)
-	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_eventCreate(JNIEnv* env, jobject obj, jint flags);
+
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, jobject obj, jlong hEvent);
 	
 	//CUresult cuEventElapsedTime(float* pMilliseconds, CUevent hStart, CUevent hEnd)
