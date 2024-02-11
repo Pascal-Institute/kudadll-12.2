@@ -779,6 +779,18 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setDeviceFlags(JNIEnv*
 	return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setValidDevices(JNIEnv* env, jclass cls, jintArray device_arr, jint len) {
+
+	jint* jintArr = env->GetIntArrayElements(device_arr, NULL);
+	env->ReleaseIntArrayElements(device_arr, jintArr, 0);
+	
+	int* arr = reinterpret_cast<int*>(jintArr);
+
+	cudaError_t cudaStatus = cudaSetValidDevices(arr ,len);
+
+	return cudaStatus;
+}
+
 JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getErrorName(JNIEnv* env, jobject obj, jint error) {
 
 	return env->NewStringUTF(cudaGetErrorName(static_cast<cudaError_t>(error)));
