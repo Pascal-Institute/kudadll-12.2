@@ -311,8 +311,8 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventQuery(JNIEnv* env, jobject obj, jlong hEvent);
 	
-	//CUresult cuEventQuery(CUevent hEvent)
-	//CUresult cuEventRecord(CUevent hEvent, CUstream hStream)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventRecord(JNIEnv* env, jobject obj, jlong hEvent, jlong hStream);
+
 	//CUresult cuEventRecordWithFlags(CUevent hEvent, CUstream hStream, unsigned int  flags)
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventSynchronize(JNIEnv* env, jobject obj, jlong hEvent);
