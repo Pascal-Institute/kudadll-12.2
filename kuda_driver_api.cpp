@@ -378,7 +378,7 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_kernelGetFunction(JNIEnv* 
 	return (jlong)pFunc;
 }
 
-//CUresult cuKernelGetName(const char** name, CUkernel hfunc)next
+//CUresult cuKernelGetName(const char** name, CUkernel hfunc) next ver (12.3)
 
 //CUresult cuKernelSetAttribute(CUfunction_attribute attrib, int  val, CUkernel kernel, CUdevice dev)
 //CUresult cuKernelSetCacheConfig(CUkernel kernel, CUfunc_cache config, CUdevice dev)
@@ -646,7 +646,21 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamDestroy(JNIEnv* env, 
 	return cuResult;
 }
 
-//CUresult cuStreamEndCapture(CUstream hStream, CUgraph* phGraph)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamEndCapture(JNIEnv* env, jobject obj, jlong hStream) {
+
+	CUgraph cuGraph;
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult cuResult = cuStreamEndCapture(cuStream, &cuGraph);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuGraph;
+ }
+
 //CUresult cuStreamGetAttribute(CUstream hStream, CUstreamAttrID attr, CUstreamAttrValue* value_out)
 //CUresult cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus* captureStatus_out, cuuint64_t* id_out, CUgraph* graph_out, const CUgraphNode** dependencies_out, size_t* numDependencies_out)
 //CUresult cuStreamGetCaptureInfo_v3(CUstream hStream, CUstreamCaptureStatus * captureStatus_out, cuuint64_t * id_out, CUgraph * graph_out, const CUgraphNode * *dependencies_out, const CUgraphEdgeData * *edgeData_out, size_t * numDependencies_out)
@@ -657,10 +671,10 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetCtx(JNIEnv* env, 
 
 	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
 
-	CUresult cudaStatus = cuStreamGetCtx(cuStream, &pctx);
+	CUresult cuResult = cuStreamGetCtx(cuStream, &pctx);
 
-	if (cudaStatus != CUDA_SUCCESS) {
-		return cudaStatus;
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
 	}
 
 	return (jlong)pctx;
