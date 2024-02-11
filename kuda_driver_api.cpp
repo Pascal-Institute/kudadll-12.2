@@ -757,7 +757,22 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, j
 	return cuResult;
 }
 
-//CUresult cuEventElapsedTime(float* pMilliseconds, CUevent hStart, CUevent hEnd)
+JNIEXPORT jfloat JNICALL Java_kuda_driverapi_DriverAPI_eventElapsedTime(JNIEnv* env, jobject obj, jlong hStart, jlong hEnd) {
+
+	float pMilliseconds;
+
+	CUevent cuEventStart = reinterpret_cast<CUevent>(hStart);
+
+	CUevent cuEventEnd = reinterpret_cast<CUevent>(hEnd);
+
+	CUresult cuResult = cuEventElapsedTime(&pMilliseconds, cuEventStart, cuEventEnd);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return pMilliseconds;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventQuery(JNIEnv* env, jobject obj, jlong hEvent) {
 

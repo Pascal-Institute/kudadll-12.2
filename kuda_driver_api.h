@@ -307,7 +307,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventDestroy(JNIEnv* env, jobject obj, jlong hEvent);
 	
-	//CUresult cuEventElapsedTime(float* pMilliseconds, CUevent hStart, CUevent hEnd)
+	JNIEXPORT jfloat JNICALL Java_kuda_driverapi_DriverAPI_eventElapsedTime(JNIEnv* env, jobject obj, jlong hStart, jlong hEnd);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_eventQuery(JNIEnv* env, jobject obj, jlong hEvent);
 	
