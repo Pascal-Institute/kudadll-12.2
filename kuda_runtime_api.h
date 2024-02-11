@@ -1,58 +1,56 @@
 ﻿#include <jni.h>
 
-//https://docs.nvidia.com/cuda/cuda-runtime-api/index.html
+//https://docs.nvidia.com/cuda/archive/12.2.2/cuda-runtime-api/index.html
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 	//1. Device Management
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_chooseDevice(JNIEnv* env, jclass cls, jobject cudaDeviceProp);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env, jobject obj, jobject cudaDeviceProp);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_flushGPUDirectRDMAWrites(JNIEnv* env, jclass cls, jint scope);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceFlushGPUDirectRDMAWrites(JNIEnv* env, jobject obj, jint scope);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getAttribute(JNIEnv* env, jclass cls, jint cudaDeviceAttr, jint device);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetAttribute(JNIEnv* env, jobject obj, jint cudaDeviceAttr, jint device);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceManager_getDefaultMemPool(JNIEnv* env, jclass cls, jint  device);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetDefaultMemPool(JNIEnv* env, jobject obj, jint  device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getLimit(JNIEnv* env, jclass cls, jbyte limit);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetLimit(JNIEnv* env, jobject obj, jbyte limit);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_DeviceManager_getMemPool(JNIEnv* env, jclass cls, jint  device);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint  device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getP2PAttribute(JNIEnv* env, jclass cls, jint attr, jint scrDevice, jint dstDevice);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetP2PAttribute(JNIEnv* env, jobject obj, jint attr, jint scrDevice, jint dstDevice);
 
-	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_DeviceManager_getPCIBusId(JNIEnv* env, jclass cls, jint device);
+	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getStreamPriorityRange(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetStreamPriorityRange(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setCacheConfig(JNIEnv* env, jclass cls, jint cacheConfig);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetCacheConfig(JNIEnv* env, jobject obj, jint cacheConfig);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setLimit(JNIEnv* env, jclass cls, jbyte limit, jsize value);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetLimit(JNIEnv* env, jobject obj, jbyte limit, jsize value);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setSharedMemConfig(JNIEnv* env, jclass cls, jint config);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetSharedMemConfig(JNIEnv* env, jobject obj, jint config);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_synchronize(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSynchronize(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_reset(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceReset(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getDevice(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDevice(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_getDiviceCount(JNIEnv* env, jclass cls);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDiviceCount(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_DeviceManager_getDeviceProperties(JNIEnv* env, jclass cls, jint device);
+	JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JNIEnv* env, jobject obj, jint device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_initDevice(JNIEnv* env, jclass cls, jint device, jint deviceFlags, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_lpcCloseMemHandle(JNIEnv* env, jclass cls, jlong devicePtr);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jobject obj, jlong devicePtr);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_lpcCloseMemHandle(JNIEnv* env, jclass cls, jlong devicePtr);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jobject obj, jint device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setDevice(JNIEnv* env, jclass cls, jint device);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDeviceFlags(JNIEnv* env, jobject obj, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setDeviceFlags(JNIEnv* env, jclass cls, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setValidDevices(JNIEnv* env, jobject obj, jintArray device_arr, jint len);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_DeviceManager_setValidDevices(JNIEnv* env, jclass cls, jint len);
-
-	//6.3 Error Handling
+	//3. Error Handling
 	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getErrorName(JNIEnv* env, jobject obj, jint error);
 
 	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_getErrorString(JNIEnv* env, jobject obj, jint error);
@@ -61,38 +59,38 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_peekAtLastError(JNIEnv* env, jobject obj);
 
-	//6.4 Stream Management
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_ctxResetPersistingL2Cache(JNIEnv* env, jclass cls);
+	//4. Stream Management
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 
 	//cudaStreamAddCallback
 
 	//cudaStreamAttachMemAsync
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_beginCapture(JNIEnv* env, jclass cls, jlong stream, jint mode);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
 
 	//cudaStreamBeginCaptureToGraph
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_copyAttributes(JNIEnv* env, jclass cls, jlong dst, jlong src);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamManager_create(JNIEnv* env, jclass cls);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamManager_createWithFlags(JNIEnv* env, jclass cls, jint flags);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreateWithFlags(JNIEnv* env, jobject obj, jint flags);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_StreamManager_createWithPriority(JNIEnv* env, jclass cls, jint flags, jint priority);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreateWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_destory(JNIEnv* env, jclass cls, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_query(JNIEnv* env, jclass cls, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream);
 
 	//cudaStreamSetAttribute
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_synchrnoize(JNIEnv* env, jclass cls, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream);
 
 	//cudaStreamUpdateCaptureDependencies
 
 	//cudaStreamUpdateCaptureDependencies_v2
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_StreamManager_waitEvent(JNIEnv* env, jclass cls, jlong stream, jlong event, jint flags);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags);
 
 	//cudaThreadExchangeStreamCaptureMode
 
