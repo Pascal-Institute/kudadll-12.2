@@ -287,7 +287,7 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetFlags(JNIEnv* env, jobject obj, jlong hStream);
 
-	//CUresult cuStreamGetId(CUstream hStream, unsigned long long* streamId)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetId(JNIEnv* env, jobject obj, jlong hStream);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream);
 	
