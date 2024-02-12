@@ -34,8 +34,10 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags);
 	
-	//8. Context Management
-	//CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
+	//8. Context Management//
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxCreate(JNIEnv* env, jobject obj, jint flags, jint dev);
+	
 	//CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDestroy(JNIEnv* env, jobject obj, jlong ctx);

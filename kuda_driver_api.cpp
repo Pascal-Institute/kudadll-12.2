@@ -110,8 +110,21 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JN
 	return cudaStatus;
 }
 
-//8. Context Management
-//CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
+//8. Context Management//
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxCreate(JNIEnv* env, jobject obj, jint flags, jint dev) {
+
+	CUcontext cuContext;
+
+	CUresult cuResult = cuCtxCreate(&cuContext, (unsigned int)flags, dev);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuContext;
+}
+
 //CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDestroy(JNIEnv* env, jobject obj, jlong ctx){
@@ -724,7 +737,7 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetId(JNIEnv* env, j
 
 	unsigned long long streamId;
 
-	CUstream cuStream = (CUstream)hStream;
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
 
 	CUresult cuResult = cuStreamGetId(cuStream, &streamId);
 
