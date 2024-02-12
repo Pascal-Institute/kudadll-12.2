@@ -642,7 +642,11 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreate(JNIEnv* env, 
 
 	CUresult cuResult = cuStreamCreate(&cuStream, (unsigned int)flags);
 
-	return cuResult;
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuStream;
 }
 
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreateWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority) {
@@ -720,7 +724,7 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetId(JNIEnv* env, j
 
 	unsigned long long streamId;
 
-	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+	CUstream cuStream = (CUstream)hStream;
 
 	CUresult cuResult = cuStreamGetId(cuStream, &streamId);
 
@@ -730,7 +734,6 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetId(JNIEnv* env, j
 
 	return (jlong)streamId;
 }
-
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream) {
 	
