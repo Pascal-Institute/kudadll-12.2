@@ -202,6 +202,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jo
 	
 	return (jint)flags;
 }
+
 //CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 //CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
 

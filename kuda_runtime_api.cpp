@@ -68,10 +68,10 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 
 	fid = env->GetFieldID(devicePropClass, "gpuDirectRDMASupported", "I");
 	cDeviceProp.gpuDirectRDMASupported = env->GetIntField(deviceProp, fid);
-	
+
 	fid = env->GetFieldID(devicePropClass, "gpuDirectRDMAWritesOrdering", "I");
 	cDeviceProp.gpuDirectRDMAWritesOrdering = env->GetIntField(deviceProp, fid);
-	
+
 	fid = env->GetFieldID(devicePropClass, "hostNativeAtomicSupported", "I");
 	cDeviceProp.hostNativeAtomicSupported = env->GetIntField(deviceProp, fid);
 
@@ -107,7 +107,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 
 	fid = env->GetFieldID(devicePropClass, "luidDeviceNodeMask", "I");
 	cDeviceProp.luidDeviceNodeMask = env->GetIntField(deviceProp, fid);
-	
+
 	fid = env->GetFieldID(devicePropClass, "major", "I");
 	cDeviceProp.major = env->GetIntField(deviceProp, fid);
 
@@ -118,8 +118,8 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 	cDeviceProp.maxBlocksPerMultiProcessor = env->GetIntField(deviceProp, fid);
 
 	fid = env->GetFieldID(devicePropClass, "maxGridSize", "[I");
-	jintArray maxGridSizeArray = (jintArray) env->GetObjectField(deviceProp, fid);
-	jint* maxGridSizeArrayElements =  env->GetIntArrayElements(maxGridSizeArray, nullptr);
+	jintArray maxGridSizeArray = (jintArray)env->GetObjectField(deviceProp, fid);
+	jint* maxGridSizeArrayElements = env->GetIntArrayElements(maxGridSizeArray, nullptr);
 	std::copy(maxGridSizeArrayElements, maxGridSizeArrayElements + 3, cDeviceProp.maxGridSize);
 	env->ReleaseIntArrayElements(maxGridSizeArray, maxGridSizeArrayElements, JNI_ABORT);
 
@@ -158,7 +158,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 	jint* maxSurfaceCubemapLayeredArrayElements = env->GetIntArrayElements(maxSurfaceCubemapLayeredArray, nullptr);
 	std::copy(maxSurfaceCubemapLayeredArrayElements, maxSurfaceCubemapLayeredArrayElements + 2, cDeviceProp.maxSurfaceCubemapLayered);
 	env->ReleaseIntArrayElements(maxSurfaceCubemapLayeredArray, maxSurfaceCubemapLayeredArrayElements, JNI_ABORT);
-	
+
 	fid = env->GetFieldID(devicePropClass, "maxTexture1D", "I");
 	cDeviceProp.maxTexture1D = env->GetIntField(deviceProp, fid);
 
@@ -215,7 +215,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 	jint* maxSurface3DAltArrayElements = env->GetIntArrayElements(maxSurface3DAltArray, nullptr);
 	std::copy(maxSurface3DAltArrayElements, maxSurface3DAltArrayElements + 3, cDeviceProp.maxTexture3DAlt);
 	env->ReleaseIntArrayElements(maxSurface3DAltArray, maxSurface3DAltArrayElements, JNI_ABORT);
-	
+
 	fid = env->GetFieldID(devicePropClass, "maxTextureCubemap", "I");
 	cDeviceProp.maxTextureCubemap = env->GetIntField(deviceProp, fid);
 
@@ -239,7 +239,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 
 	fid = env->GetFieldID(devicePropClass, "memPitch", "J");
 	cDeviceProp.memPitch = (size_t)env->GetLongField(deviceProp, fid);
-	
+
 	fid = env->GetFieldID(devicePropClass, "memoryBusWidth", "I");
 	cDeviceProp.memoryBusWidth = env->GetIntField(deviceProp, fid);
 
@@ -305,16 +305,16 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 
 	fid = env->GetFieldID(devicePropClass, "reservedSharedMemPerBlock", "J");
 	cDeviceProp.reservedSharedMemPerBlock = env->GetIntField(deviceProp, fid);
-	
+
 	fid = env->GetFieldID(devicePropClass, "sharedMemPerBlock", "J");
 	cDeviceProp.sharedMemPerBlock = env->GetIntField(deviceProp, fid);
 
 	fid = env->GetFieldID(devicePropClass, "sharedMemPerBlockOptin", "J");
 	cDeviceProp.sharedMemPerBlockOptin = env->GetIntField(deviceProp, fid);
-	
+
 	fid = env->GetFieldID(devicePropClass, "sharedMemPerMultiprocessor", "J");
 	cDeviceProp.sharedMemPerMultiprocessor = env->GetIntField(deviceProp, fid);
-	
+
 	fid = env->GetFieldID(devicePropClass, "singleToDoublePrecisionPerfRatio", "I");
 	cDeviceProp.singleToDoublePrecisionPerfRatio = env->GetIntField(deviceProp, fid);
 
@@ -363,9 +363,9 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 	cDeviceProp.warpSize = env->GetIntField(deviceProp, fid);
 
 	int device;
-	
+
 	cudaError_t cudaStatus = cudaChooseDevice(&device, &cDeviceProp);
-	
+
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
 	}
@@ -375,11 +375,11 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_chooseDevice(JNIEnv* env,
 
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceFlushGPUDirectRDMAWrites(JNIEnv* env, jobject obj, jint scope) {
-	
+
 	cudaFlushGPUDirectRDMAWritesTarget e = cudaFlushGPUDirectRDMAWritesTargetCurrentDevice;
 
 	cudaError_t cudaStatus = cudaDeviceFlushGPUDirectRDMAWrites(e, static_cast<cudaFlushGPUDirectRDMAWritesScope>(scope));
-	
+
 	return cudaStatus;
 }
 
@@ -397,7 +397,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetDefaultMemPool(
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetAttribute(JNIEnv* env, jobject obj, jint deviceAttr, jint device) {
-	
+
 	int value;
 
 	cudaError_t cudaStatus = cudaDeviceGetAttribute(&value, static_cast<cudaDeviceAttr>(deviceAttr), device);
@@ -436,7 +436,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetMemPool(JNIEnv*
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetP2PAttribute(JNIEnv* env, jobject obj, jint attr, jint scrDevice, jint dstDevice) {
-	
+
 	int value;
 
 	cudaError_t cudaStatus = cudaDeviceGetP2PAttribute(&value, static_cast<cudaDeviceP2PAttr>(attr), scrDevice, dstDevice);
@@ -639,7 +639,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.l2CacheSize,
 		cudaDeviceProp.localL1CacheSupported,
 		env->NewStringUTF(cudaDeviceProp.luid),
-		
+
 		cudaDeviceProp.luidDeviceNodeMask,
 		cudaDeviceProp.major,
 		cudaDeviceProp.managedMemory,
@@ -650,7 +650,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		maxSurface2DArray,
 		maxSurface2DLayeredArray,
 		maxSurface3DArray,
-		
+
 		cudaDeviceProp.maxSurfaceCubemap,
 		maxSurfaceCubemapLayeredArray,
 		cudaDeviceProp.maxTexture1D,
@@ -683,7 +683,7 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.pageableMemoryAccess,
 		cudaDeviceProp.pageableMemoryAccessUsesHostPageTables,
 		cudaDeviceProp.pciBusID,
-		
+
 		cudaDeviceProp.pciDeviceID,
 		cudaDeviceProp.pciDomainID,
 		cudaDeviceProp.persistingL2CacheMaxSize,
@@ -705,13 +705,13 @@ JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_getDeviceProperties(JN
 		cudaDeviceProp.texturePitchAlignment,
 		cudaDeviceProp.timelineSemaphoreInteropSupported,
 		cudaDeviceProp.totalConstMem,
-		
+
 		cudaDeviceProp.totalGlobalMem,
 		cudaDeviceProp.unifiedAddressing,
 		cudaDeviceProp.unifiedFunctionPointers,
 		uuidArray,
 		cudaDeviceProp.warpSize
-		);
+	);
 
 	env->DeleteLocalRef(maxGridSizeArray);
 	env->DeleteLocalRef(maxSurface1DLayeredArray);
@@ -770,10 +770,10 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setValidDevices(JNIEnv* e
 
 	jint* jintArr = env->GetIntArrayElements(device_arr, NULL);
 	env->ReleaseIntArrayElements(device_arr, jintArr, 0);
-	
+
 	int* arr = reinterpret_cast<int*>(jintArr);
 
-	cudaError_t cudaStatus = cudaSetValidDevices(arr ,len);
+	cudaError_t cudaStatus = cudaSetValidDevices(arr, len);
 
 	return cudaStatus;
 }
@@ -983,7 +983,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventQuery(JNIEnv* env, j
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventRecord(JNIEnv* env, jobject obj, jlong event, jlong stream) {
-	
+
 	cudaEvent_t cudaEvent = reinterpret_cast<cudaEvent_t>(event);
 
 	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
@@ -1088,7 +1088,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_hostAlloc(JNIEnv* env, j
 //__host__​cudaError_t cudaGetSymbolSize(size_t* size, const void* symbol)
 
 JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_hostRegister(JNIEnv* env, jobject obj, jsize size, jint flags) {
-	
+
 	void* cudaPtr;
 
 	cudaError_t cudaStatus = cudaHostRegister(&cudaPtr, (size_t)size, (unsigned int)flags);
@@ -1152,14 +1152,14 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceCanAccessPeer(JNIEn
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceDisablePeerAccess(JNIEnv* env, jobject obj, jint peerDevice) {
-	
+
 	cudaError_t cudaStatus = cudaDeviceDisablePeerAccess(peerDevice);
 
 	return cudaStatus;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceEnablePeerAccess(JNIEnv* env, jobject obj, jint  peerDevice, jint flags) {
-	
+
 	cudaError_t cudaStatus = cudaDeviceEnablePeerAccess(peerDevice, (unsigned int)flags);
 
 	return cudaStatus;
