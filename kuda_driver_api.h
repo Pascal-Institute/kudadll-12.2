@@ -34,8 +34,10 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags);
 	
-	//8. Context Management
-	//CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
+	//8. Context Management//
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxCreate(JNIEnv* env, jobject obj, jint flags, jint dev);
+	
 	//CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDestroy(JNIEnv* env, jobject obj, jlong ctx);
@@ -264,7 +266,9 @@ extern "C" {
 	//18. Stream Management
 	//CUresult cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void* userData, unsigned int  flags)
 	//CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
-	//CUresult cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong dst, jlong hStream, jint mode);
+
 	//CUresult cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode* dependencies, const CUgraphEdgeData* dependencyData, size_t numDependencies, CUstreamCaptureMode mode)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
@@ -285,7 +289,7 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetFlags(JNIEnv* env, jobject obj, jlong hStream);
 
-	//CUresult cuStreamGetId(CUstream hStream, unsigned long long* streamId)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetId(JNIEnv* env, jobject obj, jlong hStream);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream);
 	

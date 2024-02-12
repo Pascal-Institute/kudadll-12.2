@@ -110,8 +110,21 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JN
 	return cudaStatus;
 }
 
-//8. Context Management
-//CUresult cuCtxCreate(CUcontext* pctx, unsigned int  flags, CUdevice dev)
+//8. Context Management//
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxCreate(JNIEnv* env, jobject obj, jint flags, jint dev) {
+
+	CUcontext cuContext;
+
+	CUresult cuResult = cuCtxCreate(&cuContext, (unsigned int)flags, dev);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuContext;
+}
+
 //CUresult cuCtxCreate_v3(CUcontext* pctx, CUexecAffinityParam* paramsArray, int  numParams, unsigned int  flags, CUdevice dev)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxDestroy(JNIEnv* env, jobject obj, jlong ctx){
@@ -189,6 +202,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jo
 	
 	return (jint)flags;
 }
+
 //CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
 //CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
 
@@ -610,7 +624,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_multicastAddDevice(JNIEnv* 
 //18. Stream Management
 //CUresult cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void* userData, unsigned int  flags)
 //CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
-//CUresult cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong dst, jlong hStream, jint mode) {
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUstreamCaptureMode cuStreamCaptureMode =  static_cast<CUstreamCaptureMode>(mode);
+
+	CUresult cuResult = cuStreamBeginCapture(cuStream, cuStreamCaptureMode);
+
+	return cuResult;
+}
+
 //CUresult cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode* dependencies, const CUgraphEdgeData* dependencyData, size_t numDependencies, CUstreamCaptureMode mode)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src) {
@@ -618,7 +643,6 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamCopyAttributes(JNIEnv
 	CUstream cuStreamDst = reinterpret_cast<CUstream>(dst);
 
 	CUstream cuStreamSrc = reinterpret_cast<CUstream>(src);
-
 
 	CUresult cuResult = cuStreamCopyAttributes(cuStreamDst, cuStreamSrc);
 
@@ -632,7 +656,11 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreate(JNIEnv* env, 
 
 	CUresult cuResult = cuStreamCreate(&cuStream, (unsigned int)flags);
 
-	return cuResult;
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuStream;
 }
 
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamCreateWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority) {
@@ -706,7 +734,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetFlags(JNIEnv* env,
 	return (jint)flags;
 }
 
-//CUresult cuStreamGetId(CUstream hStream, unsigned long long* streamId)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_streamGetId(JNIEnv* env, jobject obj, jlong hStream) {
+
+	unsigned long long streamId;
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult cuResult = cuStreamGetId(cuStream, &streamId);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)streamId;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream) {
 	
@@ -714,10 +755,10 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetPriority(JNIEnv* e
 
 	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
 
-	CUresult cudaStatus = cuStreamGetPriority(cuStream, &priority);
+	CUresult cuResult = cuStreamGetPriority(cuStream, &priority);
 	
-	if (cudaStatus != CUDA_SUCCESS) {
-		return cudaStatus;
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
 	}
 
 	return priority;
