@@ -235,9 +235,10 @@ extern "C" {
 
 	//CUresult cuMemRetainAllocationHandle(CUmemGenericAllocationHandle * handle, void* addr)
 	//CUresult cuMemSetAccess(CUdeviceptr ptr, size_t size, const CUmemAccessDesc * desc, size_t count)
-	//CUresult cuMemUnmap(CUdeviceptr ptr, size_t size)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memUnmap(JNIEnv* env, jobject obj, jlong ptr, jint size);
 
-	//15. Steam Ordered Memory Allocator
+	//15. Steam Ordered Memory Allocator //
 	//CUresult cuMemAllocAsync(CUdeviceptr* dptr, size_t bytesize, CUstream hStream)
 	//CUresult cuMemAllocFromPoolAsync(CUdeviceptr* dptr, size_t bytesize, CUmemoryPool pool, CUstream hStream)
 	//CUresult cuMemFreeAsync(CUdeviceptr dptr, CUstream hStream)

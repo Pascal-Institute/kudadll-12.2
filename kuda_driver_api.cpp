@@ -652,7 +652,14 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memRelease(JNIEnv* env, job
 
 //CUresult cuMemRetainAllocationHandle(CUmemGenericAllocationHandle * handle, void* addr)
 //CUresult cuMemSetAccess(CUdeviceptr ptr, size_t size, const CUmemAccessDesc * desc, size_t count)	
-//CUresult cuMemUnmap(CUdeviceptr ptr, size_t size)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memUnmap(JNIEnv* env, jobject obj, jlong ptr, jint size) {
+	
+	CUresult cuResult = cuMemUnmap(ptr, (size_t)size);
+
+	return cuResult;
+}
+
 
 //15. Steam Ordered Memory Allocator
 //CUresult cuMemAllocAsync(CUdeviceptr* dptr, size_t bytesize, CUstream hStream)
