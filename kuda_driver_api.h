@@ -14,17 +14,26 @@ extern "C" {
 	//3. Initialization
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_init(JNIEnv* env, jobject obj, jint flags);
 
-	//4. Version Management
+	//4. Version Management // COMPLETE
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_driverGetVersion(JNIEnv* env, jobject obj);
 
-	//5. Device Management
+	//5. Device Management //
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGet(JNIEnv* env, jobject obj, jint ordinal);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env, jobject obj);
 
-	//7. Context Management
-	// 
-	//CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int* flags, int* active)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetDefaultMemPool(JNIEnv* env, jobject obj, jint dev);
+
+	//CUresult cuDeviceGetExecAffinitySupport(int* pi, CUexecAffinityType type, CUdevice dev)
+	//CUresult cuDeviceGetLuid ( char* luid, unsigned int* deviceNodeMask, CUdevice dev )
+
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint dev);
+
+	JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetName(JNIEnv* env, jobject obj, jint len, jint dev);
+
+	//7. Context Management // COMPLETE
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxGetState(JNIEnv* env, jobject obj, jint dev);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRelease(JNIEnv* env, jobject obj, jint dev);
 	
@@ -34,7 +43,7 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxSetFlags(JNIEnv* env, jobject obj, jint dev, jint flags);
 	
-	//8. Context Management//
+	//8. Context Management //
 	
 	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxCreate(JNIEnv* env, jobject obj, jint flags, jint dev);
 	
@@ -54,7 +63,8 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetFlags(JNIEnv* env, jobject obj);
 	
-	//CUresult cuCtxGetId(CUcontext ctx, unsigned long long* ctxId)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetId(JNIEnv* env, jobject obj, jlong ctx);
+	
 	//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy);
@@ -117,13 +127,16 @@ extern "C" {
 	//CUresult cuLibraryGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
 	//CUresult cuLibraryGetKernel(CUkernel * pKernel, CUlibrary library, const char* name)
 	//CUresult cuLibraryGetManaged(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
-	//CUresult cuLibraryGetModule(CUmodule * pMod, CUlibrary library)
+
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_libraryGetModule(JNIEnv* env, jobject obj, jlong library);
+	
 	//CUresult cuLibraryGetUnifiedFunction(void** fptr, CUlibrary library, const char* symbol)
 	//CUresult cuLibraryLoadData(CUlibrary * library, const void* code, CUjit_option * jitOptions, void** jitOptionsValues, unsigned int  numJitOptions, CUlibraryOption * libraryOptions, void** libraryOptionValues, unsigned int  numLibraryOptions)
 	//CUresult cuLibraryLoadFromFile(CUlibrary * library, const char* fileName, CUjit_option * jitOptions, void** jitOptionsValues, unsigned int  numJitOptions, CUlibraryOption * libraryOptions, void** libraryOptionValues, unsigned int  numLibraryOptions)
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_libraryUnload(JNIEnv* env, jobject obj, jlong library);
 
-	//13. Memory Management
+	//13. Memory Management //
+	
 	//CUresult cuArray3DCreate(CUarray* pHandle, const CUDA_ARRAY3D_DESCRIPTOR* pAllocateArray)
 	//CUresult cuArray3DGetDescriptor(CUDA_ARRAY3D_DESCRIPTOR * pArrayDescriptor, CUarray hArray)
 	//CUresult cuArrayCreate(CUarray * pHandle, const CUDA_ARRAY_DESCRIPTOR * pAllocateArray)
@@ -206,8 +219,9 @@ extern "C" {
 	//CUresult cuMipmappedArrayGetMemoryRequirements(CUDA_ARRAY_MEMORY_REQUIREMENTS * memoryRequirements, CUmipmappedArray mipmap, CUdevice device)
 	//CUresult cuMipmappedArrayGetSparseProperties(CUDA_ARRAY_SPARSE_PROPERTIES * sparseProperties, CUmipmappedArray mipmap)
 
-	//14. Virtual Memory Management
-	//CUresult cuMemAddressFree(CUdeviceptr ptr, size_t size)
+	//14. Virtual Memory Management //
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memAddressFree(JNIEnv* env, jobject obj, jlong ptr, jint size);
 	//CUresult cuMemAddressReserve(CUdeviceptr* ptr, size_t size, size_t alignment, CUdeviceptr addr, unsigned long long flags)
 	//CUresult cuMemCreate(CUmemGenericAllocationHandle* handle, size_t size, const CUmemAllocationProp* prop, unsigned long long flags)
 	//CUresult cuMemExportToShareableHandle(void* shareableHandle, CUmemGenericAllocationHandle handle, CUmemAllocationHandleType handleType, unsigned long long flags)
@@ -222,12 +236,17 @@ extern "C" {
 
 	//CUresult cuMemRetainAllocationHandle(CUmemGenericAllocationHandle * handle, void* addr)
 	//CUresult cuMemSetAccess(CUdeviceptr ptr, size_t size, const CUmemAccessDesc * desc, size_t count)
-	//CUresult cuMemUnmap(CUdeviceptr ptr, size_t size)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memUnmap(JNIEnv* env, jobject obj, jlong ptr, jint size);
 
-	//15. Steam Ordered Memory Allocator
-	//CUresult cuMemAllocAsync(CUdeviceptr* dptr, size_t bytesize, CUstream hStream)
+	//15. Steam Ordered Memory Allocator //
+
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAllocAsync(JNIEnv* env, jobject obj, jint bytesize, jlong hStream);
+	
 	//CUresult cuMemAllocFromPoolAsync(CUdeviceptr* dptr, size_t bytesize, CUmemoryPool pool, CUstream hStream)
-	//CUresult cuMemFreeAsync(CUdeviceptr dptr, CUstream hStream)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeAsync(JNIEnv* env, jobject obj, jlong ptr, jlong hStream);
+	
 	//CUresult cuMemPoolCreate(CUmemoryPool* pool, const CUmemPoolProps* poolProps)
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolDestroy(JNIEnv* env, jobject obj, jlong handle);
