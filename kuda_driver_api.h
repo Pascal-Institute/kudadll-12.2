@@ -22,6 +22,11 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env, jobject obj);
 
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetDefaultMemPool(JNIEnv* env, jobject obj, jint dev);
+
+	//CUresult cuDeviceGetExecAffinitySupport(int* pi, CUexecAffinityType type, CUdevice dev)
+	//CUresult cuDeviceGetLuid ( char* luid, unsigned int* deviceNodeMask, CUdevice dev )
+
 	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint dev);
 
 	//7. Context Management // COMPLETE

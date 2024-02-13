@@ -73,6 +73,22 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env,
 	return count;
 }
 
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetDefaultMemPool(JNIEnv* env, jobject obj, jint dev) {
+
+	CUmemoryPool cuMemoryPool;
+
+	CUresult cuResult = cuDeviceGetDefaultMemPool(&cuMemoryPool, dev);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuMemoryPool;
+}
+
+//CUresult cuDeviceGetExecAffinitySupport(int* pi, CUexecAffinityType type, CUdevice dev)
+//CUresult cuDeviceGetLuid ( char* luid, unsigned int* deviceNodeMask, CUdevice dev )
+ 
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint dev) {
 
 	CUmemoryPool cuMemoryPool;
