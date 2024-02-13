@@ -763,8 +763,6 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamAttachMemAsync(JNIEnv
 	return cuResult;
 }
 
-//CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
-
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong dst, jlong hStream, jint mode) {
 
 	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
@@ -949,7 +947,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCapture
 	return cuResult;
 }
 
-//19.Event Management
+//19. Event Management // COMPLETE
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_eventCreate(JNIEnv* env, jobject obj, jint flags) {
 	
 	CUevent phEvent;
@@ -1344,7 +1342,19 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxEnablePeerAccess(JNIEnv*
 	return cuResult;
 }
 
-//CUresult cuDeviceCanAccessPeer(int* canAccessPeer, CUdevice dev, CUdevice peerDev)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceCanAccessPeer(JNIEnv* env, jobject obj, jint dev, jint peerDev) {
+
+	int canAccessPeer;
+
+	CUresult cuResult = cuDeviceCanAccessPeer(&canAccessPeer, dev, peerDev);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return canAccessPeer;
+}
+
 //CUresult cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice)
 
 //32. Graphics Interoperability
