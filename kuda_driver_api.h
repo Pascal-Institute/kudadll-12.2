@@ -242,7 +242,9 @@ extern "C" {
 	//15. Steam Ordered Memory Allocator //
 	//CUresult cuMemAllocAsync(CUdeviceptr* dptr, size_t bytesize, CUstream hStream)
 	//CUresult cuMemAllocFromPoolAsync(CUdeviceptr* dptr, size_t bytesize, CUmemoryPool pool, CUstream hStream)
-	//CUresult cuMemFreeAsync(CUdeviceptr dptr, CUstream hStream)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeAsync(JNIEnv* env, jobject obj, jlong ptr, jlong hStream);
+	
 	//CUresult cuMemPoolCreate(CUmemoryPool* pool, const CUmemPoolProps* poolProps)
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolDestroy(JNIEnv* env, jobject obj, jlong handle);
