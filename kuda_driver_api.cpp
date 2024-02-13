@@ -715,9 +715,17 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolDestroy(JNIEnv* env,
 //CUresult cuMemPoolImportPointer(CUdeviceptr* ptr_out, CUmemoryPool pool, CUmemPoolPtrExportData* shareData)
 //CUresult cuMemPoolSetAccess(CUmemoryPool pool, const CUmemAccessDesc* map, size_t count)
 //CUresult cuMemPoolSetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void* value)
-//CUresult cuMemPoolTrimTo(CUmemoryPool pool, size_t minBytesToKeep)
 
-//16. Multicast Object Management
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolTrimTo(JNIEnv* env, jobject obj, jlong pool, jint minBytesToKeep) {
+
+	CUmemoryPool cuMemoryPool = reinterpret_cast<CUmemoryPool>(pool);
+
+	CUresult cuResult = cuMemPoolTrimTo(cuMemoryPool, (size_t)minBytesToKeep);
+
+	return cuResult;
+}
+
+//16. Multicast Object Management //
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_multicastAddDevice(JNIEnv* env, jobject obj, jlong mcHandle, jint dev) {
 
@@ -743,9 +751,17 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_multicastAddDevice(JNIEnv* 
 //CUresult cuPointerGetAttributes(unsigned int  numAttributes, CUpointer_attribute* attributes, void** data, CUdeviceptr ptr)
 //CUresult cuPointerSetAttribute(const void* value, CUpointer_attribute attribute, CUdeviceptr ptr)
 
-//18. Stream Management
+//18. Stream Management //
 //CUresult cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void* userData, unsigned int  flags)
-//CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamAttachMemAsync(JNIEnv* env, jobject obj, jlong hStream, jlong dptr, jint length, jint flags) {
+	
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult cuResult = cuStreamAttachMemAsync(cuStream, dptr, (size_t)length, (unsigned int)flags);
+
+	return cuResult;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong dst, jlong hStream, jint mode) {
 
@@ -931,7 +947,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_threadExchangeStreamCapture
 	return cuResult;
 }
 
-//19.Event Management
+//19. Event Management // COMPLETE
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_eventCreate(JNIEnv* env, jobject obj, jint flags) {
 	
 	CUevent phEvent;
@@ -1176,7 +1192,24 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* en
 //CUresult cuGraphExternalSemaphoresWaitNodeSetParams(CUgraphNode hNode, const CUDA_EXT_SEM_WAIT_NODE_PARAMS * nodeParams)
 //CUresult cuGraphGetEdges(CUgraph hGraph, CUgraphNode * from, CUgraphNode * to, size_t * numEdges)
 //CUresult cuGraphGetEdges_v2(CUgraph hGraph, CUgraphNode * from, CUgraphNode * to, CUgraphEdgeData * edgeData, size_t * numEdges)
-//CUresult cuGraphGetNodes(CUgraph hGraph, CUgraphNode * nodes, size_t * numNodes)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphGetNodes(JNIEnv* env, jobject obj, jlong hGraph) {
+
+	CUgraph cuGraph = reinterpret_cast<CUgraph>(hGraph);
+
+	CUgraphNode cuNodes;
+
+	size_t numNodes;
+
+	CUresult cuResult = cuGraphGetNodes(cuGraph, &cuNodes, &numNodes);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuNodes;
+}
+
 //CUresult cuGraphGetRootNodes(CUgraph hGraph, CUgraphNode * rootNodes, size_t * numRootNodes)
 //CUresult cuGraphHostNodeGetParams(CUgraphNode hNode, CUDA_HOST_NODE_PARAMS * nodeParams)
 //CUresult cuGraphHostNodeSetParams(CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS * nodeParams)
@@ -1211,7 +1244,22 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphLaunch(JNIEnv* env, jo
 }
 
 //CUresult cuGraphMemAllocNodeGetParams(CUgraphNode hNode, CUDA_MEM_ALLOC_NODE_PARAMS * params_out)
-//CUresult cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr * dptr_out)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphMemFreeNodeGetParams(JNIEnv* env, jobject obj, jlong hNode) {
+	
+	CUdeviceptr cuDevicePtr;
+
+	CUgraphNode cuGraphNode = reinterpret_cast<CUgraphNode>(hNode);
+
+	CUresult cuResult = cuGraphMemFreeNodeGetParams(cuGraphNode, &cuDevicePtr);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuDevicePtr;
+}
+
 //CUresult cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D * nodeParams)
 //CUresult cuGraphMemcpyNodeSetParams(CUgraphNode hNode, const CUDA_MEMCPY3D * nodeParams)
 //CUresult cuGraphMemsetNodeGetParams(CUgraphNode hNode, CUDA_MEMSET_NODE_PARAMS * nodeParams)
@@ -1326,7 +1374,19 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxEnablePeerAccess(JNIEnv*
 	return cuResult;
 }
 
-//CUresult cuDeviceCanAccessPeer(int* canAccessPeer, CUdevice dev, CUdevice peerDev)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceCanAccessPeer(JNIEnv* env, jobject obj, jint dev, jint peerDev) {
+
+	int canAccessPeer;
+
+	CUresult cuResult = cuDeviceCanAccessPeer(&canAccessPeer, dev, peerDev);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return canAccessPeer;
+}
+
 //CUresult cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice)
 
 //32. Graphics Interoperability
@@ -1354,8 +1414,6 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphicsUnregisterResource(
 
 	return cuResult;
 }
-
-//CUresult cuGraphicsUnregisterResource(CUgraphicsResource resource)
 
 //33.Driver Entry Point Access
 //CUresult cuGetProcAddress(const char* symbol, void** pfn, int  cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult * symbolStatus)
