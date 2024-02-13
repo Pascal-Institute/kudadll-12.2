@@ -715,7 +715,15 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolDestroy(JNIEnv* env,
 //CUresult cuMemPoolImportPointer(CUdeviceptr* ptr_out, CUmemoryPool pool, CUmemPoolPtrExportData* shareData)
 //CUresult cuMemPoolSetAccess(CUmemoryPool pool, const CUmemAccessDesc* map, size_t count)
 //CUresult cuMemPoolSetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void* value)
-//CUresult cuMemPoolTrimTo(CUmemoryPool pool, size_t minBytesToKeep)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolTrimTo(JNIEnv* env, jobject obj, jlong pool, jint minBytesToKeep) {
+
+	CUmemoryPool cuMemoryPool = reinterpret_cast<CUmemoryPool>(pool);
+
+	CUresult cuResult = cuMemPoolTrimTo(cuMemoryPool, (size_t)minBytesToKeep);
+
+	return cuResult;
+}
 
 //16. Multicast Object Management
 
