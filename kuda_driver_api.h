@@ -464,7 +464,9 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphLaunch(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hStream);
 	
 	//CUresult cuGraphMemAllocNodeGetParams(CUgraphNode hNode, CUDA_MEM_ALLOC_NODE_PARAMS * params_out)
-	//CUresult cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr * dptr_out)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphMemFreeNodeGetParams(JNIEnv* env, jobject obj, jlong hNode);
+	
 	//CUresult cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D * nodeParams)
 	//CUresult cuGraphMemcpyNodeSetParams(CUgraphNode hNode, const CUDA_MEMCPY3D * nodeParams)
 	//CUresult cuGraphMemsetNodeGetParams(CUgraphNode hNode, CUDA_MEMSET_NODE_PARAMS * nodeParams)

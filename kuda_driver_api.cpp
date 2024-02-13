@@ -1227,7 +1227,22 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphLaunch(JNIEnv* env, jo
 }
 
 //CUresult cuGraphMemAllocNodeGetParams(CUgraphNode hNode, CUDA_MEM_ALLOC_NODE_PARAMS * params_out)
-//CUresult cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr * dptr_out)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphMemFreeNodeGetParams(JNIEnv* env, jobject obj, jlong hNode) {
+	
+	CUdeviceptr cuDevicePtr;
+
+	CUgraphNode cuGraphNode = reinterpret_cast<CUgraphNode>(hNode);
+
+	CUresult cuResult = cuGraphMemFreeNodeGetParams(cuGraphNode, &cuDevicePtr);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuDevicePtr;
+}
+
 //CUresult cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D * nodeParams)
 //CUresult cuGraphMemcpyNodeSetParams(CUgraphNode hNode, const CUDA_MEMCPY3D * nodeParams)
 //CUresult cuGraphMemsetNodeGetParams(CUgraphNode hNode, CUDA_MEMSET_NODE_PARAMS * nodeParams)
@@ -1382,8 +1397,6 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphicsUnregisterResource(
 
 	return cuResult;
 }
-
-//CUresult cuGraphicsUnregisterResource(CUgraphicsResource resource)
 
 //33.Driver Entry Point Access
 //CUresult cuGetProcAddress(const char* symbol, void** pfn, int  cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult * symbolStatus)
