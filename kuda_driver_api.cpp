@@ -668,8 +668,23 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memUnmap(JNIEnv* env, jobje
 }
 
 
-//15. Steam Ordered Memory Allocator
-//CUresult cuMemAllocAsync(CUdeviceptr* dptr, size_t bytesize, CUstream hStream)
+//15. Steam Ordered Memory Allocator //
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAllocAsync(JNIEnv* env, jobject obj, jint bytesize, jlong hStream) {
+
+	CUdeviceptr cuDevicePtr;
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult cuResult = cuMemAllocAsync(&cuDevicePtr, (size_t)bytesize, cuStream);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuDevicePtr;
+}
+
 //CUresult cuMemAllocFromPoolAsync(CUdeviceptr* dptr, size_t bytesize, CUmemoryPool pool, CUstream hStream)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeAsync(JNIEnv* env, jobject obj, jlong dptr, jlong hStream) {
