@@ -45,6 +45,8 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_driverGetVersion(JNIEnv* en
 	return driverVersion;
 }
 
+// 5. Device Management //
+
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGet(JNIEnv* env, jobject obj, jint ordinal) {
 
 	CUdevice device;
@@ -62,13 +64,26 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env,
 	
 	int count;
 
-	CUresult cudaStatus = cuDeviceGetCount(&count);
+	CUresult cuResult = cuDeviceGetCount(&count);
 
-	if (cudaStatus != CUDA_SUCCESS) {
-		return cudaStatus;
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
 	}
 
 	return count;
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint dev) {
+
+	CUmemoryPool cuMemoryPool;
+
+	CUresult cuResult = cuDeviceGetMemPool(&cuMemoryPool, dev);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuMemoryPool;
 }
 
 //7. Primary Context Management //
