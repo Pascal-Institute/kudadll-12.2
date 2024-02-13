@@ -285,7 +285,8 @@ extern "C" {
 
 	//18. Stream Management
 	//CUresult cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void* userData, unsigned int  flags)
-	//CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamAttachMemAsync(JNIEnv* env, jobject obj, jlong hStream, jlong dptr, jint length, jint flags);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong dst, jlong hStream, jint mode);
 

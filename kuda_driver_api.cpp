@@ -725,7 +725,7 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memPoolTrimTo(JNIEnv* env, 
 	return cuResult;
 }
 
-//16. Multicast Object Management
+//16. Multicast Object Management //
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_multicastAddDevice(JNIEnv* env, jobject obj, jlong mcHandle, jint dev) {
 
@@ -751,8 +751,18 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_multicastAddDevice(JNIEnv* 
 //CUresult cuPointerGetAttributes(unsigned int  numAttributes, CUpointer_attribute* attributes, void** data, CUdeviceptr ptr)
 //CUresult cuPointerSetAttribute(const void* value, CUpointer_attribute attribute, CUdeviceptr ptr)
 
-//18. Stream Management
+//18. Stream Management //
 //CUresult cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void* userData, unsigned int  flags)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamAttachMemAsync(JNIEnv* env, jobject obj, jlong hStream, jlong dptr, jint length, jint flags) {
+	
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult cuResult = cuStreamAttachMemAsync(cuStream, dptr, (size_t)length, (unsigned int)flags);
+
+	return cuResult;
+}
+
 //CUresult cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int  flags)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong dst, jlong hStream, jint mode) {
