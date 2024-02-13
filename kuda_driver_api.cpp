@@ -71,9 +71,22 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_deviceGetCount(JNIEnv* env,
 	return count;
 }
 
-//7. Primary Context Management
+//7. Primary Context Management //
 
-//CUresult cuDevicePrimaryCtxGetState(CUdevice dev, unsigned int* flags, int* active)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxGetState(JNIEnv* env, jobject obj, jint dev) {
+	
+	unsigned int flags;
+
+	int active;
+
+	CUresult cuResult = cuDevicePrimaryCtxGetState(dev, &flags, &active);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return active;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxRelease(JNIEnv* env, jobject obj, jint dev) {
 	
