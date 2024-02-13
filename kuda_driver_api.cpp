@@ -272,7 +272,7 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetId(JNIEnv* env, jobj
 		return cuResult;
 	}
 
-	return ctxId;
+	return (jlong)ctxId;
 }
 
 //CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
@@ -463,14 +463,27 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_kernelGetFunction(JNIEnv* 
 	return (jlong)pFunc;
 }
 
-//CUresult cuKernelGetName(const char** name, CUkernel hfunc) next ver (12.3)
-
 //CUresult cuKernelSetAttribute(CUfunction_attribute attrib, int  val, CUkernel kernel, CUdevice dev)
 //CUresult cuKernelSetCacheConfig(CUkernel kernel, CUfunc_cache config, CUdevice dev)
 //CUresult cuLibraryGetGlobal(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
 //CUresult cuLibraryGetKernel(CUkernel * pKernel, CUlibrary library, const char* name)
 //CUresult cuLibraryGetManaged(CUdeviceptr * dptr, size_t * bytes, CUlibrary library, const char* name)
-//CUresult cuLibraryGetModule(CUmodule * pMod, CUlibrary library)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_libraryGetModule(JNIEnv* env, jobject obj, jlong library) {
+
+	CUmodule cuModule;
+
+	CUlibrary cuLibrary = reinterpret_cast<CUlibrary>(library);
+
+	CUresult cuResult = cuLibraryGetModule(&cuModule, cuLibrary);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuModule;
+}
+
 //CUresult cuLibraryGetUnifiedFunction(void** fptr, CUlibrary library, const char* symbol)
 //CUresult cuLibraryLoadData(CUlibrary * library, const void* code, CUjit_option * jitOptions, void** jitOptionsValues, unsigned int  numJitOptions, CUlibraryOption * libraryOptions, void** libraryOptionValues, unsigned int  numLibraryOptions)
 //CUresult cuLibraryLoadFromFile(CUlibrary * library, const char* fileName, CUjit_option * jitOptions, void** jitOptionsValues, unsigned int  numJitOptions, CUlibraryOption * libraryOptions, void** libraryOptionValues, unsigned int  numLibraryOptions)
