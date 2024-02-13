@@ -672,11 +672,11 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memUnmap(JNIEnv* env, jobje
 //CUresult cuMemAllocAsync(CUdeviceptr* dptr, size_t bytesize, CUstream hStream)
 //CUresult cuMemAllocFromPoolAsync(CUdeviceptr* dptr, size_t bytesize, CUmemoryPool pool, CUstream hStream)
 
-JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeAsync(JNIEnv* env, jobject obj, jlong ptr, jlong hStream) {
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFreeAsync(JNIEnv* env, jobject obj, jlong dptr, jlong hStream) {
 
 	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
 
-	CUresult cuResult = cuMemFreeAsync(ptr, cuStream);
+	CUresult cuResult = cuMemFreeAsync(dptr, cuStream);
 
 	return cuResult;
 }
