@@ -158,7 +158,9 @@ extern "C" {
 	//CUresult cuIpcGetMemHandle(CUipcMemHandle * pHandle, CUdeviceptr dptr)
 	//CUresult cuIpcOpenEventHandle(CUevent * phEvent, CUipcEventHandle handle)
 	//CUresult cuIpcOpenMemHandle(CUdeviceptr * pdptr, CUipcMemHandle handle, unsigned int  Flags)
-	//CUresult cuMemAlloc(CUdeviceptr * dptr, size_t bytesize)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAlloc(JNIEnv* env, jobject obj, jint byteSize);
+	
 	//CUresult cuMemAllocHost(void** pp, size_t bytesize)
 	//CUresult cuMemAllocManaged(CUdeviceptr * dptr, size_t bytesize, unsigned int  flags)
 	//CUresult cuMemAllocPitch(CUdeviceptr * dptr, size_t * pPitch, size_t WidthInBytes, size_t Height, unsigned int  ElementSizeBytes)
