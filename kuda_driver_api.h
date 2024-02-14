@@ -65,7 +65,7 @@ extern "C" {
 	
 	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetId(JNIEnv* env, jobject obj, jlong ctx);
 	
-	//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetLimit(JNIEnv* env, jobject obj, jint limit);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy);
 	

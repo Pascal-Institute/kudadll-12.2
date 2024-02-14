@@ -275,7 +275,20 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetId(JNIEnv* env, jobj
 	return (jlong)ctxId;
 }
 
-//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetLimit(JNIEnv* env, jobject obj, jint limit) {
+
+	size_t pValue;
+
+	CUlimit cuLimit = static_cast<CUlimit>(limit);
+
+	CUresult cuResult = cuCtxGetLimit(&pValue, cuLimit);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jint)pValue;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy) {
 	
