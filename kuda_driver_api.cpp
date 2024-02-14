@@ -579,7 +579,20 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAlloc(JNIEnv* env, jobj
 }
 
 //CUresult cuMemAllocHost(void** pp, size_t bytesize)
-//CUresult cuMemAllocManaged(CUdeviceptr * dptr, size_t bytesize, unsigned int  flags)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAllocManaged(JNIEnv* env, jobject obj, jint byteSize, jint flags) {
+
+	CUdeviceptr cuDevicePtr;
+
+	CUresult cuResult = cuMemAllocManaged(&cuDevicePtr, (size_t)byteSize, (unsigned int)flags);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuDevicePtr;
+}
+
 //CUresult cuMemAllocPitch(CUdeviceptr * dptr, size_t * pPitch, size_t WidthInBytes, size_t Height, unsigned int  ElementSizeBytes)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFree(JNIEnv* env, jobject obj, jlong dptr) {
