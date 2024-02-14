@@ -65,7 +65,7 @@ extern "C" {
 	
 	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetId(JNIEnv* env, jobject obj, jlong ctx);
 	
-	//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetLimit(JNIEnv* env, jobject obj, jint limit);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy);
 	
@@ -158,9 +158,13 @@ extern "C" {
 	//CUresult cuIpcGetMemHandle(CUipcMemHandle * pHandle, CUdeviceptr dptr)
 	//CUresult cuIpcOpenEventHandle(CUevent * phEvent, CUipcEventHandle handle)
 	//CUresult cuIpcOpenMemHandle(CUdeviceptr * pdptr, CUipcMemHandle handle, unsigned int  Flags)
-	//CUresult cuMemAlloc(CUdeviceptr * dptr, size_t bytesize)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAlloc(JNIEnv* env, jobject obj, jint byteSize);
+	
 	//CUresult cuMemAllocHost(void** pp, size_t bytesize)
-	//CUresult cuMemAllocManaged(CUdeviceptr * dptr, size_t bytesize, unsigned int  flags)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAllocManaged(JNIEnv* env, jobject obj, jint byteSize, jint flags);
+	
 	//CUresult cuMemAllocPitch(CUdeviceptr * dptr, size_t * pPitch, size_t WidthInBytes, size_t Height, unsigned int  ElementSizeBytes)
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFree(JNIEnv* env, jobject obj, jlong dptr);
@@ -417,11 +421,11 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphDestroyNode(JNIEnv* env, jobject obj, jlong hNode);
 	
-	//CUresult cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphEventRecordNodeGetEvent(JNIEnv* env, jobject obj, jlong hNode);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventRecordNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event);
 	
-	//CUresult cuGraphEventWaitNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeGetEvent(JNIEnv* env, jobject obj, jlong hNode);
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event);
 	

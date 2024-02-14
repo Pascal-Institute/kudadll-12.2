@@ -115,7 +115,7 @@ JNIEXPORT jstring JNICALL Java_kuda_driverapi_DriverAPI_deviceGetName(JNIEnv* en
 	return javaString;
 }
 
-//7. Primary Context Management //
+//7. Primary Context Management // COMPLETE
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_devicePrimaryCtxGetState(JNIEnv* env, jobject obj, jint dev) {
 	
@@ -275,7 +275,20 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_ctxGetId(JNIEnv* env, jobj
 	return (jlong)ctxId;
 }
 
-//CUresult cuCtxGetLimit(size_t * pvalue, CUlimit limit)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetLimit(JNIEnv* env, jobject obj, jint limit) {
+
+	size_t pValue;
+
+	CUlimit cuLimit = static_cast<CUlimit>(limit);
+
+	CUresult cuResult = cuCtxGetLimit(&pValue, cuLimit);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jint)pValue;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ctxGetSharedMemConfig(JNIEnv* env, jobject obj, jboolean dummy) {
 	
@@ -551,9 +564,35 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_ipcCloseMemHandle(JNIEnv* e
 //CUresult cuIpcGetMemHandle(CUipcMemHandle * pHandle, CUdeviceptr dptr)
 //CUresult cuIpcOpenEventHandle(CUevent * phEvent, CUipcEventHandle handle)
 //CUresult cuIpcOpenMemHandle(CUdeviceptr * pdptr, CUipcMemHandle handle, unsigned int  Flags)
-//CUresult cuMemAlloc(CUdeviceptr * dptr, size_t bytesize)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAlloc(JNIEnv* env, jobject obj, jint byteSize) {
+
+	CUdeviceptr cuDevicePtr;
+
+	CUresult cuResult = cuMemAlloc(&cuDevicePtr, (size_t)byteSize);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuDevicePtr;
+}
+
 //CUresult cuMemAllocHost(void** pp, size_t bytesize)
-//CUresult cuMemAllocManaged(CUdeviceptr * dptr, size_t bytesize, unsigned int  flags)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_memAllocManaged(JNIEnv* env, jobject obj, jint byteSize, jint flags) {
+
+	CUdeviceptr cuDevicePtr;
+
+	CUresult cuResult = cuMemAllocManaged(&cuDevicePtr, (size_t)byteSize, (unsigned int)flags);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuDevicePtr;
+}
+
 //CUresult cuMemAllocPitch(CUdeviceptr * dptr, size_t * pPitch, size_t WidthInBytes, size_t Height, unsigned int  ElementSizeBytes)
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_memFree(JNIEnv* env, jobject obj, jlong dptr) {
@@ -1137,7 +1176,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphDestroyNode(JNIEnv* en
 	return cuResult;
 }
 
-//CUresult cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphEventRecordNodeGetEvent(JNIEnv* env, jobject obj, jlong hNode) {
+
+	CUevent cuEvent;
+
+	CUgraphNode cuGraphNode = reinterpret_cast<CUgraphNode>(hNode);
+
+	CUresult cuResult = cuGraphEventRecordNodeGetEvent(cuGraphNode, &cuEvent);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuEvent;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventRecordNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event) {
 
@@ -1150,7 +1202,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventRecordNodeSetEven
 	return cuResult;
 }
 
-//CUresult cuGraphEventWaitNodeGetEvent(CUgraphNode hNode, CUevent * event_out)
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeGetEvent(JNIEnv* env, jobject obj, jlong hNode) {
+
+	CUevent cuEvent;
+
+	CUgraphNode cuGraphNode = reinterpret_cast<CUgraphNode>(hNode);
+
+	CUresult cuResult = cuGraphEventWaitNodeGetEvent(cuGraphNode, &cuEvent);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuEvent;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event) {
 
