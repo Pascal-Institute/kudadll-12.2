@@ -941,7 +941,21 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamGetPriority(JNIEnv* e
 	return priority;
 }
 
-//CUresult cuStreamIsCapturing(CUstream hStream, CUstreamCaptureStatus * captureStatus)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamIsCapturing(JNIEnv* env, jobject obj, jlong hStream) {
+
+	CUstreamCaptureStatus cuStreamCaptureStatus;
+
+	CUstream cuStream = reinterpret_cast<CUstream>(hStream);
+
+	CUresult cuResult = cuStreamIsCapturing(cuStream, &cuStreamCaptureStatus);
+	
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+	
+	return static_cast<int>(cuStreamCaptureStatus);
+
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_streamQuery(JNIEnv* env, jobject obj, jlong hStream) {
 	
