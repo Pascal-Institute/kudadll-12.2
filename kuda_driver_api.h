@@ -440,7 +440,8 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecEventRecordNodeSetEvent(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hNode, jlong event);
 
-	//CUresult cuGraphExecEventWaitNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hNode, jlong event);
+
 	//CUresult cuGraphExecExternalSemaphoresSignalNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphExecExternalSemaphoresWaitNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_WAIT_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphExecGetFlags(CUgraphExec hGraphExec, cuuint64_t * flags)

@@ -1310,8 +1310,20 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecEventRecordNodeSet
 
 }
 
-//CUresult cuGraphExecEventRecordNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event)
-//CUresult cuGraphExecEventWaitNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event)
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hNode, jlong event) {
+
+	CUgraphExec cuGraphExec = reinterpret_cast<CUgraphExec>(hGraphExec);
+
+	CUgraphNode cuGraphNode = reinterpret_cast<CUgraphNode>(hNode);
+
+	CUevent cuEvent = reinterpret_cast<CUevent>(event);
+
+	CUresult cuResult = cuGraphExecEventWaitNodeSetEvent(cuGraphExec, cuGraphNode, cuEvent);
+
+	return cuResult;
+
+}
+
 //CUresult cuGraphExecExternalSemaphoresSignalNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS * nodeParams)
 //CUresult cuGraphExecExternalSemaphoresWaitNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_WAIT_NODE_PARAMS * nodeParams)
 //CUresult cuGraphExecGetFlags(CUgraphExec hGraphExec, cuuint64_t * flags)
