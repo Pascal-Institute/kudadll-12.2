@@ -1171,6 +1171,7 @@ JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphChildGraphNodeGetGrap
 	}
 
 	return (jlong)cuGraph;
+
 }
 
 JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphClone(JNIEnv* env, jobject obj, jlong originalGraph) {
@@ -1272,7 +1273,19 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeSetEvent(
 }
 
 //CUresult cuGraphExecBatchMemOpNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_BATCH_MEM_OP_NODE_PARAMS * nodeParams)
-//CUresult cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph)
+
+JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecChildGraphNodeSetParams(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hNode, jlong childGraph) {
+
+	CUgraphExec cuGraphExec = reinterpret_cast<CUgraphExec>(hGraphExec);
+	
+	CUgraphNode cuGraphNode = reinterpret_cast<CUgraphNode>(hNode);
+	
+	CUgraph cuGraph = reinterpret_cast<CUgraph>(childGraph);
+
+	CUresult cuResult = cuGraphExecChildGraphNodeSetParams(cuGraphExec, cuGraphNode, cuGraph);
+
+	return cuResult;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* env, jobject obj, jlong hGraphExec) {
 
