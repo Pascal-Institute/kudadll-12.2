@@ -26,7 +26,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_atan(JNIEnv* env, jclass cls
 	return atan(x);
 }
 
-//double atan2(double  y, double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_atan2(JNIEnv* env, jclass cls, jdouble y, jdouble x) {
+	return atan2(y, x);
+}
+
 //double atanh(double  x)
 //double cbrt(double  x)
 //double ceil(double  x)
