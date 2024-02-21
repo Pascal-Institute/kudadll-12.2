@@ -24,6 +24,9 @@
     <ClCompile Include="kublas.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="math_api.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kuda_runtime_api.h">
@@ -33,6 +36,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="kublas.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="math_api.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
