@@ -6,8 +6,14 @@
 #include <crt/math_functions.hpp>
 #undef __CUDA_INTERNAL_COMPILATION__
 
-//double acos(double  x)
-//double acosh(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acos(JNIEnv* env, jclass cls, jdouble x) {
+	return acos(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acosh(JNIEnv* env, jclass cls, jdouble x){
+	return acosh(x);
+}
+
 //double asin(double  x)
 //double asinh(double  x)
 //double atan(double  x)

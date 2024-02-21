@@ -5,8 +5,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	//double acos(double  x)
-	//double acosh(double  x)
+
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acos(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acosh(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double asin(double  x)
 	//double asinh(double  x)
 	//double atan(double  x)
