@@ -51,7 +51,7 @@
 //long long int 	llrint(double  x)
 //long long int 	llround(double  x)
 
-JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log(JNIEnv* env, jobject obj, jdouble x) {
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log(JNIEnv* env, jclass cls, jdouble x) {
 	return log(x);
 }
 
