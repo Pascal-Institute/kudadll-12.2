@@ -409,7 +409,8 @@ extern "C" {
 	//CUresult cuGraphAddNode_v2(CUgraphNode * phGraphNode, CUgraph hGraph, const CUgraphNode * dependencies, const CUgraphEdgeData * dependencyData, size_t numDependencies, CUgraphNodeParams * nodeParams)
 	//CUresult cuGraphBatchMemOpNodeGetParams(CUgraphNode hNode, CUDA_BATCH_MEM_OP_NODE_PARAMS * nodeParams_out)
 	//CUresult cuGraphBatchMemOpNodeSetParams(CUgraphNode hNode, const CUDA_BATCH_MEM_OP_NODE_PARAMS * nodeParams)
-	//CUresult cuGraphChildGraphNodeGetGraph(CUgraphNode hNode, CUgraph * phGraph)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphChildGraphNodeGetGraph(JNIEnv* env, jobject obj, jlong hNode);
 	
 	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_graphClone(JNIEnv* env, jobject obj, jlong originalGraph);
 	
@@ -432,12 +433,15 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hNode, jlong event);
 	
 	//CUresult cuGraphExecBatchMemOpNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_BATCH_MEM_OP_NODE_PARAMS * nodeParams)
-	//CUresult cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph)
+	
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecChildGraphNodeSetParams(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hNode, jlong childGraph);
 
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecDestroy(JNIEnv* env, jobject obj, jlong hGraphExec);
 	
-	//CUresult cuGraphExecEventRecordNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event)
-	//CUresult cuGraphExecEventWaitNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event)
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecEventRecordNodeSetEvent(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hNode, jlong event);
+
+	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_graphExecEventWaitNodeSetEvent(JNIEnv* env, jobject obj, jlong hGraphExec, jlong hNode, jlong event);
+
 	//CUresult cuGraphExecExternalSemaphoresSignalNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphExecExternalSemaphoresWaitNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_WAIT_NODE_PARAMS * nodeParams)
 	//CUresult cuGraphExecGetFlags(CUgraphExec hGraphExec, cuuint64_t * flags)
