@@ -22,7 +22,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_asinh(JNIEnv* env, jclass cl
 	return asinh(x);
 }
 
-//double atan(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_atan(JNIEnv* env, jclass cls, jdouble x) {
+	return atan(x);
+}
+
 //double atan2(double  y, double  x)
 //double atanh(double  x)
 //double cbrt(double  x)
