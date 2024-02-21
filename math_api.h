@@ -10,8 +10,10 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acosh(JNIEnv* env, jclass cls, jdouble x);
 	
-	//double asin(double  x)
-	//double asinh(double  x)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_asin(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_asinh(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double atan(double  x)
 	//double atan2(double  y, double  x)
 	//double atanh(double  x)
