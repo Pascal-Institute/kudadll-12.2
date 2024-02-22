@@ -42,7 +42,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_ceil(JNIEnv* env, jclass cls
 	return ceil(x);
 }
 
-//double copysign(double  x, double  y)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_copysign(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+	return copysign(x, y);
+}
+
 //double cos(double  x)
 //double cosh(double  x)
 //double cospi(double  x)
