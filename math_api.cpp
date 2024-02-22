@@ -34,6 +34,9 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_atanh(JNIEnv* env, jclass cl
 	return atanh(x);
 }
 
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cbrt(JNIEnv* env, jclass cls, jdouble x) {
+	return cbrt(x);
+}
 //double cbrt(double  x)
 //double ceil(double  x)
 //double copysign(double  x, double  y)

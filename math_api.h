@@ -19,7 +19,9 @@ extern "C" {
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_atan2(JNIEnv* env, jclass cls, jdouble y, jdouble x);
 
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_atanh(JNIEnv* env, jclass cls, jdouble x);
-	//double cbrt(double  x)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cbrt(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double ceil(double  x)
 	//double copysign(double  x, double  y)
 	//double cos(double  x)
