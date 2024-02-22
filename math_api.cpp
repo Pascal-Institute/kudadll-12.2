@@ -59,22 +59,69 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cospi(JNIEnv* env, jclass cl
 	return cospi(x);
 }
 
-//double erf(double  x)
-//double erfc(double  x)
-//double erfcinv(double  x)
-//double erfcx(double  x)
-//double erfinv(double  x)
-//double exp(double  x)
-//double exp10(double  x)
-//double exp2(double  x)
-//double expm1(double  x)
-//double fabs(double  x)
-//double fdim(double  x, double  y)
-//double floor(double  x)
-//double fma(double  x, double  y, double  z)
-//double fmax(double, double)
-//double fmin(double  x, double  y)
-//double fmod(double  x, double  y)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_erf(JNIEnv* env, jclass cls, jdouble x) {
+    return erf(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_erfc(JNIEnv* env, jclass cls, jdouble x) {
+    return erfc(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_erfcinv(JNIEnv* env, jclass cls, jdouble x) {
+    return erfcinv(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_erfcx(JNIEnv* env, jclass cls, jdouble x) {
+    return erfcx(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_erfinv(JNIEnv* env, jclass cls, jdouble x) {
+    return erfinv(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_exp(JNIEnv* env, jclass cls, jdouble x) {
+    return exp(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_exp10(JNIEnv* env, jclass cls, jdouble x) {
+    return exp10(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_exp2(JNIEnv* env, jclass cls, jdouble x) {
+    return exp2(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_expm1(JNIEnv* env, jclass cls, jdouble x) {
+    return expm1(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fabs(JNIEnv* env, jclass cls, jdouble x) {
+    return fabs(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fdim(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+    return fdim(x, y);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_floor(JNIEnv* env, jclass cls, jdouble x) {
+    return floor(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fma(JNIEnv* env, jclass cls, jdouble x, jdouble y, jdouble z) {
+    return fma(x, y, z);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fmax(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+    return fmax(x, y);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fmin(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+    return fmin(x, y);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fmod(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+    return fmod(x, y);
+}
 //double frexp(double  x, int* nptr)
 //double hypot(double  x, double  y)
 //int ilogb(double  x)
