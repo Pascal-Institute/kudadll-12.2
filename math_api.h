@@ -22,7 +22,8 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cbrt(JNIEnv* env, jclass cls, jdouble x);
 	
-	//double ceil(double  x)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_ceil(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double copysign(double  x, double  y)
 	//double cos(double  x)
 	//double cosh(double  x)
