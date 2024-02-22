@@ -46,7 +46,14 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_copysign(JNIEnv* env, jclass
 	return copysign(x, y);
 }
 
-//double cos(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cos(JNIEnv* env, jclass cls, jdouble x) {
+	return cos(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cosh(JNIEnv* env, jclass cls, jdouble x) {
+	return cosh(x);
+}
+
 //double cosh(double  x)
 //double cospi(double  x)
 //double cyl_bessel_i0(double  x)
