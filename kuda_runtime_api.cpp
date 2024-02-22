@@ -1195,7 +1195,14 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_runtimeGetVersion(JNIEnv*
 
 //28. Graph Management
 //__host__​cudaError_t cudaDeviceGetGraphMemAttribute(int  device, cudaGraphMemAttributeType attr, void* value)
-//__host__​cudaError_t cudaDeviceGraphMemTrim(int  device)
+
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGraphMemTrim(JNIEnv* env, jobject obj, jint device) {
+	
+	cudaError_t cudaStatus = cudaDeviceGraphMemTrim(device);
+
+	return cudaStatus;
+}
+
 //__host__​cudaError_t cudaDeviceSetGraphMemAttribute(int  device, cudaGraphMemAttributeType attr, void* value)
 //__device__​cudaGraphExec_t 	cudaGetCurrentGraphExec(void)
 //__host__​cudaError_t cudaGraphAddChildGraphNode(cudaGraphNode_t * pGraphNode, cudaGraph_t graph, const cudaGraphNode_t * pDependencies, size_t numDependencies, cudaGraph_t childGraph)
