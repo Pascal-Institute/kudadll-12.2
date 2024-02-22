@@ -2,6 +2,7 @@
 #include <jni.h>
 #include <vcruntime_string.h>
 #include <cuda/std/cmath>
+#include <cmath>
 #define __CUDA_INTERNAL_COMPILATION__
 #include <crt/math_functions.hpp>
 #undef __CUDA_INTERNAL_COMPILATION__
@@ -58,12 +59,6 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cospi(JNIEnv* env, jclass cl
 	return cospi(x);
 }
 
-JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cylBesselI0(JNIEnv* env, jclass cls, jdouble x) {
-	return cyl_bessel_i0(x);
-}
-
-//double cyl_bessel_i0(double  x)
-//double cyl_bessel_i1(double  x)
 //double erf(double  x)
 //double erfc(double  x)
 //double erfcinv(double  x)

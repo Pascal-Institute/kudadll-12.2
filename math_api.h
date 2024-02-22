@@ -32,10 +32,9 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cospi(JNIEnv* env, jclass cls, jdouble x);
 	
-	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cylBesselI0(JNIEnv* env, jclass cls, jdouble x);
-
-	//double cyl_bessel_i0(double  x)
-	//double cyl_bessel_i1(double  x)
+	//JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cylBesselI0(JNIEnv* env, jclass cls, jdouble x);
+	//JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_cylBesselI1(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double erf(double  x)
 	//double erfc(double  x)
 	//double erfcinv(double  x)
