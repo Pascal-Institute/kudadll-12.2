@@ -83,8 +83,10 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_jn(JNIEnv* env, jclass cls, jint n, jdouble x);
 
-	//double ldexp(double  x, int  exp)
-	//double lgamma(double  x)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_ldexp(JNIEnv* env, jclass cls, jdouble x, jint exp);
+
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_lgamma(JNIEnv* env, jclass cls, jdouble x);
+
 	//long long int 	llrint(double  x)
 	//long long int 	llround(double  x)
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log(JNIEnv* env, jclass cls, jdouble x);
