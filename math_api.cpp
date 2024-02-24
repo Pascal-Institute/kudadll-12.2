@@ -128,10 +128,14 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_hypot(JNIEnv* env, jclass cl
     return hypot(x, y);
 }
 
-//int ilogb(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_ilogb(JNIEnv* env, jclass cls, jdouble x) {
+    return ilogb(x);
+}
+
 //__RETURN_TYPE 	isfinite(double  a)
 //__RETURN_TYPE 	isinf(double  a)
 //__RETURN_TYPE 	isnan(double  a)
+
 //double j0(double  x)
 //double j1(double  x)
 //double jn(int  n, double  x)

@@ -71,7 +71,8 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_hypot(JNIEnv* env, jclass cls, jdouble x, jdouble y);
 	
-	//int ilogb(double  x)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_ilogb(JNIEnv* env, jclass cls, jdouble x);
+
 	//__RETURN_TYPE 	isfinite(double  a)
 	//__RETURN_TYPE 	isinf(double  a)
 	//__RETURN_TYPE 	isnan(double  a)
