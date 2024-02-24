@@ -144,7 +144,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_j1(JNIEnv* env, jclass cls, 
     return _j1(x);
 }
 
-//double jn(int  n, double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_jn(JNIEnv* env, jclass cls, jint n, jdouble x) {
+    return _jn(n, x);
+}
+
 //double ldexp(double  x, int  exp)
 //double lgamma(double  x)
 //long long int 	llrint(double  x)
