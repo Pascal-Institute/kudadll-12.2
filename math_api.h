@@ -68,7 +68,9 @@ extern "C" {
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fmod(JNIEnv* env, jclass cls, jdouble x, jdouble y);
 	
 	//double frexp(double  x, int* nptr)
-	//double hypot(double  x, double  y)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_hypot(JNIEnv* env, jclass cls, jdouble x, jdouble y);
+	
 	//int ilogb(double  x)
 	//__RETURN_TYPE 	isfinite(double  a)
 	//__RETURN_TYPE 	isinf(double  a)
