@@ -128,7 +128,7 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_hypot(JNIEnv* env, jclass cl
     return hypot(x, y);
 }
 
-JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_ilogb(JNIEnv* env, jclass cls, jdouble x) {
+JNIEXPORT jint JNICALL Java_kuda_mathapi_MathAPI_ilogb(JNIEnv* env, jclass cls, jdouble x) {
     return ilogb(x);
 }
 
