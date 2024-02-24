@@ -76,8 +76,11 @@ extern "C" {
 	//__RETURN_TYPE 	isfinite(double  a)
 	//__RETURN_TYPE 	isinf(double  a)
 	//__RETURN_TYPE 	isnan(double  a)
-	//double j0(double  x)
-	//double j1(double  x)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_j0(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_j1(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double jn(int  n, double  x)
 	//double ldexp(double  x, int  exp)
 	//double lgamma(double  x)
