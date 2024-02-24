@@ -148,11 +148,13 @@
     <ClCompile Include="kublas.cpp" />
     <ClCompile Include="kuda_driver_api.cpp" />
     <ClCompile Include="kuda_runtime_api.cpp" />
+    <ClCompile Include="math_api.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kublas.h" />
     <ClInclude Include="kuda_driver_api.h" />
     <ClInclude Include="kuda_runtime_api.h" />
+    <ClInclude Include="math_api.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
