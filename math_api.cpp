@@ -137,11 +137,11 @@ JNIEXPORT jint JNICALL Java_kuda_mathapi_MathAPI_ilogb(JNIEnv* env, jclass cls, 
 //__RETURN_TYPE 	isnan(double  a)
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_j0(JNIEnv* env, jclass cls, jdouble x) {
-    return j0(x);
+    return _j0(x);
 }
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_j1(JNIEnv* env, jclass cls, jdouble x) {
-    return j1(x);
+    return _j1(x);
 }
 
 //double jn(int  n, double  x)
