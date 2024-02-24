@@ -168,10 +168,22 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log(JNIEnv* env, jclass cls,
 	return log(x);
 }
 
-//double log10(double  x)
-//double log1p(double  x)
-//double log2(double  x)
-//double logb(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log10(JNIEnv* env, jclass cls, jdouble x) {
+    return log10(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log1p(JNIEnv* env, jclass cls, jdouble x) {
+    return log1p(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log2(JNIEnv* env, jclass cls, jdouble x) {
+    return log2(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_logb(JNIEnv* env, jclass cls, jdouble x) {
+    return logb(x);
+}
+
 //long int lrint(double  x)
 //long int lround(double  x)
 //double max(const double  a, const float  b)
