@@ -156,8 +156,13 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_lgamma(JNIEnv* env, jclass c
     return lgamma(x);
 }
 
-//long long int 	llrint(double  x)
-//long long int 	llround(double  x)
+JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_llrint(JNIEnv* env, jclass cls, jdouble x) {
+    return llrint(x);
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_llround(JNIEnv* env, jclass cls, jdouble x) {
+    return llround(x);
+}
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log(JNIEnv* env, jclass cls, jdouble x) {
 	return log(x);
