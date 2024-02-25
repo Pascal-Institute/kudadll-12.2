@@ -101,8 +101,10 @@ extern "C" {
 
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_logb(JNIEnv* env, jclass cls, jdouble x);
 
-	//long int lrint(double  x)
-	//long int lround(double  x)
+	JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_lrint(JNIEnv* env, jclass cls, jdouble x);
+
+	JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_lround(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double max(const double  a, const float  b)
 	//double max(const float  a, const double  b)
 	//double max(const double  a, const double  b)
