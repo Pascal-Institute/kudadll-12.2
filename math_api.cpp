@@ -13,6 +13,11 @@ int max(int a, int b) {
     return (a > b) ? a : b;
 }
 
+//DEPRECATED FUNCTION
+int min(int a, int b) {
+    return (a < b) ? a : b;
+}
+
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acos(JNIEnv* env, jclass cls, jdouble x) {
 	return acos(x);
@@ -199,12 +204,12 @@ JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_lround(JNIEnv* env, jclass cls
     return lround(x);
 }
 
-JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max1(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
   
     return max((const double)a, (const float)b);
 }
 
-JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max2(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
 
     return max((const float)a, (const double)b);
 }
@@ -214,12 +219,12 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max(JNIEnv* env, jclass cls,
     return max((const double)a, (const double)b);
 }
 
-JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min1(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
 
     return min((const double)a, (const float)b);
 }
 
-JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min2(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
 
     return min((const float)a, (const double)b);
 }
