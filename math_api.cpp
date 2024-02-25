@@ -214,9 +214,21 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max(JNIEnv* env, jclass cls,
     return max((const double)a, (const double)b);
 }
 
-//double min(const double  a, const float  b)
-//double min(const float  a, const double  b)
-//double min(const double  a, const double  b)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
+
+    return min((const double)a, (const float)b);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
+
+    return min((const float)a, (const double)b);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min(JNIEnv* env, jclass cls, jdouble a, jdouble b) {
+
+    return min((const double)a, (const double)b);
+}
+
 //double modf(double  x, double* iptr)
 //double nan(const char* tagp)
 //double nearbyint(double  x)
