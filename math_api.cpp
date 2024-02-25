@@ -1,11 +1,18 @@
 #include "math_api.h"
 #include <jni.h>
+#include <cmath>
 #include <vcruntime_string.h>
 #include <cuda/std/cmath>
-#include <cmath>
 #define __CUDA_INTERNAL_COMPILATION__
+#include <crt/math_functions.h>
 #include <crt/math_functions.hpp>
 #undef __CUDA_INTERNAL_COMPILATION__
+
+//DEPRECATED FUNCTION
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acos(JNIEnv* env, jclass cls, jdouble x) {
 	return acos(x);
@@ -190,6 +197,11 @@ JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_lrint(JNIEnv* env, jclass cls,
 
 JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_lround(JNIEnv* env, jclass cls, jdouble x) {
     return lround(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
+    
+    return max((const double)a, (const float)b);
 }
 
 //double max(const double  a, const float  b)
