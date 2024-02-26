@@ -1,11 +1,23 @@
 #include "math_api.h"
 #include <jni.h>
+#include <cmath>
 #include <vcruntime_string.h>
 #include <cuda/std/cmath>
-#include <cmath>
 #define __CUDA_INTERNAL_COMPILATION__
+#include <crt/math_functions.h>
 #include <crt/math_functions.hpp>
 #undef __CUDA_INTERNAL_COMPILATION__
+
+//DEPRECATED FUNCTION
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+//DEPRECATED FUNCTION
+int min(int a, int b) {
+    return (a < b) ? a : b;
+}
+
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_acos(JNIEnv* env, jclass cls, jdouble x) {
 	return acos(x);
@@ -123,38 +135,109 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_fmod(JNIEnv* env, jclass cls
     return fmod(x, y);
 }
 //double frexp(double  x, int* nptr)
-//double hypot(double  x, double  y)
-//int ilogb(double  x)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_hypot(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+    return hypot(x, y);
+}
+
+JNIEXPORT jint JNICALL Java_kuda_mathapi_MathAPI_ilogb(JNIEnv* env, jclass cls, jdouble x) {
+    return ilogb(x);
+}
+
 //__RETURN_TYPE 	isfinite(double  a)
 //__RETURN_TYPE 	isinf(double  a)
 //__RETURN_TYPE 	isnan(double  a)
-//double j0(double  x)
-//double j1(double  x)
-//double jn(int  n, double  x)
-//double ldexp(double  x, int  exp)
-//double lgamma(double  x)
-//long long int 	llrint(double  x)
-//long long int 	llround(double  x)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_j0(JNIEnv* env, jclass cls, jdouble x) {
+    return _j0(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_j1(JNIEnv* env, jclass cls, jdouble x) {
+    return _j1(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_jn(JNIEnv* env, jclass cls, jint n, jdouble x) {
+    return _jn(n, x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_ldexp(JNIEnv* env, jclass cls, jdouble x, jint exp) {
+    return ldexp(x, exp);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_lgamma(JNIEnv* env, jclass cls, jdouble x) {
+    return lgamma(x);
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_llrint(JNIEnv* env, jclass cls, jdouble x) {
+    return llrint(x);
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_llround(JNIEnv* env, jclass cls, jdouble x) {
+    return llround(x);
+}
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log(JNIEnv* env, jclass cls, jdouble x) {
 	return log(x);
 }
 
-//double log10(double  x)
-//double log1p(double  x)
-//double log2(double  x)
-//double logb(double  x)
-//long int lrint(double  x)
-//long int lround(double  x)
-//double max(const double  a, const float  b)
-//double max(const float  a, const double  b)
-//double max(const double  a, const double  b)
-//double min(const double  a, const float  b)
-//double min(const float  a, const double  b)
-//double min(const double  a, const double  b)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log10(JNIEnv* env, jclass cls, jdouble x) {
+    return log10(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log1p(JNIEnv* env, jclass cls, jdouble x) {
+    return log1p(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_log2(JNIEnv* env, jclass cls, jdouble x) {
+    return log2(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_logb(JNIEnv* env, jclass cls, jdouble x) {
+    return logb(x);
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_lrint(JNIEnv* env, jclass cls, jdouble x) {
+    return lrint(x);
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_mathapi_MathAPI_lround(JNIEnv* env, jclass cls, jdouble x) {
+    return lround(x);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max1(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
+  
+    return max((const double)a, (const float)b);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max2(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
+
+    return max((const float)a, (const double)b);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max(JNIEnv* env, jclass cls, jdouble a, jdouble b) {
+
+    return max((const double)a, (const double)b);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min1(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
+    return min((const double)a, (const float)b);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min2(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
+    return min((const float)a, (const double)b);
+}
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min(JNIEnv* env, jclass cls, jdouble a, jdouble b) {
+    return min((const double)a, (const double)b);
+}
+
 //double modf(double  x, double* iptr)
 //double nan(const char* tagp)
-//double nearbyint(double  x)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nearbyint(JNIEnv* env, jclass cls, jdouble x) {
+    return nearbyint(x);
+}
+
 //double nextafter(double  x, double  y)
 //double norm(int  dim, const double* p)
 //double norm3d(double  a, double  b, double  c)
