@@ -220,23 +220,24 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_max(JNIEnv* env, jclass cls,
 }
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min1(JNIEnv* env, jclass cls, jdouble a, jfloat b) {
-
     return min((const double)a, (const float)b);
 }
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min2(JNIEnv* env, jclass cls, jfloat a, jdouble b) {
-
     return min((const float)a, (const double)b);
 }
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_min(JNIEnv* env, jclass cls, jdouble a, jdouble b) {
-
     return min((const double)a, (const double)b);
 }
 
 //double modf(double  x, double* iptr)
 //double nan(const char* tagp)
-//double nearbyint(double  x)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nearbyint(JNIEnv* env, jclass cls, jdouble x) {
+    return nearbyint(x);
+}
+
 //double nextafter(double  x, double  y)
 //double norm(int  dim, const double* p)
 //double norm3d(double  a, double  b, double  c)

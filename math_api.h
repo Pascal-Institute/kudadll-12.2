@@ -119,6 +119,9 @@ extern "C" {
 
 	//double modf(double  x, double* iptr)
 	//double nan(const char* tagp)
+
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nearbyint(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double nearbyint(double  x)
 	//double nextafter(double  x, double  y)
 	//double norm(int  dim, const double* p)
