@@ -238,7 +238,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nearbyint(JNIEnv* env, jclas
     return nearbyint(x);
 }
 
-//double nextafter(double  x, double  y)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nextafter(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+    return nextafter(x, y);
+}
+
 //double norm(int  dim, const double* p)
 //double norm3d(double  a, double  b, double  c)
 //double norm4d(double  a, double  b, double  c, double  d)
