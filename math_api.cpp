@@ -252,7 +252,11 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_pow(JNIEnv* env, jclass cls,
     return pow(x, y);
 }
 
-//double rcbrt(double  x)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rcbrt(JNIEnv* env, jclass cls, jdouble x) {
+    return rcbrt(x);
+}
+
 //double remainder(double  x, double  y)
 //double remquo(double  x, double  y, int* quo)
 //double rhypot(double  x, double  y)
