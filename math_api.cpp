@@ -247,7 +247,11 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nextafter(JNIEnv* env, jclas
 //double norm4d(double  a, double  b, double  c, double  d)
 //double normcdf(double  x)
 //double normcdfinv(double  x)
-//double pow(double  x, double  y)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_pow(JNIEnv* env, jclass cls, jdouble x, jdouble y) {
+    return pow(x, y);
+}
+
 //double rcbrt(double  x)
 //double remainder(double  x, double  y)
 //double remquo(double  x, double  y, int* quo)
