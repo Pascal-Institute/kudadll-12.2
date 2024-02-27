@@ -133,8 +133,9 @@ extern "C" {
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_pow(JNIEnv* env, jclass cls, jdouble x, jdouble y);
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rcbrt(JNIEnv* env, jclass cls, jdouble x);
+
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_remainder(JNIEnv* env, jclass cls, jdouble x, jdouble y);
 	
-	//double remainder(double  x, double  y)
 	//double remquo(double  x, double  y, int* quo)
 	//double rhypot(double  x, double  y)
 	//double rint(double  x)
