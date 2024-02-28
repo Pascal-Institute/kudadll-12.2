@@ -147,7 +147,8 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rsqrt(JNIEnv* env, jclass cls, jdouble x);
 
-	//double scalbln(double  x, long int  n)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_scalbln(JNIEnv* env, jclass cls, jdouble x, jlong n);
+	
 	//double scalbn(double  x, int  n)
 	//__RETURN_TYPE 	signbit(double  a)
 	//double sin(double  x)

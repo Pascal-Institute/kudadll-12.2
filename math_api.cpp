@@ -275,7 +275,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rsqrt(JNIEnv* env, jclass cl
     return rsqrt(x);
 }
 
-//double scalbln(double  x, long int  n)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_scalbln(JNIEnv* env, jclass cls, jdouble x, jlong n) {
+    return scalbln(x, n);
+}
+
 //double scalbn(double  x, int  n)
 //__RETURN_TYPE 	signbit(double  a)
 //double sin(double  x)
