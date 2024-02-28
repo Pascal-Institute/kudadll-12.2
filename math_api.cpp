@@ -267,6 +267,11 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_remainder(JNIEnv* env, jclas
 //double rnorm(int  dim, const double* p)
 //double rnorm3d(double  a, double  b, double  c)
 //double rnorm4d(double  a, double  b, double  c, double  d)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_round(JNIEnv* env, jclass cls, jdouble x) {
+    return round(x);
+}
+
 //double round(double  x)
 //double rsqrt(double  x)
 //double scalbln(double  x, long int  n)
