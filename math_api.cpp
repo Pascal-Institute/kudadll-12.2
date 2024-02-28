@@ -252,7 +252,6 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_pow(JNIEnv* env, jclass cls,
     return pow(x, y);
 }
 
-
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rcbrt(JNIEnv* env, jclass cls, jdouble x) {
     return rcbrt(x);
 }
@@ -272,8 +271,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_round(JNIEnv* env, jclass cl
     return round(x);
 }
 
-//double round(double  x)
-//double rsqrt(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rsqrt(JNIEnv* env, jclass cls, jdouble x) {
+    return rsqrt(x);
+}
+
 //double scalbln(double  x, long int  n)
 //double scalbn(double  x, int  n)
 //__RETURN_TYPE 	signbit(double  a)
