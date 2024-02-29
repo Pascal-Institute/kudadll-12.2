@@ -122,40 +122,62 @@ extern "C" {
 
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nearbyint(JNIEnv* env, jclass cls, jdouble x);
 	
-	//double nearbyint(double  x)
-	//double nextafter(double  x, double  y)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_nextafter(JNIEnv* env, jclass cls, jdouble x, jdouble y);
+
 	//double norm(int  dim, const double* p)
 	//double norm3d(double  a, double  b, double  c)
 	//double norm4d(double  a, double  b, double  c, double  d)
 	//double normcdf(double  x)
 	//double normcdfinv(double  x)
-	//double pow(double  x, double  y)
-	//double rcbrt(double  x)
-	//double remainder(double  x, double  y)
+
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_pow(JNIEnv* env, jclass cls, jdouble x, jdouble y);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rcbrt(JNIEnv* env, jclass cls, jdouble x);
+
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_remainder(JNIEnv* env, jclass cls, jdouble x, jdouble y);
+	
 	//double remquo(double  x, double  y, int* quo)
 	//double rhypot(double  x, double  y)
 	//double rint(double  x)
 	//double rnorm(int  dim, const double* p)
 	//double rnorm3d(double  a, double  b, double  c)
 	//double rnorm4d(double  a, double  b, double  c, double  d)
-	//double round(double  x)
-	//double rsqrt(double  x)
-	//double scalbln(double  x, long int  n)
-	//double scalbn(double  x, int  n)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_round(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_rsqrt(JNIEnv* env, jclass cls, jdouble x);
+
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_scalbln(JNIEnv* env, jclass cls, jdouble x, jlong n);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_scalbn(JNIEnv* env, jclass cls, jdouble x, jint n);
+	
 	//__RETURN_TYPE 	signbit(double  a)
-	//double sin(double  x)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sin(JNIEnv* env, jclass cls, jdouble x);
+	
 	//void sincos(double  x, double* sptr, double* cptr)
 	//void sincospi(double  x, double* sptr, double* cptr)
-	//double sinh(double  x)
-	//double sinpi(double  x)
-	//double sqrt(double  x)
-	//double tan(double  x)
-	//double tanh(double  x)
-	//double tgamma(double  x)
-	//double trunc(double  x)
-	//double y0(double  x)
-	//double y1(double  x)
-	//double yn(int  n, double  x)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sinh(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sinpi(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sqrt(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_tan(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_tanh(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_tgamma(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_trunc(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_y0(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_y1(JNIEnv* env, jclass cls, jdouble x);
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_yn(JNIEnv* env, jclass cls, jint n, jdouble x);
+
 #ifdef __cplusplus
 }
 #endif
