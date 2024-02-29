@@ -296,7 +296,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sinh(JNIEnv* env, jclass cls
     return sinh(x);
 }
 
-//double sinpi(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sinpi(JNIEnv* env, jclass cls, jdouble x) {
+    return sinpi(x);
+}
+
 //double sqrt(double  x)
 //double tan(double  x)
 //double tanh(double  x)
