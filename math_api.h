@@ -168,7 +168,8 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_tanh(JNIEnv* env, jclass cls, jdouble x);
 	
-	//double tgamma(double  x)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_tgamma(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double trunc(double  x)
 	//double y0(double  x)
 	//double y1(double  x)
