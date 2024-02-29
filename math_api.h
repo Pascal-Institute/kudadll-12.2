@@ -157,7 +157,8 @@ extern "C" {
 	
 	//void sincos(double  x, double* sptr, double* cptr)
 	//void sincospi(double  x, double* sptr, double* cptr)
-	//double sinh(double  x)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sinh(JNIEnv* env, jclass cls, jdouble x);
 	//double sinpi(double  x)
 	//double sqrt(double  x)
 	//double tan(double  x)
