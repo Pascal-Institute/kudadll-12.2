@@ -176,7 +176,8 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_y1(JNIEnv* env, jclass cls, jdouble x);
 	
-	//double yn(int  n, double  x)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_yn(JNIEnv* env, jclass cls, jint n, jdouble x);
+
 #ifdef __cplusplus
 }
 #endif
