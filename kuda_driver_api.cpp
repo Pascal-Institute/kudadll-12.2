@@ -442,7 +442,22 @@ JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleGetLoadingMode(JNIEnv
 	return static_cast<int>(cuLoadingModuleMode);
 }
 
-//CUresult cuModuleLoad(CUmodule * module, const char* fname)
+
+JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_moduleLoad(JNIEnv* env, jobject obj, jstring fname) {
+
+	CUmodule cuModule;
+
+	const char* fileName = env->GetStringUTFChars(fname, nullptr);
+
+	CUresult cuResult = cuModuleLoad(&cuModule, fileName);
+
+	if (cuResult != CUDA_SUCCESS) {
+		return cuResult;
+	}
+
+	return (jlong)cuModule;
+}
+
 //CUresult cuModuleLoadData(CUmodule * module, const void* image)
 //CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)
 //CUresult cuModuleLoadFatBinary(CUmodule * module, const void* fatCubin)

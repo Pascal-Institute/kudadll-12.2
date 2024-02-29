@@ -25,6 +25,7 @@ extern "C" {
 	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetDefaultMemPool(JNIEnv* env, jobject obj, jint dev);
 
 	//CUresult cuDeviceGetExecAffinitySupport(int* pi, CUexecAffinityType type, CUdevice dev)
+	
 	//CUresult cuDeviceGetLuid ( char* luid, unsigned int* deviceNodeMask, CUdevice dev )
 
 	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint dev);
@@ -106,7 +107,8 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_driverapi_DriverAPI_moduleGetLoadingMode(JNIEnv* env, jobject obj, jboolean dummy);
 	
-	//CUresult cuModuleLoad(CUmodule * module, const char* fname)
+	JNIEXPORT jlong JNICALL Java_kuda_driverapi_DriverAPI_moduleLoad(JNIEnv* env, jobject obj, jstring fname);
+	
 	//CUresult cuModuleLoadData(CUmodule * module, const void* image)
 	//CUresult cuModuleLoadDataEx(CUmodule * module, const void* image, unsigned int  numOptions, CUjit_option * options, void** optionValues)
 	//CUresult cuModuleLoadFatBinary(CUmodule * module, const void* fatCubin)
