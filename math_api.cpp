@@ -284,7 +284,11 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_scalbn(JNIEnv* env, jclass c
 }
 
 //__RETURN_TYPE 	signbit(double  a)
-//double sin(double  x)
+
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sin(JNIEnv* env, jclass cls, jdouble x) {
+    return sin(x);
+}
+
 //void sincos(double  x, double* sptr, double* cptr)
 //void sincospi(double  x, double* sptr, double* cptr)
 //double sinh(double  x)

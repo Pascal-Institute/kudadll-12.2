@@ -152,7 +152,9 @@ extern "C" {
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_scalbn(JNIEnv* env, jclass cls, jdouble x, jint n);
 	
 	//__RETURN_TYPE 	signbit(double  a)
-	//double sin(double  x)
+	
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sin(JNIEnv* env, jclass cls, jdouble x);
+	
 	//void sincos(double  x, double* sptr, double* cptr)
 	//void sincospi(double  x, double* sptr, double* cptr)
 	//double sinh(double  x)
