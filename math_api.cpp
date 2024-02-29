@@ -308,7 +308,10 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_tan(JNIEnv* env, jclass cls,
     return tan(x);
 }
 
-//double tanh(double  x)
+JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_tanh(JNIEnv* env, jclass cls, jdouble x) {
+    return tanh(x);
+}
+
 //double tgamma(double  x)
 //double trunc(double  x)
 //double y0(double  x)
