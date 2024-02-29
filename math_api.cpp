@@ -321,13 +321,13 @@ JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_trunc(JNIEnv* env, jclass cl
 }
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_y0(JNIEnv* env, jclass cls, jdouble x) {
-    return y0(x);
+    return _y0(x);
 }
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_y1(JNIEnv* env, jclass cls, jdouble x) {
-    return y1(x);
+    return _y1(x);
 }
 
 JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_yn(JNIEnv* env, jclass cls, jint n, jdouble x) {
-    return yn(n, x);
+    return _yn(n, x);
 }
