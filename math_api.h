@@ -162,7 +162,8 @@ extern "C" {
 	
 	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sinpi(JNIEnv* env, jclass cls, jdouble x);
 	
-	//double sqrt(double  x)
+	JNIEXPORT jdouble JNICALL Java_kuda_mathapi_MathAPI_sqrt(JNIEnv* env, jclass cls, jdouble x);
+	
 	//double tan(double  x)
 	//double tanh(double  x)
 	//double tgamma(double  x)
