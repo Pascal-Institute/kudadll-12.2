@@ -63,8 +63,7 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 
 	//cudaStreamAddCallback
-
-	//cudaStreamAttachMemAsync
+	__host__​cudaError_t cudaStreamBeginCapture(cudaStream_t stream, cudaStreamCaptureMode mode)
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
 
@@ -79,6 +78,8 @@ extern "C" {
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreateWithPriority(JNIEnv* env, jobject obj, jint flags, jint priority);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream);
+
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamEndCapture(JNIEnv* env, jobject obj, jlong stream);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream);
 

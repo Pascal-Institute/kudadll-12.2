@@ -877,11 +877,26 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreateWithPriority
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream) {
 
-	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
 
-	cudaError_t cudaStatus = cudaStreamDestroy(cudaStreamPointer);
+	cudaError_t cudaStatus = cudaStreamDestroy(cudaStream);
 
 	return cudaStatus;
+}
+
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamEndCapture(JNIEnv* env, jobject obj, jlong stream) {
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
+	
+	cudaGraph_t cudaGraph;
+
+	cudaError_t cudaStatus = cudaStreamEndCapture(cudaStream, &cudaGraph);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)cudaGraph;
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream) {
