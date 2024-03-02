@@ -908,7 +908,18 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, 
 	return cudaStatus;
 }
 
-//cudaStreamSetAttribute
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSetAttribute(JNIEnv* env, jobject obj, jlong hStream, jint attr) {
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(hStream);
+
+	cudaStreamAttrID cudaStreamAttrId = static_cast<cudaStreamAttrID>(attr);
+
+	cudaLaunchAttributeValue cudaLaunchAttrValue;
+
+	cudaError_t cudaStatus = cudaStreamSetAttribute(cudaStream, cudaStreamAttrId, &cudaLaunchAttrValue);
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream) {
 
@@ -1046,6 +1057,23 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_destroyExternalSemaphore(
 
 	return cudaStatus;
 }
+
+//7. Execution Control
+//__host__​__device__​cudaError_t cudaFuncGetAttributes(cudaFuncAttributes* attr, const void* func)
+//__host__​cudaError_t cudaFuncSetAttribute(const void* func, cudaFuncAttribute attr, int  value)
+//__host__​cudaError_t cudaFuncSetCacheConfig(const void* func, cudaFuncCache cacheConfig)
+//__host__​cudaError_t cudaFuncSetSharedMemConfig(const void* func, cudaSharedMemConfig config)
+//__device__​ void* cudaGetParameterBuffer(size_t alignment, size_t size)
+//__device__​ void* cudaGetParameterBufferV2(void* func, dim3 gridDimension, dim3 blockDimension, unsigned int  sharedMemSize)
+//JNIEXPORT void JNICALL Java_kuda_runtimeapi_RuntimeAPI_gridDependencySynchronize(JNIEnv* env, jobject obj);
+//__host__​cudaError_t cudaLaunchCooperativeKernel(const void* func, dim3 gridDim, dim3 blockDim, void** args, size_t sharedMem, cudaStream_t stream)
+//__host__​cudaError_t cudaLaunchCooperativeKernelMultiDevice(cudaLaunchParams * launchParamsList, unsigned int  numDevices, unsigned int  flags = 0)
+//__host__​cudaError_t cudaLaunchHostFunc(cudaStream_t stream, cudaHostFn_t fn, void* userData)
+//__host__​cudaError_t cudaLaunchKernel(const void* func, dim3 gridDim, dim3 blockDim, void** args, size_t sharedMem, cudaStream_t stream)
+//__host__​cudaError_t cudaLaunchKernelExC(const cudaLaunchConfig_t * config, const void* func, void** args)
+//__host__​cudaError_t cudaSetDoubleForDevice(double* d)
+//__host__​cudaError_t cudaSetDoubleForHost(double* d)
+//__device__​ void cudaTriggerProgrammaticLaunchCompletion(void)
 
 //6.9 Memory Manangement
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_free(JNIEnv* env, jobject obj, jlong devPtr) {
