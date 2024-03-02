@@ -220,7 +220,7 @@ extern "C" {
 	//__host__​cudaError_t cudaGraphCreate(cudaGraph_t * pGraph, unsigned int  flags)
 	//__host__​cudaError_t cudaGraphDebugDotPrint(cudaGraph_t graph, const char* path, unsigned int  flags)
 	
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj, jlong graph);
 	
 	//__host__​cudaError_t cudaGraphDestroy(cudaGraph_t graph)
 	//__host__​cudaError_t cudaGraphDestroyNode(cudaGraphNode_t node)
