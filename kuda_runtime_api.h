@@ -219,7 +219,9 @@ extern "C" {
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphClone(JNIEnv* env, jobject obj, jlong originalGraph);
 	
 	//__host__​cudaError_t cudaGraphConditionalHandleCreate(cudaGraphConditionalHandle * pHandle_out, cudaGraph_t graph, unsigned int  defaultLaunchValue = 0, unsigned int  flags = 0)
-	//__host__​cudaError_t cudaGraphCreate(cudaGraph_t * pGraph, unsigned int  flags)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphCreate(JNIEnv* env, jobject obj, jint flags);
+	
 	//__host__​cudaError_t cudaGraphDebugDotPrint(cudaGraph_t graph, const char* path, unsigned int  flags)
 	
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj, jlong graph);
