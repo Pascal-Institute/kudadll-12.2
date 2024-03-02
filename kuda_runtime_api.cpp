@@ -1282,7 +1282,15 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env,
 	return cudaStatus;
 }
 
-//__host__​cudaError_t cudaGraphDestroyNode(cudaGraphNode_t node)
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroyNode(JNIEnv* env, jobject obj, jlong graphNode) {
+	
+	cudaGraphNode_t cudaGraphNode= reinterpret_cast<cudaGraphNode_t>(graphNode);
+
+	cudaError_t cudaStatus = cudaGraphDestroyNode(cudaGraphNode);
+
+	return cudaStatus;
+}
+
 //__host__​cudaError_t cudaGraphEventRecordNodeGetEvent(cudaGraphNode_t node, cudaEvent_t * event_out)
 //__host__​cudaError_t cudaGraphEventRecordNodeSetEvent(cudaGraphNode_t node, cudaEvent_t event)
 //__host__​cudaError_t cudaGraphEventWaitNodeGetEvent(cudaGraphNode_t node, cudaEvent_t * event_out)

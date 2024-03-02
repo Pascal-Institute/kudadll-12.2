@@ -222,8 +222,7 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj, jlong graph);
 	
-	//__host__​cudaError_t cudaGraphDestroy(cudaGraph_t graph)
-	//__host__​cudaError_t cudaGraphDestroyNode(cudaGraphNode_t node)
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj, jlong graphNode);
 	//__host__​cudaError_t cudaGraphEventRecordNodeGetEvent(cudaGraphNode_t node, cudaEvent_t * event_out)
 	//__host__​cudaError_t cudaGraphEventRecordNodeSetEvent(cudaGraphNode_t node, cudaEvent_t event)
 	//__host__​cudaError_t cudaGraphEventWaitNodeGetEvent(cudaGraphNode_t node, cudaEvent_t * event_out)
