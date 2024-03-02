@@ -409,6 +409,33 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetAttribute(JNIEnv
 	return value;
 }
 
+JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint device) {
+
+	const int maxBufferLen = 13;
+	char pciBusId[maxBufferLen];
+
+	cudaError_t cudaStatus = cudaDeviceGetPCIBusId(pciBusId, maxBufferLen, device);
+
+	if (cudaStatus != cudaSuccess) {
+		return env->NewStringUTF("Error retrieving PCI Bus ID");
+	}
+
+	return env->NewStringUTF(pciBusId);
+}
+
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj) {
+	
+	cudaFuncCache funcCache;
+	
+	cudaError_t cudaStatus = cudaDeviceGetCacheConfig(&funcCache);
+	
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return  static_cast<int>(funcCache);
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetLimit(JNIEnv* env, jobject obj, jbyte limit) {
 
 	size_t pValue;
@@ -446,21 +473,6 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetP2PAttribute(JNI
 	}
 
 	return value;
-}
-
-
-JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint device) {
-
-	const int maxBufferLen = 13;
-	char pciBusId[maxBufferLen];
-
-	cudaError_t cudaStatus = cudaDeviceGetPCIBusId(pciBusId, maxBufferLen, device);
-
-	if (cudaStatus != cudaSuccess) {
-		return env->NewStringUTF("Error retrieving PCI Bus ID");
-	}
-
-	return env->NewStringUTF(pciBusId);
 }
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetStreamPriorityRange(JNIEnv* env, jobject obj) {
