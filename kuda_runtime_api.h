@@ -21,7 +21,7 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetP2PAttribute(JNIEnv* env, jobject obj, jint attr, jint scrDevice, jint dstDevice);
 
 	JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetPCIBusId(JNIEnv* env, jobject obj, jint device);
-
+	
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetStreamPriorityRange(JNIEnv* env, jobject obj);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetCacheConfig(JNIEnv* env, jobject obj, jint cacheConfig);
@@ -63,9 +63,6 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 
 	//cudaStreamAddCallback
-
-	//cudaStreamAttachMemAsync
-
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
 
 	//cudaStreamBeginCaptureToGraph
@@ -80,9 +77,11 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamDestory(JNIEnv* env, jobject obj, jlong stream);
 
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamEndCapture(JNIEnv* env, jobject obj, jlong stream);
+
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream);
 
-	//cudaStreamSetAttribute
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSetAttribute(JNIEnv* env, jobject obj, jlong hStream, jint attr);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream);
 
@@ -94,7 +93,7 @@ extern "C" {
 
 	//cudaThreadExchangeStreamCaptureMode
 
-	//5. Event ManageMent
+	//5. Event ManageMent (COMPLETE)
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj);
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventCreateWithFlags(JNIEnv* env, jobject obj, jint flags);
@@ -127,6 +126,23 @@ extern "C" {
 	//JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_signalExternalSemaphoresAsync(JNIEnv* env, jobject obj);
 		
 	//JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_waitExternalSemaphoresAsync(JNIEnv* env, jobject obj);
+
+	//7. Execution Control
+	//__host__​__device__​cudaError_t cudaFuncGetAttributes(cudaFuncAttributes* attr, const void* func)
+	//__host__​cudaError_t cudaFuncSetAttribute(const void* func, cudaFuncAttribute attr, int  value)
+	//__host__​cudaError_t cudaFuncSetCacheConfig(const void* func, cudaFuncCache cacheConfig)
+	//__host__​cudaError_t cudaFuncSetSharedMemConfig(const void* func, cudaSharedMemConfig config)
+	//__device__​ void* cudaGetParameterBuffer(size_t alignment, size_t size)
+	//__device__​ void* cudaGetParameterBufferV2(void* func, dim3 gridDimension, dim3 blockDimension, unsigned int  sharedMemSize)
+	//JNIEXPORT void JNICALL Java_kuda_runtimeapi_RuntimeAPI_gridDependencySynchronize(JNIEnv* env, jobject obj);
+	//__host__​cudaError_t cudaLaunchCooperativeKernel(const void* func, dim3 gridDim, dim3 blockDim, void** args, size_t sharedMem, cudaStream_t stream)
+	//__host__​cudaError_t cudaLaunchCooperativeKernelMultiDevice(cudaLaunchParams * launchParamsList, unsigned int  numDevices, unsigned int  flags = 0)
+	//__host__​cudaError_t cudaLaunchHostFunc(cudaStream_t stream, cudaHostFn_t fn, void* userData)
+	//__host__​cudaError_t cudaLaunchKernel(const void* func, dim3 gridDim, dim3 blockDim, void** args, size_t sharedMem, cudaStream_t stream)
+	//__host__​cudaError_t cudaLaunchKernelExC(const cudaLaunchConfig_t * config, const void* func, void** args)
+	//__host__​cudaError_t cudaSetDoubleForDevice(double* d)
+	//__host__​cudaError_t cudaSetDoubleForHost(double* d)
+	//__device__​ void cudaTriggerProgrammaticLaunchCompletion(void)
 
 	//6.9 Memory Management
 	//__host__​cudaError_t cudaArrayGetInfo(cudaChannelFormatDesc* desc, cudaExtent* extent, unsigned int* flags, cudaArray_t array)
@@ -199,12 +215,18 @@ extern "C" {
 	//__host__​cudaError_t cudaGraphAddNode(cudaGraphNode_t * pGraphNode, cudaGraph_t graph, const cudaGraphNode_t * pDependencies, size_t numDependencies, cudaGraphNodeParams * nodeParams)
 	//__host__​cudaError_t cudaGraphAddNode_v2(cudaGraphNode_t * pGraphNode, cudaGraph_t graph, const cudaGraphNode_t * pDependencies, const cudaGraphEdgeData * dependencyData, size_t numDependencies, cudaGraphNodeParams * nodeParams)
 	//__host__​cudaError_t cudaGraphChildGraphNodeGetGraph(cudaGraphNode_t node, cudaGraph_t * pGraph)
-	//__host__​cudaError_t cudaGraphClone(cudaGraph_t * pGraphClone, cudaGraph_t originalGraph)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphClone(JNIEnv* env, jobject obj, jlong originalGraph);
+	
 	//__host__​cudaError_t cudaGraphConditionalHandleCreate(cudaGraphConditionalHandle * pHandle_out, cudaGraph_t graph, unsigned int  defaultLaunchValue = 0, unsigned int  flags = 0)
-	//__host__​cudaError_t cudaGraphCreate(cudaGraph_t * pGraph, unsigned int  flags)
+	
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphCreate(JNIEnv* env, jobject obj, jint flags);
+	
 	//__host__​cudaError_t cudaGraphDebugDotPrint(cudaGraph_t graph, const char* path, unsigned int  flags)
-	//__host__​cudaError_t cudaGraphDestroy(cudaGraph_t graph)
-	//__host__​cudaError_t cudaGraphDestroyNode(cudaGraphNode_t node)
+	
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj, jlong graph);
+	
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj, jlong graphNode);
 	//__host__​cudaError_t cudaGraphEventRecordNodeGetEvent(cudaGraphNode_t node, cudaEvent_t * event_out)
 	//__host__​cudaError_t cudaGraphEventRecordNodeSetEvent(cudaGraphNode_t node, cudaEvent_t event)
 	//__host__​cudaError_t cudaGraphEventWaitNodeGetEvent(cudaGraphNode_t node, cudaEvent_t * event_out)
