@@ -219,6 +219,9 @@ extern "C" {
 	//__host__​cudaError_t cudaGraphConditionalHandleCreate(cudaGraphConditionalHandle * pHandle_out, cudaGraph_t graph, unsigned int  defaultLaunchValue = 0, unsigned int  flags = 0)
 	//__host__​cudaError_t cudaGraphCreate(cudaGraph_t * pGraph, unsigned int  flags)
 	//__host__​cudaError_t cudaGraphDebugDotPrint(cudaGraph_t graph, const char* path, unsigned int  flags)
+	
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_graphDestroy(JNIEnv* env, jobject obj);
+	
 	//__host__​cudaError_t cudaGraphDestroy(cudaGraph_t graph)
 	//__host__​cudaError_t cudaGraphDestroyNode(cudaGraphNode_t node)
 	//__host__​cudaError_t cudaGraphEventRecordNodeGetEvent(cudaGraphNode_t node, cudaEvent_t * event_out)
