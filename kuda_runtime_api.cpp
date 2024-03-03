@@ -757,14 +757,14 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_initDevice(JNIEnv* env, j
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcCloseMemHandle(JNIEnv* env, jobject obj, jlong devicePtr) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcCloseMemHandle(JNIEnv* env, jobject obj, jlong devicePtr) {
 
 	cudaError_t cudaStatus = cudaIpcCloseMemHandle((void*)devicePtr);
 
 	return cudaStatus;
 }
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcGetEventHandle(JNIEnv* env, jobject obj, jlong event) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcGetEventHandle(JNIEnv* env, jobject obj, jlong event) {
 	
 	cudaIpcEventHandle_t cudaIpcEventHandle;
 
@@ -782,7 +782,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcGetEventHandle(JNIEnv
 
 //__host__​cudaError_t cudaIpcGetMemHandle ( cudaIpcMemHandle_t* handle, void* devPtr )
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle) {
 	
 	cudaEvent_t cudaEvent;
 	

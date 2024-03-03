@@ -44,13 +44,13 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_initDevice(JNIEnv* env, jobject obj, jint device, jint deviceFlags, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcCloseMemHandle(JNIEnv* env, jobject obj, jlong devicePtr);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcCloseMemHandle(JNIEnv* env, jobject obj, jlong devicePtr);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcGetEventHandle(JNIEnv* env, jobject obj, jlong event);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcGetEventHandle(JNIEnv* env, jobject obj, jlong event);
 
 	//__host__​cudaError_t cudaIpcGetMemHandle ( cudaIpcMemHandle_t* handle, void* devPtr )
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jobject obj, jint device);
 
