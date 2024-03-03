@@ -782,7 +782,7 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcGetEventHandle(JNIEnv
 
 //__host__​cudaError_t cudaIpcGetMemHandle ( cudaIpcMemHandle_t* handle, void* devPtr )
 
-JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle) {
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle) {
 	
 	cudaEvent_t cudaEvent;
 	
