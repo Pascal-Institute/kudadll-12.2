@@ -46,7 +46,11 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcCloseMemHandle(JNIEnv* env, jobject obj, jlong devicePtr);
 
-	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcGetEventHandle(jlong event);
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_lpcGetEventHandle(JNIEnv* env, jobject obj, jlong event);
+
+	//__host__​cudaError_t cudaIpcGetMemHandle ( cudaIpcMemHandle_t* handle, void* devPtr )
+
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_IpcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jobject obj, jint device);
 
