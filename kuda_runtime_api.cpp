@@ -991,6 +991,19 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* e
 
 }
 
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj) {
+	
+	cudaStreamCaptureMode mode;
+
+	cudaError_t cudaStatus = cudaThreadExchangeStreamCaptureMode(&mode);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(mode);
+}
+
 //5. Event ManageMent
 JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj) {
 
