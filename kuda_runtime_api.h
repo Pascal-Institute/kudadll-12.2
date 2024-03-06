@@ -20,7 +20,7 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint  device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetP2PAttribute(JNIEnv* env, jobject obj, jint attr, jint scrDevice, jint dstDevice);
 	
@@ -98,7 +98,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jboolean dummy);
 
 	//5. Event ManageMent (COMPLETE)
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj);

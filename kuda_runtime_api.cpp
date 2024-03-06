@@ -423,7 +423,7 @@ JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetPCIBusId(JNIE
 	return env->NewStringUTF(pciBusId);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy) {
 	
 	cudaFuncCache funcCache;
 	
@@ -991,7 +991,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* e
 
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jboolean dummy) {
 	
 	cudaStreamCaptureMode mode;
 
