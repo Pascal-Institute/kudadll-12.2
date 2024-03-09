@@ -20,7 +20,7 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetMemPool(JNIEnv* env, jobject obj, jint  device);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetP2PAttribute(JNIEnv* env, jobject obj, jint attr, jint scrDevice, jint dstDevice);
 	
@@ -48,7 +48,7 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcGetEventHandle(JNIEnv* env, jobject obj, jlong event);
 
-	//__host__​cudaError_t cudaIpcGetMemHandle ( cudaIpcMemHandle_t* handle, void* devPtr )
+	JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcGetMemHandle(JNIEnv* env, jobject obj, jlong devPtr);
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle);
 
@@ -73,7 +73,6 @@ extern "C" {
 	//cudaStreamAddCallback
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
 
-	//cudaStreamBeginCaptureToGraph
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
 
@@ -99,7 +98,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags);
 
-	//cudaThreadExchangeStreamCaptureMode
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jboolean dummy);
 
 	//5. Event ManageMent (COMPLETE)
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_eventCreate(JNIEnv* env, jobject obj);

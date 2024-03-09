@@ -423,7 +423,7 @@ JNIEXPORT jstring JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetPCIBusId(JNIE
 	return env->NewStringUTF(pciBusId);
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj) {
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceGetCacheConfig(JNIEnv* env, jobject obj, jboolean dummy) {
 	
 	cudaFuncCache funcCache;
 	
@@ -777,9 +777,32 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcGetEventHandle(JNIEnv
 	}
 
 	return (jlong)&cudaIpcEventHandle;
-
 }
 
+JNIEXPORT jobject JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcGetMemHandle(JNIEnv* env, jobject obj, jlong devPtr) {
+
+	void* cudaDevPtr = reinterpret_cast<void*>(devPtr);
+
+	cudaIpcMemHandle_t handle;
+
+	cudaError_t cudaStatus = cudaIpcGetMemHandle(&handle, cudaDevPtr);
+
+	if (cudaStatus != cudaSuccess) {
+		return nullptr;
+	}
+	
+
+	jclass cudaIpcMemHandleClass = env->FindClass("kuda/runtimeapi/structure/IpcMemHandle");
+
+	jmethodID constructor = env->GetMethodID(cudaIpcMemHandleClass, "<init>", "(Ljava/lang/String;)V");
+	jobject cudaIpcMemHandleObject = env->NewObject(cudaIpcMemHandleClass, constructor,
+		env->NewStringUTF(handle.reserved)
+	);
+
+	env->DeleteLocalRef(cudaIpcMemHandleClass);
+	
+	return cudaIpcMemHandleObject;
+}
 //__host__​cudaError_t cudaIpcGetMemHandle ( cudaIpcMemHandle_t* handle, void* devPtr )
 
 JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcOpenEventHandle(JNIEnv* env, jobject obj, jlong handle) {
@@ -989,6 +1012,19 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* e
 
 	return cudaStatus;
 
+}
+
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_threadExchangeStreamCaptureMode(JNIEnv* env, jobject obj, jboolean dummy) {
+	
+	cudaStreamCaptureMode mode;
+
+	cudaError_t cudaStatus = cudaThreadExchangeStreamCaptureMode(&mode);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return static_cast<int>(mode);
 }
 
 //5. Event ManageMent
