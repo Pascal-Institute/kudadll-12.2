@@ -496,6 +496,15 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetLimit(JNIEnv* en
 	return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetMemPool(JNIEnv* env, jobject obj, jint device, jlong memPool) {
+
+	cudaMemPool_t cudaMemPool = reinterpret_cast<cudaMemPool_t>(memPool);
+
+	cudaError_t cudaStatus = cudaDeviceSetMemPool(device, cudaMemPool);
+
+	return cudaStatus;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetSharedMemConfig(JNIEnv* env, jobject obj, jint config) {
 
 	cudaError_t cudaStatus = cudaDeviceSetSharedMemConfig(static_cast<cudaSharedMemConfig>(config));
@@ -881,7 +890,16 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ctxResetPersistingL2Cache
 
 //cudaStreamAddCallback
 
-//cudaStreamAttachMemAsync
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamAttachMemAsync(JNIEnv* env, jobject obj, jlong stream, jlong devPtr, jint length, jint flags) {
+	
+	void* cudaDevPtr = reinterpret_cast<void*>(devPtr);
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
+	
+	cudaError_t cudaStatus = cudaStreamAttachMemAsync(cudaStream, cudaDevPtr, length, flags);
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode) {
 
