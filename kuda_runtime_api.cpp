@@ -829,6 +829,31 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcOpenEventHandle(JNIEn
 	return (jlong)cudaEvent;
 }
 
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_ipcOpenMemHandle(JNIEnv* env, jobject obj, jobject handle, jint flags) {
+
+	void* cudaDevPtr;
+
+	cudaIpcMemHandle_t cudaHandle;
+
+	jclass ipcMemHandleClass = env->FindClass("kuda/runtimeapi/structure/IpcMemHandle");
+
+	jfieldID fid;
+
+	fid = env->GetFieldID(ipcMemHandleClass, "reserved", "Ljava/lang/String;");
+	jstring nameString = (jstring)env->GetObjectField(handle, fid);
+	const char* nameChars = env->GetStringUTFChars(nameString, nullptr);
+	strcpy_s(cudaHandle.reserved, nameChars);
+	env->ReleaseStringUTFChars(nameString, nameChars);
+
+	cudaError_t cudaStatus = cudaIpcOpenMemHandle(&cudaDevPtr, cudaHandle, (unsigned int)flags);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)cudaDevPtr;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_setDevice(JNIEnv* env, jobject obj, jint device) {
 
 	cudaError_t cudaStatus = cudaSetDevice(device);
