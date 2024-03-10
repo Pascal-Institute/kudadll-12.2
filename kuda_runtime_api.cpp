@@ -496,6 +496,15 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetLimit(JNIEnv* en
 	return cudaStatus;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetMemPool(JNIEnv* env, jobject obj, jint device, jlong memPool) {
+
+	cudaMemPool_t cudaMemPool = reinterpret_cast<cudaMemPool_t>(memPool);
+
+	cudaError_t cudaStatus = cudaDeviceSetMemPool(device, cudaMemPool);
+
+	return cudaStatus;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_deviceSetSharedMemConfig(JNIEnv* env, jobject obj, jint config) {
 
 	cudaError_t cudaStatus = cudaDeviceSetSharedMemConfig(static_cast<cudaSharedMemConfig>(config));
