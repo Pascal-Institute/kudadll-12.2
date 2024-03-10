@@ -890,7 +890,16 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ctxResetPersistingL2Cache
 
 //cudaStreamAddCallback
 
-//cudaStreamAttachMemAsync
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamAttachMemAsync(JNIEnv* env, jobject obj, jlong stream, jlong devPtr, jint length, jint flags) {
+	
+	void* cudaDevPtr = reinterpret_cast<void*>(devPtr);
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
+	
+	cudaError_t cudaStatus = cudaStreamAttachMemAsync(cudaStream, cudaDevPtr, length, flags);
+
+	return cudaStatus;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode) {
 

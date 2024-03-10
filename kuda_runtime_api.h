@@ -73,6 +73,9 @@ extern "C" {
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_ctxResetPersistingL2Cache(JNIEnv* env, jobject obj);
 
 	//cudaStreamAddCallback
+	
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamAttachMemAsync(JNIEnv* env, jobject obj, jlong stream, jlong devPtr, jint length, jint flags);
+	
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
 
 
