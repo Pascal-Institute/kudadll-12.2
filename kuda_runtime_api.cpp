@@ -1010,6 +1010,21 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamEndCapture(JNIEnv*
 	return (jlong)cudaGraph;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetFlags(JNIEnv* env, jobject obj, jlong hStream) {
+	
+	unsigned int flags;
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(hStream);
+
+	cudaError_t cudaStatus = cudaStreamGetFlags(cudaStream, &flags);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jint)flags;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
