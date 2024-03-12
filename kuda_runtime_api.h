@@ -102,7 +102,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSetAttribute(JNIEnv* env, jobject obj, jlong hStream, jint attr);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchronize(JNIEnv* env, jobject obj, jlong stream);
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamUpdateCaptureDependencies(JNIEnv* env, jobject obj, jlong stream, jint numDependencies, jint flags);
 

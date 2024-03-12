@@ -1077,8 +1077,8 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSetAttribute(JNIEnv
 	return cudaStatus;
 }
 
-JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream) {
-
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchronize(JNIEnv* env, jobject obj, jlong stream) {
+	
 	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
 
 	cudaError_t cudaStatus = cudaStreamSynchronize(cudaStream);
