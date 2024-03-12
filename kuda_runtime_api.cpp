@@ -1046,7 +1046,7 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetPriority(JNIEnv*
 
 	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(hStream);
 
-	cudaError_t cudaStatus = cudaStreamGetId(cudaStream, &priority);
+	cudaError_t cudaStatus = cudaStreamGetPriority(cudaStream, &priority);
 
 	if (cudaStatus != cudaSuccess) {
 		return cudaStatus;
