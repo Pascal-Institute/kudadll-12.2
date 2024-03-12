@@ -104,9 +104,7 @@ extern "C" {
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream);
 
-	//cudaStreamUpdateCaptureDependencies
-
-	//cudaStreamUpdateCaptureDependencies_v2
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamUpdateCaptureDependencies(JNIEnv* env, jobject obj, jlong stream, jint numDependencies, jint flags);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags);
 

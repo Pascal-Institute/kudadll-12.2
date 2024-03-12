@@ -1079,16 +1079,27 @@ JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSetAttribute(JNIEnv
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream) {
 
-	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
 
-	cudaError_t cudaStatus = cudaStreamSynchronize(cudaStreamPointer);
+	cudaError_t cudaStatus = cudaStreamSynchronize(cudaStream);
 
 	return cudaStatus;
 }
 
-//cudaStreamUpdateCaptureDependencies
+JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamUpdateCaptureDependencies(JNIEnv* env, jobject obj, jlong stream, jint numDependencies, jint flags) {
 
-//cudaStreamUpdateCaptureDependencies_v2
+	cudaGraphNode_t cudaGraphNode;
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(stream);
+
+	cudaError_t cudaStatus = cudaStreamUpdateCaptureDependencies(cudaStream, &cudaGraphNode, numDependencies, flags);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return (jlong)cudaGraphNode;
+}
 
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags) {
 
