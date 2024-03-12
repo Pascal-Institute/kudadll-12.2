@@ -80,7 +80,6 @@ extern "C" {
 	
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamBeginCapture(JNIEnv* env, jobject obj, jlong stream, jint mode);
 
-
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCopyAttributes(JNIEnv* env, jobject obj, jlong dst, jlong src);
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamCreate(JNIEnv* env, jobject obj);
@@ -93,15 +92,19 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamEndCapture(JNIEnv* env, jobject obj, jlong stream);
 
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetFlags(JNIEnv* env, jobject obj, jlong hStream);
+
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetId(JNIEnv* env, jobject obj, jlong hStream);
+
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream);
+
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSetAttribute(JNIEnv* env, jobject obj, jlong hStream, jint attr);
 
-	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchrnoize(JNIEnv* env, jobject obj, jlong stream);
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSynchronize(JNIEnv* env, jobject obj, jlong stream);
 
-	//cudaStreamUpdateCaptureDependencies
-
-	//cudaStreamUpdateCaptureDependencies_v2
+	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamUpdateCaptureDependencies(JNIEnv* env, jobject obj, jlong stream, jint numDependencies, jint flags);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamWaitEvent(JNIEnv* env, jobject obj, jlong stream, jlong event, jint flags);
 
