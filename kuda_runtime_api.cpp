@@ -1040,6 +1040,21 @@ JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetId(JNIEnv* env,
 	return (jlong)streamId;
 }
 
+JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream) {
+
+	int priority;
+
+	cudaStream_t cudaStream = reinterpret_cast<cudaStream_t>(hStream);
+
+	cudaError_t cudaStatus = cudaStreamGetId(cudaStream, &priority);
+
+	if (cudaStatus != cudaSuccess) {
+		return cudaStatus;
+	}
+
+	return priority;
+}
+
 JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream) {
 
 	CUstream_st* cudaStreamPointer = reinterpret_cast<CUstream_st*>(stream);

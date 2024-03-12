@@ -96,6 +96,8 @@ extern "C" {
 
 	JNIEXPORT jlong JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetId(JNIEnv* env, jobject obj, jlong hStream);
 
+	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamGetPriority(JNIEnv* env, jobject obj, jlong hStream, jint priority);
+
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamQuery(JNIEnv* env, jobject obj, jlong stream);
 
 	JNIEXPORT jint JNICALL Java_kuda_runtimeapi_RuntimeAPI_streamSetAttribute(JNIEnv* env, jobject obj, jlong hStream, jint attr);
